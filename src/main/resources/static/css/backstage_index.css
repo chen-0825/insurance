@@ -50,7 +50,7 @@ body,html{
 	float: left;
 	background-color: rgb(47, 54, 62);
 }
-#main_left>ul>li{
+#main_left li{
 	width: 100%;
 	height: 50px;
 	line-height: 50px;
@@ -61,7 +61,7 @@ body,html{
 	color: white;
 }
 
-#main_left>ul>li:hover{
+#main_left li:hover{
 	background-color: rgb(237, 81, 80);
 	border-left:2px rgb(247, 175, 175) solid;
 }
