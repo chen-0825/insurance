@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+
+<head>
+    <meta charset="UTF-8">
+    <title>保单页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <!--jquery要放在所有js最上面-->
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+    <!--<script type="text/css">-->
+        <!--.modal-content>.modal-body>.kuang{-->
+            <!--width: 120px;}-->
+    <!--</script>-->
+</head>
+<body>
+
+<!-- 保单添加的模态框1 -->
+<div class="modal fade bs-example-modal-lg" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">保单添加</h4>
+            </div>
+            <div class="modal-body">
+                <label>车辆信息</label>
+                <div>
+                    <label>号牌号码:</label>
+                    <input type="text" style="width: 130px" id="plate_number">
+                    <label>车架号:</label>
+                    <input type="text" style="width: 130px" id="vin">
+                    <label>行驶证号:</label>
+                    <input type="text" style="width: 130px" id="driving_Licence">
+                    <label>厂牌车型:</label>
+                    <input type="text" style="width: 130px" id="factory_plate_model">
+                </div>
+                <br/>
+                <div>
+                    <label>登录日期:</label>
+                    <input type="text" style="width: 130px" id="date_of_registration">
+                    <label>发动机号:</label>
+                    <input type="text" style="width: 130px" id="engine">
+                    <label>载客数:</label>
+                    <input type="text" style="width: 130px" id="passenger_number">
+                    <label>车主:</label>
+                    <input type="text" style="width: 130px" id="name_of_owner">
+
+                </div>
+                <br/>
+                <div>
+                    <label>使用年限:</label>
+                    <input type="text" style="width: 130px" id="useful_year">
+                    <label>已行驶公里:</label>
+                    <input type="text" style="width: 130px" id="driving_mileage">
+                    <label>机动车类型:</label>
+                    <input type="text" style="width: 130px" id="vehicles_type">
+                    <label>颜色:</label>
+                    <input type="text" style="width: 130px" id="color">
+                </div>
+                <br/>
+                <div>
+                    <label>车价:</label>
+                    <input type="text" style="width: 130px" id="car_price">
+                    <label>签单日期:</label>
+                    <input type="text" style="width: 130px" id="written_date">
+                </div>
+                <hr/>
+                <br/>
+
+                <label>保单生效信息</label>
+                <div>
+                    <div>
+                        客户期望交强险保单生效日期:<input type="date" id="start_date">0时至<input type="date" id="ending_date">24时止&nbsp&nbsp<input type="checkbox" name="jiaoqiang" id="jiaoqiang" value="1">投保
+                    </div>
+                    <br/>
+                    <div>
+                        客户期望商业险保单生效日期:<input type="date">0时至<input type="date">24时止&nbsp&nbsp<input type="checkbox" name="shangye" id="shangye" value="1">投保
+                    </div>
+                </div>
+                <hr/>
+                <br/>
+
+                <label>保单类型</label>
+                <div>
+                    <input type="radio" name="policy_type" value="新保"/>新保
+                    <input type="radio" name="policy_type" value="续保"/>续保
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="emp_next_btn">下一步</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 保单添加的模态框2 -->
+<div class="modal fade bs-example-modal-lg" id="empAddModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalL">保单添加</h4>
+            </div>
+            <div class="modal-body">
+                <label>交强险信息</label>
+                <form>
+                    <table style="width: 880px" border="1px,solider,black">
+                        <tr>
+                            <td></td>
+                            <td>是否投保</td>
+                            <td>保费金额(元)</td>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <td>交强险</td>
+                            <td><input type="checkbox" id="jiao"></td>
+                            <td><span>950</span></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <br/>
+                <label>商业险信息</label>
+                <table style="width: 880px" border="1px,solider,black">
+                    <tr>
+                        <td>基本险</td>
+                        <td>投保金额/责任限额</td>
+                        <td>是否投保</td>
+                        <td>保险费(元)</td>
+                    </tr>
+                    <tr>
+                        <td>机动车损失险</td>
+                        <td>50000</td>
+                        <td><input type="checkbox"></td>
+                        <td><span>500</span></td>
+                    </tr>
+                    <tr>
+                        <td>第三者责任保险</td>
+                        <td>
+                            <select>
+                                <option>请选择....</option>
+                                <option>20万</option>
+                                <option>30万</option>
+                                <option>100万</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox"></td>
+                        <td><span>222</span></td>
+                    </tr>
+                    <tr>
+                        <td>车上人员责任险(司机)</td>
+                        <td>
+                            <select>
+                                <option>请选择....</option>
+                                <option>1万</option>
+                                <option>1万</option>
+                                <option>2万</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox"></td>
+                        <td><span>333</span></td>
+                    </tr>
+                    <tr>
+                        <td>车上人员责任险(乘客)</td>
+                        <td>
+                            <select>
+                                <option>请选择....</option>
+                                <option>1万</option>
+                                <option>1万</option>
+                                <option>2万</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox"></td>
+                        <td><span>444</span></td>
+                    </tr>
+                    <tr>
+                        <td>机动车盗抢险</td>
+                        <td>50000</td>
+                        <td><input type="checkbox"></td>
+                        <td><span>500</span></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>附加险</td>
+                        <td>投保金额/责任限额</td>
+                        <td>是否投保</td>
+                        <td>保险费(元)</td>
+                    </tr>
+                    <tr>
+                        <td>玻璃单独破碎险</td>
+                        <td>
+                            <select>
+                                <option>请选择....</option>
+                                <option>国产玻璃</option>
+                                <option>外国玻璃</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox"></td>
+                        <td><span>123456</span></td>
+                    </tr>
+                    <tr>
+                        <td>车身划痕损失险</td>
+                        <td>
+                            <select>
+                                <option>请选择....</option>
+                                <option>1万</option>
+                                <option>2万</option>
+                            </select>
+                        </td>
+                        <td><input type="checkbox"></td>
+                        <td><span>7890</span></td>
+                    </tr>
+                    <tr>
+                        <td>自然损失险</td>
+                        <td>16666</td>
+                        <td><input type="checkbox"></td>
+                        <td><span>7890</span></td>
+                    </tr>
+                    <tr>
+                        <td>不计免赔案特约条款</td>
+                        <td colspan="2">
+                            <input type="checkbox" name="aa" value="新保"/>车损
+                            <input type="checkbox" name="aa" value="续保"/>三者
+                            <input type="checkbox" name="aa" value="新保"/>司机
+                            <input type="checkbox" name="aa" value="续保"/>乘客
+                            <input type="checkbox" name="aa" value="新保"/>盗抢
+                            <input type="checkbox" name="aa" value="续保"/>自燃
+                            <input type="checkbox" name="aa" value="续保"/>涉水
+                        </td>
+                        <td><span>7890</span></td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="emp_last_btn">下一步</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 保单添加的模态框3 -->
+<div class="modal fade bs-example-modal-lg" id="empAddModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLL">保单添加</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="emp_finally_btn">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--整体结构-->
+<div class="container">
+    <!--查询条件-->
+    <div>
+
+        <div class="col-xs-2">
+            <label>保单号</label>
+            <input type="text" class="form-control" placeholder="PDAA201033011114006532">
+        </div>
+
+        <div class="col-xs-2">
+            <label>被保人</label>
+            <input type="text" class="form-control" placeholder="张三丰">
+        </div>
+
+        <div class="col-xs-2">
+            <label>车架号</label>
+            <input type="text" class="form-control" placeholder="LSVAM4187C2184847">
+        </div>
+
+        <div class="col-xs-2">
+            <label>车牌号</label>
+            <input type="text" class="form-control" placeholder="鄂A.88888">
+        </div>
+    </div>
+    <hr/>
+    <!--按钮-->
+    <div>
+        <button type="button" class="btn btn-success">查询</button>
+        <button type="button" class="btn btn-info">重置</button>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
+            <button class="btn btn-info">修改</button>
+            <button class="btn btn-danger" id="emp_delete_all_btn">删除</button>
+            <button class="btn btn-primary">保单审核</button>
+        </div>
+    </div>
+
+
+    <!--保单信息列表-->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered" id="emps_table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>保单</th>
+                    <th>被保人</th>
+                    <th>车架号</th>
+                    <th>车牌号</th>
+                    <th>厂牌型号</th>
+                    <th>起保时间</th>
+                    <th>终保时间</th>
+                    <th>保险总额</th>
+                    <th>赔偿限额</th>
+                    <th>保单类型</th>
+                    <th>保单状态</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
+    $(function(){
+        //去首页
+        to_page(1);
+    });
+
+    function to_page(pn){
+        $.ajax({
+            url:"guarantee",
+            data:"pn="+pn,
+            type:"GET",
+            success:function(result){
+                //1、解析并显示员工数据
+                build_emps_table(result);
+                // //2、解析并显示分页信息   页面左下角
+                // build_page_info(result);
+                // //3、解析显示分页条数据   页面右下角
+                // build_page_nav(result);
+            }
+        });
+    }
+
+    function build_emps_table(result){
+        //清空table表格
+        $("#emps_table tbody").empty();
+        var emps = result.extend.pageInfo.list;
+        $.each(emps,function(index,item){
+            var policyId = $("<td></td>").append(item.policyId);
+            var empNameTd = $("<td></td>").append(item.empName);
+            var genderTd = $("<td></td>").append(item.gender=='M'?"男":"女");
+            var emailTd = $("<td></td>").append(item.email);
+            var deptNameTd = $("<td></td>").append(item.department.deptName);
+            $("<tr></tr>").append(checkBoxTd)
+                .append(empIdTd)
+                .append(empNameTd)
+                .append(genderTd)
+                .append(emailTd)
+                .append(deptNameTd)
+                .append(btnTd)
+                .appendTo("#emps_table tbody");
+        });
+    }
+
+
+
+    $("#emp_add_modal_btn").click(function(){
+        //弹出1模态框
+        $("#empAddModal").modal({
+            backdrop:"static"
+        });
+    });
+
+    $("#emp_next_btn").click(function(){
+        //关闭1模态框
+        $('#empAddModal').modal('hide');
+        //弹出2模态框
+        $("#empAddModal2").modal({
+            backdrop:"static"
+        });
+        //1模态框中交强选中后2模态框交强自动给选中
+        var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
+        if(jiaoqiang==1){
+            $("#jiao").prop('checked',true);
+        }
+    });
+
+
+    $("#emp_last_btn").click(function(){
+        //关闭2模态框
+        $('#empAddModal2').modal('hide');
+        //弹出3模态框
+        $("#empAddModal3").modal({
+            backdrop:"static"
+        });
+    });
+
+
+
+    $("#emp_finally_btn").click(function(){
+        //关闭3模态框
+        $('#empAddModal3').modal('hide');
+        //获取车辆信息
+        var plate_number = $("#plate_number").val();
+        var vin = $("#vin").val();
+        var driving_Licence = $("#driving_Licence").val();
+        var factory_plate_model = $("#factory_plate_model").val();
+
+        var date_of_registration = $("#date_of_registration").val();
+        var engine = $("#engine").val();
+        var passenger_number = $("#assenger_number").val();
+        var name_of_owner = $("#name_of_owner").val();
+
+        var useful_year = $("#useful_year").val();
+        var driving_mileage = $("#driving_mileage").val();
+        var vehicles_type = $("#vehicles_type").val();
+        var color = $("#color").val();
+
+        var car_price = $("#car_price").val();
+        var written_date = $("#written_date").val();
+
+        //保单生效日期
+        var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
+        var shangye = $("input[name='shangye']:checked").val();
+        if(jiaoqiang==1){
+            var start_date = $("#start_date").val();
+            var ending_date = $("#ending_date").val();
+        }
+
+        //保单类型
+        var policy_type = $("input[name='policy_type']:checked").val();
+        // alert(start_date);
+
+
+        //通过ajax把数据传向后台
+        $.ajax({
+            url: "guarantee/insert",
+            type: "POST",
+            data: {"plate_number":1 , "vin": 2},
+            success: function (result) {
+                if (result.code == 100) {
+                    //保单保存成功；
+                    //1、关闭模态框
+                    $("#empAddModal3").modal('hide');
+                    to_page(1);
+                }
+            }
+        });
+
+    });
+
+
+
+
+
+</script>
+</body>
+</html>

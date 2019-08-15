@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:shiro="">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,18 +14,23 @@
     <div id="main">
         <div id="main_left">
             <ul>
-                <li id="L1"><a href="" target="content">客户管理</a></li>
-                <li id="L2"><a href="" target="content">保单管理</a></li>
-                <li id="L3"><a href="" target="content">出险管理</a></li>
-                <li id="L4"><a href="" target="content">查勘与定损管理</a></li>
-                <li id="L5"><a href="" target="content">理赔查询</a></li>
-                <li id="L6"><a href="" target="content">我的订单</a></li>
-                <li id="L7"><a href="" target="content">我的保单</a></li>
-                <li id="L8"><a href="" target="content">理赔查询</a></li>
-                <li id="L9"><a href="" target="content">个人信息</a></li>
-                <li id="L10"><a href="" target="content">车辆信息</a></li>
-                <li id="L11"><a href="" target="content">配送地址</a></li>
-                <li id="L12"><a href="" target="content">上传投保资料</a></li>
+                <shiro:hasRole name = "admin">
+                    <li><a href="" target="content">客户管理</a></li>
+                    <li><a href="" target="content">保单管理</a></li>
+                    <li><a href="" target="content">出险管理</a></li>
+                    <li><a href="" target="content">查勘与定损管理</a></li>
+                    <li><a href="" target="content">理赔查询</a></li>
+                </shiro:hasRole>
+                <shiro:hasRole name = "user">
+                    <li><a href="" target="content">我的订单</a></li>
+                    <li><a href="" target="content">我的保单</a></li>
+                    <li><a href="" target="content">理赔查询</a></li>
+                    <li><a href="" target="content">个人信息</a></li>
+                    <li><a href="" target="content">车辆信息</a></li>
+                    <li><a href="" target="content">配送地址</a></li>
+                    <li><a href="" target="content">上传投保资料</a></li>
+                </shiro:hasRole>
+                <li><a href="/toupdatePwd" target="content">修改密码</a></li>
             </ul>
         </div>
         <div id="main_right">

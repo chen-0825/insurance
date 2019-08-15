@@ -4,17 +4,18 @@ import lombok.Data;
 
 @Data
 public class PolicyHolder {
-    private String phId;	//投保人id,雪花算法生成
+    private Integer phId;
 
-    private String phName;	//投保人姓名
+    private String phName;
 
-    private String phSex;	//投保人性别
+    private String phSex;
 
-    private String phCredType;	//投保人证件类型
+    private String phCertificateType;
 
-    private String phCredNumber;	//投保人证件号码
+    private String phCardNumber;
 
-    private String phTel;	//投保人联系方式
+    private String phTel;
 
-    private String phAddress;	//投保人联系地址
+    private String phAddress;
+
 }

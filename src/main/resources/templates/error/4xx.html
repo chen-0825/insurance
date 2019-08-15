@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}">
+</head>
+<body>
+<div style="text-align: center;">
+    <h1>出错啦!</h1>
+    <h2>状态码[[${status}]]</h2>
+    <h3>时间[[${timestamp}]]</h3>
+    <h4>异常对象[[${exception}]]</h4>
+    <h5>异常信息[[${message}]]</h5>
+    <h6>错误提示[[${error}]]</h6>
+    <img src="img/timg.jpg">
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>
+</body>
+</html>
