@@ -25,4 +25,13 @@ public class guaranteeServiceimpl implements guaranteeService {
     public List<Policys> guaranteesfindAll(){
         return gm.guaranteesfindAll();
     }
+
+    public int guaranteedelete(String policyId){
+        return gm.guaranteedelete(policyId);
+    }
+
+    public int tianjianfind(Policys po){
+        return gm.tianjianfind(po);
+    }
+
 }

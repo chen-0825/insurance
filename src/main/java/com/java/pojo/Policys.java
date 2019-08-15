@@ -1,7 +1,9 @@
 package com.java.pojo;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,10 +17,13 @@ public class Policys {
 
     private String recognizee;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date writtenDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endingDate;
 
     private Double baofeizonge;
@@ -49,6 +54,7 @@ public class Policys {
 
     private Double carPrice;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfRegistration;
 
     private Integer usefulYear;
@@ -84,5 +90,23 @@ public class Policys {
         super();
     }
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    public String getStartDate() {
+
+        return sdf.format(this.startDate);
+    }
+
+    public String getWrittenDate() {
+        return sdf.format(this.writtenDate);
+    }
+
+    public String getEndingDate() {
+        return sdf.format(this.endingDate);
+    }
+
+    public String getDateOfRegistration() {
+        return sdf.format(this.dateOfRegistration);
+    }
 
 }
