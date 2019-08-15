@@ -32,7 +32,7 @@
                           <td class="info" th:text="${p.phCardNumber}"></td>
                           <td class="info" th:text="${p.phTel}"></td>
                           <td class="info" th:text="${p.phAddress}"></td>
-                          <td ><a th:href="@{ph_delete(phId=${p.phId})}" type="button" class="btn btn-danger">删除</a> <a href="ph_findOne?id=${p.phId}" type="button" class="btn btn-warning" >修改</a></td>
+                          <td ><a th:href="@{ph_delete(phId=${p.phId})}" type="button" class="btn btn-danger">删除</a> <a href="ph_findOne?phId=${p.phId}" type="button" class="btn btn-warning" >修改</a></td>
                       </tr>
                   </c:forEach>
               </table>
