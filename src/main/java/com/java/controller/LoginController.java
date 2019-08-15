@@ -50,9 +50,9 @@ public class LoginController {
 //        3.执行登录方法
             subject.login(token);
         }catch (UnknownAccountException e){
-            model.addAttribute("msg","用户名不存在");
+//            model.addAttribute("msg","用户名不存在");
         }catch (IncorrectCredentialsException e){
-            model.addAttribute("msg","密码错误");
+//            model.addAttribute("msg","密码错误");
         }
 //        判断是否存在用户
         if(subject.isAuthenticated()){
@@ -90,8 +90,8 @@ public class LoginController {
     }
 
     @RequestMapping("/verification")
-    public String verification(String pwd,HttpServletRequest request){
-        if (pwd.equals(""+i)){
+    public String verification(String pwd){
+        if (i == Integer.parseInt(pwd)){
             return "redirect:/backstageIndex";
         }
         return "/backstage/emails";
@@ -103,7 +103,7 @@ public class LoginController {
 
     }
     @RequestMapping("/updatePwd")
-    public String updatePwd(HttpServletRequest request,String password,Model model){
+    public String updatePwd(HttpServletRequest request,String password){
         ShiroUser shiroUser = (ShiroUser)request.getSession().getAttribute("ShiroUser");
         shiroUser.setPassword(password);
         userService.update(shiroUser);
