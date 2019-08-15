@@ -2,7 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>登录</title>
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
 </head>
 <style>
@@ -33,19 +35,19 @@
     }
 </style>
 <body>
-<botton class="btn" id="btn1">登录</botton>
-<botton class="btn" id="btn2">注册</botton>
+<botton id="btn1" class="btn btn-primary">登录</botton>
+<botton id="btn2" class="btn btn-success">注册</botton>
 <div id="wrap">
     <form methed="post" action="backstageLogin" id="form1">
         用户名:<input type="text" name="name"/><br/>
         密码:<input type="password" name="password"/><br/>
-        <input type="submit" th:value="登录"/>
+        <input type="submit" class="btn btn-primary" th:value="登录"/>
     </form>
     <form methed="post" action="register" id="form2">
         用户名:<input type="text" name="name"/><br/>
         密码:<input type="password" name="password"/><br/>
         邮箱:<input type="email" name="email"/><br/>
-        <input type="submit" th:value="注册"/>
+        <input type="submit" class="btn btn-success" th:value="注册"/>
     </form>
 </div>
 
