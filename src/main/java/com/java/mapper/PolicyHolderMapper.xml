@@ -5,23 +5,25 @@
     
     <!--投保人增-->
     <insert id="add">
-        INSERT INTO `policy_holder` (
-  `phName`,
-  `phSex`,
-  `phCertificateType`,
-  `phCardNumber`,
-  `phTel`,
-  `phAddress`
+    INSERT INTO `insurance`.`policy_holder` (
+  `ph_id`,
+  `ph_name`,
+  `ph_sex`,
+  `ph_cred_type`,
+  `ph_cred_number`,
+  `ph_tel`,
+  `ph_address`
 )
 VALUES
   (
-     #{phName},
-     #{phSex},
-     #{phCertificateType},
-     #{phCardNumber},
-     #{phTel},
-     #{phAddress}
-  ) ;
+    #{phId},
+    #{phName},
+    #{phSex},
+    #{phCredType},
+    #{phCredNumber},
+    #{phTel},
+    #{phAddress}
+  )
 
     </insert>
     <!--投保人删-->
@@ -30,17 +32,17 @@ VALUES
     </delete>
     <!--投保人改-->
     <update id="update">
-    UPDATE
-  `policy_holder`
+ UPDATE
+  `insurance`.`policy_holder`
 SET
-  `phName` = #{phName},
-  `phSex` = #{phSex},
-  `phCertificateType` = #{phCertificateType},
-  `phCardNumber` = #{phCardNumber},
-  `phTel` = #{phTel},
-  `phAddress` =#{phAddress}
-WHERE ph_Id = #{phId} ;
-
+  `ph_id` =  #{phId},
+  `ph_name` =  #{phName},
+  `ph_sex` =  #{phSex},
+  `ph_cred_type` =  #{phCredType},
+  `ph_cred_number` =  #{phCredNumber},
+  `ph_tel` =  #{phTel},
+  `ph_address` =  #{phAddress}
+WHERE `ph_id` =  #{phId} ;
     </update>
     <!--投保人查所有-->
     <select id="findAll" resultType="com.java.pojo.PolicyHolder">
@@ -56,10 +58,10 @@ WHERE ph_Id = #{phId} ;
         select * from policy_holder
         <where>
             <if test="phName != null  and phName != ''">
-                and phName = #{phName}
+                and ph_name = #{phName}
             </if>
-            <if test="phCardNumber !=null  and phCardNumber != ''">
-                and phCardNumber = #{phCardNumber}
+            <if test="phCredNumber !=null  and phCredNumber != ''">
+                and ph_cred_number = #{phCredNumber}
             </if>
 
         </where>
@@ -68,7 +70,7 @@ WHERE ph_Id = #{phId} ;
     <!--投保人批量删-->
     <update id="batchDelete">
         delete from policy_holder where ph_id in
-        <foreach collection="array" item="id" open="(" close=")"
+        <foreach collection="array" item="phId" open="(" close=")"
                  separator=",">
             #{phId}
         </foreach>

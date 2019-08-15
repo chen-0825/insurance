@@ -41,8 +41,8 @@ public class PolicyHolderServiceImpl implements PolicyHolderService {
     }
 
     //    批量删除
-    public int batchDelete(String[] phid) {
-        return policyholderMapper.batchDelete(phid);
+    public int batchDelete(String[] phId) {
+        return policyholderMapper.batchDelete(phId);
     }
 
 
