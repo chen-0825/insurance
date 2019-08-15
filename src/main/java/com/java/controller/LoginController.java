@@ -57,7 +57,7 @@ public class LoginController {
             System.out.println("认证成功");
             token.clear();
             request.getSession().setAttribute("ShiroUser",userService.find(name));
-            return "redirect:/forget";
+            return "redirect:/sendEmails";
         }else{
             token.clear();
             return "/backstage/login";
@@ -74,8 +74,8 @@ public class LoginController {
     }
 
 //    发送邮箱
-    @RequestMapping("/forget")
-    public String forget(HttpServletRequest request){
+    @RequestMapping("/sendEmails")
+    public String sendEmails(HttpServletRequest request){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("验证码");
         i = (int) ((Math.random() * 9 + 1) * 100000);
