@@ -1,6 +1,7 @@
 package com.java.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,8 +55,19 @@ public class ShiroConfig {
 
     //创建Realm
     @Bean(name="userRealm")
-    public UserRealm getRealm(){
-        return new UserRealm();
+    public UserRealm getRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher hashedCredentialsMatcher){
+        UserRealm userRealm = new UserRealm();
+        userRealm.setCredentialsMatcher(hashedCredentialsMatcher);
+        return userRealm;
+    }
+
+    @Bean("hashedCredentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("MD5");
+        matcher.setHashIterations(3);
+        return matcher;
+
     }
 
     //配置shiroDialect,用于thymeleaf和shiro标签配合使用

@@ -3,13 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        padding: 200px;
+    }
+    #wrap{
+        width: 500px;
+        height: 500px;
+        overflow: hidden;
+    }
+    form{
+        width: 500px;
+        height: 500px;
+    }
+    #form1{
+        display: block;
+    }
+    #form2{
+        display: none;
+    }
+    input{
+        height: 30px;
+    }
+</style>
 <body>
 <h3 th:text="${msg}" style="color: red"></h3>
-<form methed="post" action="backstageLogin">
-    用户名:<input type="text" name="name"/>
-    密码:<input type="password" name="password"/>
-    <input type="submit" value="登录"/>
-</form>
+<botton class="btn" id="btn1">登录</botton>
+<botton class="btn" id="btn2">注册</botton>
+<div id="wrap">
+    <form methed="post" action="backstageLogin" id="form1">
+        用户名:<input type="text" name="name"/><br/>
+        密码:<input type="password" name="password"/><br/>
+        <input type="submit" th:value="登录"/>
+    </form>
+    <form methed="post" action="register" id="form2">
+        用户名:<input type="text" name="name"/><br/>
+        密码:<input type="password" name="password"/><br/>
+        邮箱:<input type="email" name="email"/>
+        <input type="submit" th:value="注册"/>
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<!--<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>-->
+<script>
+$(function(){
+    $("#btn1").click(function(){
+        $("#form1").css("display","block");
+        $("#form2").css("display","none");
+    })
+    $("#btn2").click(function(){
+        $("#form1").css("display","none");
+        $("#form2").css("display","block");
+    })
+})
+</script>
 </body>
 </html>

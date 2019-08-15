@@ -9,6 +9,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm extends AuthorizingRealm {
@@ -38,12 +39,11 @@ public class UserRealm extends AuthorizingRealm {
         //1.判断用户名
         UsernamePasswordToken token = (UsernamePasswordToken)authenticationToken;
         ShiroUser user = userService.find(token.getUsername());
-
         if(user == null){
             //用户名不存在
             return null;    // shiro底层会抛出UnknownAccountException
         }
         //2.判断密码
-        return new SimpleAuthenticationInfo(user,user.getPassword(),"");
+        return new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(token.getUsername()), getName());
     }
 }

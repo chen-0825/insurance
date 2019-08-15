@@ -19,4 +19,12 @@ public class UserServiceImpl implements UserService {
     public String findRole(int id) {
         return usermapper.findRole(id);
     }
+
+    public int insert(ShiroUser shiroUser) {
+        return usermapper.insert(shiroUser);
+    }
+
+    public int update(ShiroUser shiroUser) {
+        return usermapper.update(shiroUser);
+    }
 }
