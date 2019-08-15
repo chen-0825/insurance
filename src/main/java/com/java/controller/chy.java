@@ -10,4 +10,8 @@ public class chy {
     public String index(){
         return "backstage/index";
     }
+    @RequestMapping("lg")
+    public String lg(){
+        return "backstage/lg";
+    }
 }
