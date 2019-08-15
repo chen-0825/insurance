@@ -3,7 +3,6 @@ package com.java.mapper;
 import com.java.pojo.ShiroUser;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 
 public interface UserMapper {
@@ -17,6 +16,4 @@ public interface UserMapper {
     @Insert("insert into shiro_user(`name`,password,email) values (#{name},#{password},#{email})")
     int insert(ShiroUser shiroUser);
 
-    @Update("update shiro_user set password=#{password} where name=#{name}")
-    int update(ShiroUser shiroUser);
 }

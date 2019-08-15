@@ -24,7 +24,4 @@ public class UserServiceImpl implements UserService {
         return usermapper.insert(shiroUser);
     }
 
-    public int update(ShiroUser shiroUser) {
-        return usermapper.update(shiroUser);
-    }
 }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +33,11 @@ public class LoginController {
 
     @RequestMapping("/tologin")
     public String tologin(){
-        System.out.println("登录");
         return "/backstage/login";
     }
 
     @RequestMapping("/backstageLogin")
-    public String login(String name,String password, Model model,HttpServletRequest request){
+    public String login(String name,String password,HttpServletRequest request){
 
         /*  使用shiro编写认证操作  */
 //        1.获取Subject
@@ -50,9 +48,9 @@ public class LoginController {
 //        3.执行登录方法
             subject.login(token);
         }catch (UnknownAccountException e){
-            model.addAttribute("msg","用户名不存在");
+//            model.addAttribute("msg","用户名不存在");
         }catch (IncorrectCredentialsException e){
-            model.addAttribute("msg","密码错误");
+//            model.addAttribute("msg","密码错误");
         }
 //        判断是否存在用户
         if(subject.isAuthenticated()){
@@ -66,6 +64,7 @@ public class LoginController {
         }
     }
 
+//    注册
     @RequestMapping("/register")
     public String register(ShiroUser shiroUser){
         Md5Hash admin = new Md5Hash(shiroUser.getPassword(), shiroUser.getName(), 3);
@@ -74,8 +73,9 @@ public class LoginController {
         return "/backstage/login";
     }
 
+//    发送邮箱
     @RequestMapping("/forget")
-    public String forget(HttpServletRequest request,Model model){
+    public String forget(HttpServletRequest request){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("验证码");
         i = (int) ((Math.random() * 9 + 1) * 100000);
@@ -85,29 +85,16 @@ public class LoginController {
         System.out.println(shiroUser);
         message.setTo(shiroUser.getEmail());
         sendMail.send(message);
-        model.addAttribute("emails",shiroUser.getEmail());
         return "/backstage/emails";
     }
 
+//    邮箱正确进入首页
     @RequestMapping("/verification")
-    public String verification(String pwd,HttpServletRequest request){
-        if (pwd.equals(""+i)){
+    public String verification(String pwd){
+        if (i == Integer.parseInt(pwd)){
             return "redirect:/backstageIndex";
         }
         return "/backstage/emails";
-    }
-
-    @RequestMapping("/toupdatePwd")
-    public String toupdatePwd(Model model){
-        return "/backstage/updatePwd";
-
-    }
-    @RequestMapping("/updatePwd")
-    public String updatePwd(HttpServletRequest request,String password,Model model){
-        ShiroUser shiroUser = (ShiroUser)request.getSession().getAttribute("ShiroUser");
-        shiroUser.setPassword(password);
-        userService.update(shiroUser);
-        return "/backstage/login";
     }
 
 }

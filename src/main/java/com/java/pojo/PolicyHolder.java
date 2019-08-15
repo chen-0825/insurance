@@ -1,20 +1,87 @@
 package com.java.pojo;
 
-import lombok.Data;
-
-@Data
 public class PolicyHolder {
-    private String phId;	//投保人id,雪花算法生成
+    private Integer phId;
 
-    private String phName;	//投保人姓名
+    private String phName;
 
-    private String phSex;	//投保人性别
+    private String phSex;
 
-    private String phCredType;	//投保人证件类型
+    private String phCredType;
 
-    private String phCredNumber;	//投保人证件号码
+    private String phCredNumber;
 
-    private String phTel;	//投保人联系方式
+    private String phTel;
 
-    private String phAddress;	//投保人联系地址
+    private String phAddress;
+
+    public PolicyHolder(Integer phId, String phName, String phSex, String phCredType, String phCredNumber, String phTel, String phAddress) {
+        this.phId = phId;
+        this.phName = phName;
+        this.phSex = phSex;
+        this.phCredType = phCredType;
+        this.phCredNumber = phCredNumber;
+        this.phTel = phTel;
+        this.phAddress = phAddress;
+    }
+
+    public PolicyHolder() {
+        super();
+    }
+
+    public Integer getPhId() {
+        return phId;
+    }
+
+    public void setPhId(Integer phId) {
+        this.phId = phId;
+    }
+
+    public String getPhName() {
+        return phName;
+    }
+
+    public void setPhName(String phName) {
+        this.phName = phName == null ? null : phName.trim();
+    }
+
+    public String getPhSex() {
+        return phSex;
+    }
+
+    public void setPhSex(String phSex) {
+        this.phSex = phSex == null ? null : phSex.trim();
+    }
+
+    public String getPhCredType() {
+        return phCredType;
+    }
+
+    public void setPhCredType(String phCredType) {
+        this.phCredType = phCredType == null ? null : phCredType.trim();
+    }
+
+    public String getPhCredNumber() {
+        return phCredNumber;
+    }
+
+    public void setPhCredNumber(String phCredNumber) {
+        this.phCredNumber = phCredNumber == null ? null : phCredNumber.trim();
+    }
+
+    public String getPhTel() {
+        return phTel;
+    }
+
+    public void setPhTel(String phTel) {
+        this.phTel = phTel == null ? null : phTel.trim();
+    }
+
+    public String getPhAddress() {
+        return phAddress;
+    }
+
+    public void setPhAddress(String phAddress) {
+        this.phAddress = phAddress == null ? null : phAddress.trim();
+    }
 }

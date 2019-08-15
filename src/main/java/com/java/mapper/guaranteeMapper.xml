@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.guaranteeMapper">
+
+  <!--表的字段-->
+  <sql id="zhiduan">
+        `policy_id`,
+        `recognizee`,
+        `written_date`,
+        `start_date`,
+        `ending_date`,
+        `baofeizonge`,
+        `policy_type`,
+        `policy_state`,
+        `peichangxiane`,
+        `engine`,
+        `vin`,
+        `factory_plate_model`,
+        `plate_number`,
+        `color`,
+        `vehicles_type`,
+        `passenger_number`,
+        `driving_Licence`,
+        `name_of_owner`,
+        `car_price`,
+        `date_of_registration`,
+        `useful_year`,
+        `driving_mileage`
+   </sql>
+
+  <!--#{}是实体类属性-->
+  <insert id="guaranteeinsert">
+       insert into `insurance`.`policys`
+    (<include refid="zhiduan"/>)
+values
+  (
+    #{policyId},
+    #{recognizee},
+    #{writtenDate},
+    #{startDate},
+    #{endingDate},
+    #{baofeizonge},
+    #{policyType},
+    #{policyState},
+    #{peichangxiane},
+    #{engine},
+    #{vin},
+    #{factoryPlateModel},
+    #{plateNumber},
+    #{color},
+    #{vehiclesType},
+    #{passengerNumber},
+    #{drivingLicence},
+    #{nameOfOwner},
+    #{carPrice},
+    #{dateOfRegistration},
+    #{usefulYear},
+    #{drivingMileage}
+  ) ;
+    </insert>
+
+  <select id="guaranteesfindAll" parameterType="com.java.pojo.Policys" resultType="com.java.pojo.Policys">
+      select *  from policys
+  </select>
+</mapper>
