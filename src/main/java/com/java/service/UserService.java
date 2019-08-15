@@ -11,5 +11,4 @@ public interface UserService {
 
     int insert(ShiroUser shiroUser);
 
-    int update(ShiroUser shiroUser);
 }
