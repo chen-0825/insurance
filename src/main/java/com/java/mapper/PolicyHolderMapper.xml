@@ -26,7 +26,7 @@ VALUES
     </insert>
     <!--投保人删-->
     <delete id="delete">
-        delete from policy_holder where ph_id = #{id}
+        delete from policy_holder where ph_id = #{phId}
     </delete>
     <!--投保人改-->
     <update id="update">
@@ -39,7 +39,7 @@ SET
   `phCardNumber` = #{phCardNumber},
   `phTel` = #{phTel},
   `phAddress` =#{phAddress}
-WHERE ph_Id = #{id} ;
+WHERE ph_Id = #{phId} ;
 
     </update>
     <!--投保人查所有-->
@@ -48,7 +48,7 @@ WHERE ph_Id = #{id} ;
     </select>
     <!--投保人查单条-->
     <select id="findOne" resultType="com.java.pojo.PolicyHolder">
-        select * from policy_holder where phId =#{phId}
+        select * from policy_holder where ph_id =#{phId}
     </select>
 
     <!--投保人多条件查询-->
@@ -67,7 +67,7 @@ WHERE ph_Id = #{id} ;
 
     <!--投保人批量删-->
     <update id="batchDelete">
-        delete from policy_holder where phId in
+        delete from policy_holder where ph_id in
         <foreach collection="array" item="id" open="(" close=")"
                  separator=",">
             #{phId}
@@ -76,6 +76,6 @@ WHERE ph_Id = #{id} ;
 
     <!--投保人分页-->
     <select id="findOneSelf" resultType="com.java.pojo.PolicyHolder">
-        select * from policy_holder where phId = #{phId}
+        select * from policy_holder where ph_id = #{phId}
     </select>
 </mapper>
