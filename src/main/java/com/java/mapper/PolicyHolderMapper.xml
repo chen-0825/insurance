@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.PolicyHolderMapper">
+    
+    <!--投保人增-->
+    <insert id="add">
+        INSERT INTO `policy_holder` (
+  `phName`,
+  `phSex`,
+  `phCertificateType`,
+  `phCardNumber`,
+  `phTel`,
+  `phAddress`
+)
+VALUES
+  (
+     #{phName},
+     #{phSex},
+     #{phCertificateType},
+     #{phCardNumber},
+     #{phTel},
+     #{phAddress}
+  ) ;
+
+    </insert>
+    <!--投保人删-->
+    <delete id="delete">
+        delete from policy_holder where ph_id = #{phId}
+    </delete>
+    <!--投保人改-->
+    <update id="update">
+    UPDATE
+  `policy_holder`
+SET
+  `phName` = #{phName},
+  `phSex` = #{phSex},
+  `phCertificateType` = #{phCertificateType},
+  `phCardNumber` = #{phCardNumber},
+  `phTel` = #{phTel},
+  `phAddress` =#{phAddress}
+WHERE ph_Id = #{phId} ;
+
+    </update>
+    <!--投保人查所有-->
+    <select id="findAll" resultType="com.java.pojo.PolicyHolder">
+        select * from policy_holder
+    </select>
+    <!--投保人查单条-->
+    <select id="findOne" resultType="com.java.pojo.PolicyHolder">
+        select * from policy_holder where ph_id =#{phId}
+    </select>
+
+    <!--投保人多条件查询-->
+    <select id="searchOne"  resultType="com.java.pojo.PolicyHolder">
+        select * from policy_holder
+        <where>
+            <if test="phName != null  and phName != ''">
+                and phName = #{phName}
+            </if>
+            <if test="phCardNumber !=null  and phCardNumber != ''">
+                and phCardNumber = #{phCardNumber}
+            </if>
+
+        </where>
+    </select>
+
+    <!--投保人批量删-->
+    <update id="batchDelete">
+        delete from policy_holder where ph_id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{phId}
+        </foreach>
+    </update>
+
+    <!--投保人分页-->
+    <select id="findOneSelf" resultType="com.java.pojo.PolicyHolder">
+        select * from policy_holder where ph_id = #{phId}
+    </select>
+</mapper>
