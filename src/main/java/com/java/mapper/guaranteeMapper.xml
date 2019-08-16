@@ -59,7 +59,32 @@ values
   ) ;
     </insert>
 
-  <select id="guaranteesfindAll" parameterType="com.java.pojo.Policys" resultType="com.java.pojo.Policys">
-      select *  from policys
-  </select>
+    <select id="guaranteesfindAll" parameterType="com.java.pojo.Policys" resultType="com.java.pojo.Policys">
+        select <include refid="zhiduan"/> from policys
+    </select>
+
+    <delete id="guaranteedelete">
+        delete from policys  where `policy_id` = #{policyId}
+    </delete>
+
+    <select id="tianjianfind" resultType="com.java.pojo.Policys">
+        select
+        <include refid="zhiduan"/>
+        from policys
+        <where>
+            <if test="#{policyId} != null">
+                and policy_id = #{policyId}
+            </if>
+            <if test="#{recognizee} != null">
+                and recognizee = #{recognizee}
+            </if>
+            <if test="#{vin} != null">
+                and vin = #{vin}
+            </if>
+            <if test="#{plateNumber} != null">
+                and plate_number = #{plateNumber}
+            </if>
+        </where>
+    </select>
+
 </mapper>

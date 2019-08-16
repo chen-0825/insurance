@@ -25,7 +25,7 @@ public interface PolicyHolderMapper {
     List<PolicyHolder> searchOne(PolicyHolder policyholder);
 
     //批量删
-    int batchDelete(String[] phid);
+    int batchDelete(String[] phId);
 
     //分页
     List<PolicyHolder> findOneSelf(PolicyHolder policyholder);
