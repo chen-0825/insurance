@@ -10,6 +10,6 @@
         SELECT * FROM zi_city where CityName like "%"#{city}"%" LIMIT 0,7
     </select>
     <select id="findCityByPinyin" resultType="ZiCity">
-        SELECT * FROM zi_city where pinyin like "%"#{city}"%" LIMIT 0,7
+        SELECT * FROM zi_city where pinyin like #{city} LIMIT 0,7
     </select>
 </mapper>
