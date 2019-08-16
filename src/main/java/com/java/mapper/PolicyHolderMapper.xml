@@ -9,8 +9,8 @@
   `ph_id`,
   `ph_name`,
   `ph_sex`,
-  `ph_cred_type`,
-  `ph_cred_number`,
+  `ph_certificate_type`,
+  `ph_identification_number`,
   `ph_tel`,
   `ph_address`
 )
@@ -19,8 +19,8 @@ VALUES
     #{phId},
     #{phName},
     #{phSex},
-    #{phCredType},
-    #{phCredNumber},
+    #{phCertificateType},
+    #{phIdentificationNumber},
     #{phTel},
     #{phAddress}
   )
@@ -38,8 +38,8 @@ SET
   `ph_id` =  #{phId},
   `ph_name` =  #{phName},
   `ph_sex` =  #{phSex},
-  `ph_cred_type` =  #{phCredType},
-  `ph_cred_number` =  #{phCredNumber},
+  `ph_certificate_type` =  #{phCertificateType},
+  `ph_identification_number` =  #{phIdentificationNumber},
   `ph_tel` =  #{phTel},
   `ph_address` =  #{phAddress}
 WHERE `ph_id` =  #{phId} ;
@@ -60,8 +60,8 @@ WHERE `ph_id` =  #{phId} ;
             <if test="phName != null  and phName != ''">
                 and ph_name = #{phName}
             </if>
-            <if test="phCredNumber !=null  and phCredNumber != ''">
-                and ph_cred_number = #{phCredNumber}
+            <if test="phIdentificationNumber !=null  and phIdentificationNumber != ''">
+                and ph_identification_number = #{phIdentificationNumber}
             </if>
 
         </where>

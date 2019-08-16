@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.InsuredPersonMapper">
+    
+    <!--投保人增-->
+    <insert id="add">
+   INSERT INTO `insurance`.`insured_person` (
+  `ip_name`,
+  `ip_sex`,
+  `ip_tel`,
+  `ip_email`,
+  `ip_certificate_type`,
+  `ip_identification_number`,
+  `ip_address`,
+  `ip_bank_account`,
+  `ip_dirver_license`,
+  `ph_name`
+)
+VALUES
+  (
+    #{ipName},
+    #{ipSex},
+    #{ipTel},
+    #{ipEmail},
+    #{ipCertificateType},
+    #{ipIdentificationNumber},
+    #{ipAddress},
+    #{ipBankAccount},
+    #{ipDirverLicense},
+    #{phName}
+  )
+
+    </insert>
+    <!--投保人删-->
+    <delete id="delete">
+        delete from insured_person where ip_id = #{ipId}
+    </delete>
+    <!--投保人改-->
+    <update id="update">
+ UPDATE
+  `insurance`.`insured_person`
+SET
+  `ip_id` =  #{ipId},
+  `ip_name` =  #{ipName},
+  `ip_sex` =  #{ipSex},
+  `ip_tel` =  #{ipTel},
+  `ip_email` = #{ipEmail},
+  `ip_certificate_type` =  #{ipCertificateType},
+  `ip_identification_number` =  #{ipIdentificationNumber},
+  `ip_address` =  #{ipAddress},
+  `ip_bank_account` =  #{ipBankAccount},
+  `ip_dirver_license` =  #{ipDirverLicense},
+  `ph_name` =  #{phName}
+WHERE `ip_id` =  #{ipId} ;
+    </update>
+    <!--投保人查所有-->
+    <select id="findAll" resultType="com.java.pojo.InsuredPerson">
+        select * from insured_person
+    </select>
+    <!--投保人查单条-->
+    <select id="findOne" resultType="com.java.pojo.InsuredPerson">
+        select * from insured_person where ip_id =#{ipId}
+    </select>
+
+    <!--投保人多条件查询-->
+    <select id="searchOne"  resultType="com.java.pojo.InsuredPerson">
+        select * from insured_person
+        <where>
+            <if test="ipName != null  and ipName != ''">
+                and ip_name = #{ipName}
+            </if>
+            <if test="ipIdentificationNumber !=null  and ipIdentificationNumber != ''">
+                and ip_identification_number = #{ipIdentificationNumber}
+            </if>
+
+        </where>
+    </select>
+
+    <!--投保人批量删-->
+    <update id="batchDelete">
+        delete from insured_person where ip_id in
+        <foreach collection="array" item="ipId" open="(" close=")"
+                 separator=",">
+            #{ipId}
+        </foreach>
+    </update>
+
+    <!--投保人分页-->
+    <select id="findOneSelf" resultType="com.java.pojo.InsuredPerson">
+        select * from insured_person where ip_id = #{ipId}
+    </select>
+</mapper>
