@@ -95,7 +95,7 @@ public class Sk_policyholder {
         // 封装了分页的详情信息,和查询来的结果
         PageInfo pageInfo = new PageInfo(list, 5);// 传入连续显示的页数
         model.addAttribute("pageInfo", pageInfo);
-        if (policyholder.getPhName()=="" && policyholder.getPhCredNumber()==""){
+        if (policyholder.getPhName()=="" && policyholder.getPhIdentificationNumber()==""){
 
             return "redirect:ph_index";
 
