@@ -52,7 +52,7 @@ public class guarantee {
         List<Policys> policysList = guaranteeservice.guaranteesfindAll();
         PageHelper.startPage(pn, 8);
         PageInfo page = new PageInfo(policysList, 5);
-        return Msg.success().add("pageInfo", page);
+        return Msg.success().maps("pageInfo", page);
 //        return "guarantee/guarantee";
     }
 

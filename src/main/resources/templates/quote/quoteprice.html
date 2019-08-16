@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:c="http://mybatis.org/schema/mybatis-mapper">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" th:href="@{css/quoteprice.css}"/>
+		<link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+		<title></title>
+	</head>
+	<body>
+		<div id="main">
+			<div id="header">
+				
+			</div>
+			
+			<div id="container">
+				<div id="container-left">
+						<div>
+							驾驶城市<input type="text" id="city" name="city" value="" onkeyup="searchCity(value)" style="height: 25px; width: 200px; font-size: 24px;"/>
+							<p id="hotcity-button"></p>
+						</div>
+						<div>
+							车牌号码<input type="text" id="car-number" name="car-number" style="height: 25px; width: 200px; font-size: 24px;"/>
+						</div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+				</div>
+				<div id="hot-city" style="display: none; width: 298px; height: 144px; border:1px solid black; position: absolute; left: 646px; top: 50px; background-color: white;">
+					<ul th:each="city:${hotCity}">
+						<li th:text="${city.CityName}" class="class1"></li>
+					</ul>
+				</div>
+				<div id="container-right">
+
+				</div>
+			</div>
+			<div id="footer">
+				
+			</div>
+		</div>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+		<script type="text/javascript">
+			var li = $(".class1");
+			var count = 0;
+				li.click(function () {
+					count = li.index(this);
+                    var city = li.eq(count).text();
+                    $("#city").val(city);
+                    $("#hot-city").css('display','none');
+				})
+
+            $("#hotcity-button").click(function () {
+                if ($("#hot-city").css('display')=='none'){
+                    $("#hot-city").css('display','inline-block');
+                }else {
+                    $("#hot-city").css('display','none');
+                }
+            })
+
+            function searchCity(v) {
+				    if(v==null||v==""){
+				        console.log("this null");
+                    }else {
+				        console.log(v);
+                        $.ajax({
+                            url:"/searchCity",
+                            async:true,
+                            data:{"city":v},
+                            type:"post",
+                            dataType:"json",
+                            success:function (result) {
+
+                            },
+                            error:function () {
+
+                            }
+                        })
+                    }
+            }
+
+		</script>
+	</body>
+</html>
