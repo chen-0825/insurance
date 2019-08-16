@@ -1,10 +1,10 @@
-package com.java.mapper;
+package com.java.service;
 
 import com.java.pojo.Lpgl;
 
 import java.util.List;
 
-public interface LpglMapper {
+public interface LpglService {
     //增加
     int insertLpgl(Lpgl lpgl);
     //删除

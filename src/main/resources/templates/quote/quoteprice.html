@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:c="http://mybatis.org/schema/mybatis-mapper">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" th:href="@{css/quoteprice.css}"/>
+		<link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+		<title></title>
+	</head>
+	<body>
+		<div id="main">
+			<div id="header">
+				
+			</div>
+			
+			<div id="container">
+				<form>
+					<div id="container-left">
+							<div style="border: none;">
+								驾驶城市<input type="text" id="city" name="city" th:value="${firstcity}" onkeyup="searchCity(value)" style="height: 25px; width: 200px; font-size: 22px;" required="required"/>
+								<p id="hotcity-button"></p>
+							</div>
+							<div style="border: none;">
+								车牌号码<input type="text" id="car-number" name="car-number" placeholder="选填" style="height: 25px; width: 200px; font-size: 22px;"/>
+							</div>
+							<div style="border:none;">
+								提车时间<select name="getTimeYear">
+											<option value="2019">2019</option>
+											<option value="2018">2018</option>
+											<option value="2017">2017</option>
+											<option value="2016">2016</option>
+											<option value="2015">2015</option>
+											<option value="2014">2014</option>
+											<option value="2013">2013</option>
+											<option value="2012">2012</option>
+											<option value="2011">2011</option>
+											<option value="2010">2010</option>
+											<option value="2009">2009</option>
+											<option value="2008">2008</option>
+											<option value="2007">2007</option>
+											<option value="2006">2006</option>
+											<option value="2005">2005</option>
+											<option value="2004">2004</option>
+										</select>年
+										<select name="getTimeMonth">
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>月
+							</div>
+							<div style="border: none;">
+								车价<input type="text" name="carprice" style="height: 25px; width: 200px; font-size: 22px;" required="required"/>万元
+							</div>
+							<div style="border: none;">
+								手机号<input type="text" name="phonenumber" style="height: 25px; width: 200px; font-size: 22px;" required="required" />
+							</div>
+							<div>
+								<input type="submit" id="submit1"/>
+							</div>
+
+					</div>
+				</form>
+				<div id="hot-city" style="display: none; width: 298px; height: 144px; border:1px solid black; position: absolute; left: 646px; top: 50px; background-color: white;">
+					<ul th:each="city:${hotCity}">
+						<li th:text="${city.CityName}" class="class1"></li>
+					</ul>
+				</div>
+				<div id="prompt-city" style="width: 298px;border: 1px solid white; position:absolute; left: 646px;top: 50px; background-color: #FFFFFF; display: inline-block;">
+
+				</div>
+				<div id="container-right">
+
+				</div>
+			</div>
+			<div id="footer">
+				
+			</div>
+		</div>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+		<script type="text/javascript">
+			$(function () {
+				var li = $(".class1");
+				var count = 0;
+				li.click(function () {
+					count = li.index(this);
+					var city = li.eq(count).text();
+					$("#city").val(city);
+					$("#hot-city").css('display','none');
+				})
+
+				$("#hotcity-button").click(function () {
+					if ($("#hot-city").css('display')=='none'){
+						$("#hot-city").css('display','inline-block');
+					}else {
+						$("#hot-city").css('display','none');
+					}
+				})
+
+
+			})
+
+            function searchCity(v) {
+				    if(v==null||v==""){
+				        console.log("this null");
+						$("#prompt-city").empty();
+						$("#prompt-city").css('border','1px solid white');
+                    }else {
+				        console.log(v);
+                        $.ajax({
+                            url:"/searchCity",
+                            async:true,
+                            data:{"city":v},
+                            type:"post",
+                            dataType:"json",
+                            success:function (result) {
+                            	if(result.length!=0){
+									$("#prompt-city").css('display','inline-block');
+									$("#prompt-city").empty();
+									$("#prompt-city").css('border','1px solid black');
+									for (var i = 0; i < result.length; i++){
+										$("#prompt-city").append("<li style='list-style: none;' class='prompt-zhong' onclick='setCity()'>"+result[i].cityName);
+										$("#prompt-city").append("<li style='list-style: none;' class='prompt-pin'>"+result[i].pinyin);
+									}
+								}else {
+									$("#prompt-city").css('display','inline-block');
+									$("#prompt-city").empty();
+									$("#prompt-city").css('border','1px solid black');
+									$("#prompt-city").append("<div class='prompt-zhong'>小的找不到:</div>");
+									$("#prompt-city").append("<div class='prompt-pin'>"+v+"</div>");
+								}
+                            },
+                            error:function () {
+
+                            }
+                        })
+                    }
+            }
+
+			function setCity() {
+				var li1 = $(".prompt-zhong");
+				var count1 = 0;
+				li1.click(function () {
+					count1 = li1.index(this);
+					var city = li1.eq(count1).text();
+					$("#city").val(city);
+					$("#prompt-city").css('display','none');
+				})
+			}
+
+		</script>
+	</body>
+</html>

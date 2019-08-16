@@ -39,14 +39,14 @@
 <botton id="btn2" class="btn btn-success">注册</botton>
 <div id="wrap">
     <form methed="post" action="backstageLogin" id="form1">
-        用户名:<input type="text" name="name"/><br/>
-        密码:<input type="password" name="password"/><br/>
+        用户名:<input type="text" name="name" required/><br/>
+        密码:<input type="password" name="password" required/><br/>
         <input type="submit" class="btn btn-primary" th:value="登录"/>
     </form>
     <form methed="post" action="register" id="form2">
-        用户名:<input type="text" name="name"/><br/>
-        密码:<input type="password" name="password"/><br/>
-        邮箱:<input type="email" name="email"/><br/>
+        用户名:<input type="text" name="name" required/><br/>
+        密码:<input type="password" name="password" required/><br/>
+        邮箱:<input type="email" name="email" required/><br/>
         <input type="submit" class="btn btn-success" th:value="注册"/>
     </form>
 </div>

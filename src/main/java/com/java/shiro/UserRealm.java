@@ -28,6 +28,7 @@ public class UserRealm extends AuthorizingRealm {
         ShiroUser user = (ShiroUser)subject.getPrincipal();
         String role = userService.findRole(user.getId());
         info.addRole(role);
+        System.out.println(role);
         return info;
     }
 

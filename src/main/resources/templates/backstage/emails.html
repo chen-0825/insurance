@@ -11,13 +11,13 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">已向该邮箱发送验证码:</label>
         <div class="col-sm-10">
-            <p class="form-control-static" th:text="${session.ShiroUser.emails}"></p>
+            <p class="form-control-static" th:text="${session.ShiroUser.email}"></p>
         </div>
     </div>
     <div class="form-group">
         <label for="inputPassword" class="col-sm-2 control-label">验证码:</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" name="pwd">
+            <input type="password" class="form-control" id="inputPassword" name="pwd" required>
         </div>
     </div>
     <input type="submit" th:value="确认"/>

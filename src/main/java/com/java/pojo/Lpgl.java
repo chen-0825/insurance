@@ -14,10 +14,6 @@ import java.util.Date;
 public class Lpgl {
     private Integer id;
 
-    private Integer pgId;
-
-    private String pgName;
-
     private String xmName;
 
     private BigDecimal ssMoney;
@@ -30,8 +26,6 @@ public class Lpgl {
 
     private String lpFs;
 
-    private String lpJz;
-
     private String lpSh;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -39,6 +33,9 @@ public class Lpgl {
 
     public String getLpTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(this.lpTime);
+        if(this.lpTime != null){
+            return sdf.format(this.lpTime);
+        }
+        return "";
     }
 }
