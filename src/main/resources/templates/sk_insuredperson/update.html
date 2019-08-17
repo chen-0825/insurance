@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>被保人修改页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
+</head>
+<body>
+
+<div class="container" style="padding-top: 100px">
+    <form action="ip_xg" method="post">
+                   <input type="text" name="ipId" th:value="${i.ipId}" style="display: none" /></br>
+        被保人姓名:<input type="text" name="ipName" th:value="${i.ipName}" /></br>
+        被保人性别:<input type="text" name="ipSex" th:value="${i.ipSex}"  /></br>
+        被保人电话:<input type="text" name="ipTel" th:value="${i.ipTel}"  /></br>
+        被保人邮箱:<input type="text" name="ipEmail" th:value="${i.ipEmail}" /></br>
+        被保人证件类型:<input type="text" name="ipCertificateType" th:value="${i.ipCertificateType}"   /></br>
+        被保人证件号码:<input type="text" name="ipIdentificationNumber" th:value="${i.ipIdentificationNumber}" /></br>
+        被保人联系地址:<input type="text" name="ipAddress" th:value="${i.ipAddress}"  /></br>
+        被保人银行账户:<input type="text" name="ipBankAccount" th:value="${i.ipBankAccount}" /></br>
+        被保人驾驶执照:<input type="text" name="ipDirverLicense" th:value="${i.ipDirverLicense}" /></br>
+        投保人姓名:<input type="text" name="phName" th:value="${i.phName}" /></br>
+        <input type="submit" value="修改"  class="btn btn-success"/></br>
+    </form>
+</div>
+</body>
+</html>
