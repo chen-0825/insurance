@@ -1,6 +1,7 @@
 package com.java.service.impl;
 
 import com.java.mapper.QuoteMapper;
+import com.java.pojo.AccessInfo;
 import com.java.pojo.HotCity;
 import com.java.pojo.ZiCity;
 import com.java.service.QuoteService;
@@ -28,5 +29,10 @@ public class QuoteServiceImpl implements QuoteService {
     @Override
     public List<ZiCity> findCityByPinyin(String city) {
         return quoteMapper.findCityByPinyin(city);
+    }
+
+    @Override
+    public int addAccessInfo(AccessInfo accessInfo) {
+        return quoteMapper.addAccessInfo(accessInfo);
     }
 }
