@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>出险管理</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <td>报案编号</td>
+                <td>保单号</td>
+                <td>被保人身份证号</td>
+                <td>被保人姓名</td>
+                <td>报案人</td>
+                <td>报案时间</td>
+                <td>报案电话</td>
+                <td>司机姓名</td>
+                <td>司机电话</td>
+                <td>出险时间</td>
+                <td>出险地点</td>
+                <td>出险原因</td>
+                <td>被保人电话</td>
+                <td>保安处理</td>
+                <td>案件状态</td>
+            </tr>
+
+            <tr th:each="li:${list}" >
+                <td th:text="${li.riskBnSerial}"></td>
+                <td th:text="${li.riskIdcard}"></td>
+                <td th:text="${li.riskPersonname}"></td>
+                <td th:text="${li.riskReporter}"></td>
+                <td th:text="${li.riskBnTime}"></td>
+                <td th:text="${li.riskDirvertel}"></td>
+                <td th:text="${li.riskDirver}"></td>
+                <td th:text="${li.riskDirvertel}"></td>
+                <td th:text="${li.riskOuttime}"></td>
+                <td th:text="${li.riskOutprovince + li.riskOutcity +li.riskOutarea +li.riskOutroad}"></td>
+                <td th:text="${li.riskReason}"></td>
+                <td th:text="${li.riskReportertel}"></td>
+                <td th:if="${li.riskHander} == 1">注销</td>
+                <td th:if="${li.riskHander} == 2">受理</td>
+                <td th:if="${li.riskHander} == 3">暂存</td>
+                <td th:if="${li.riskState} == 1">结案</td>
+                <td th:if="${li.riskState} == 2">予以立案</td>
+                <td th:if="${li.riskState} == 3">撤案</td>
+                <td th:if="${li.riskState} == 4">注销</td>
+            </tr>
+        </table>
+
+    </div>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>
+</body>
+</html>
