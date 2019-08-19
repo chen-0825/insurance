@@ -30,8 +30,9 @@ public class guaranteeServiceimpl implements guaranteeService {
         return gm.guaranteedelete(policyId);
     }
 
-    public int tianjianfind(Policys po){
-        return gm.tianjianfind(po);
+    public List<Policys> tiaojianfind(Policys po){
+        System.out.println(po);
+        return gm.tiaojianfind(po);
     }
 
 }
