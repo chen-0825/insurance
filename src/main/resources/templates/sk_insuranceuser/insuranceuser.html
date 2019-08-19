@@ -23,7 +23,7 @@
               <table  class="table table-bordered table-hover">
                   <tr class="info" >
                       <td> <button type="button" class="btn btn-primary btn-sm" id="qx">全选</button></td>
-                      <button type="button" class="btn btn-primary btn-sm" id="fx">反选</button>
+                      <button type="button" class="btn btn-primary btn-sm" id="fx">全部取消</button>
                       <td >被保人姓名</td>
                       <td >被保人性别</td>
                       <td >被保人电话</td>
@@ -101,8 +101,6 @@
         for(var i = 0;i < nums.length; i++){
             if(nums[i].checked==true){
                 nums[i].checked=false;
-            }else{
-                nums[i].checked=true;
             }
         }
     })
