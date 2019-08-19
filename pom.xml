@@ -66,17 +66,20 @@
             <artifactId>bootstrap</artifactId>
             <version>3.3.5</version>
         </dependency>
+
         <!--沙箱支付-->
         <!--<dependency>-->
             <!--<groupId>com.alipay.sdk</groupId>-->
             <!--<artifactId>alipay-sdk-java</artifactId>-->
             <!--<version>3.7.110.ALL</version>-->
         <!--</dependency>-->
+
         <!--配置redis起步依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+        <!--</dependency>-->
+
         <!-- Spring-Mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -88,17 +91,21 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.20</version>
-        </dependency>
+
+        <!--连接池-->
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba</groupId>-->
+            <!--<artifactId>druid</artifactId>-->
+            <!--<version>1.0.20</version>-->
+        <!--</dependency>-->
+
         <!--阿里云上的ajax-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
+
         <!--消息提示插件-->
         <!--<dependency>-->
             <!--<groupId>org.webjars.bower</groupId>-->
@@ -111,6 +118,7 @@
             <!--<artifactId>zhenzisms</artifactId>-->
             <!--<version>1.0.2</version>-->
         <!--</dependency>-->
+
         <!--shiro-spring-->
         <dependency>
             <groupId>org.apache.shiro</groupId>

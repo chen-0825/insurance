@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>验证码</title>
     <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
     <link rel="bookmark" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
 </head>
-<body style="padding:500px;">
-<form class="form-horizontal" method="post" action="verification">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">已向该邮箱发送验证码:</label>
-        <div class="col-sm-10">
-            <p class="form-control-static" th:text="${session.ShiroUser.email}"></p>
+<body style="padding:400px 600px;background-image:url(img/loginbackground.jpg) ">
+<div class="container">
+
+    <form class="form-horizontal" method="post" action="verification">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">已向该邮箱发送验证码:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">[[${session.ShiroUser.email}]]</p>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="inputPassword" class="col-sm-2 control-label">验证码:</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" name="pwd" required>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">验证码:</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" name="pwd" required style="width: 200px">
+            </div>
         </div>
-    </div>
-    <input type="submit" th:value="确认"/>
-</form>
+        <input type="submit" th:value="确认" class="btn btn-primary" style="margin-left: 200px"/>
+    </form>
+</div>
 </body>
 </html>
