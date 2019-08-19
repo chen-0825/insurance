@@ -25,7 +25,8 @@
         `car_price`,
         `date_of_registration`,
         `useful_year`,
-        `driving_mileage`
+        `driving_mileage`,
+        `idcard`
    </sql>
 
   <!--#{}是实体类属性-->
@@ -55,7 +56,8 @@ values
     #{carPrice},
     #{dateOfRegistration},
     #{usefulYear},
-    #{drivingMileage}
+    #{drivingMileage},
+    #{idcard}
   ) ;
     </insert>
 
@@ -67,23 +69,24 @@ values
         delete from policys  where `policy_id` = #{policyId}
     </delete>
 
-    <select id="tianjianfind" resultType="com.java.pojo.Policys">
+    <!--通过选择其中一项或多项字段来查询-->
+    <select id="tiaojianfind" resultType="com.java.pojo.Policys">
         select
         <include refid="zhiduan"/>
         from policys
         <where>
-            <if test="#{policyId} != null">
-                and policy_id = #{policyId}
-            </if>
-            <if test="#{recognizee} != null">
-                and recognizee = #{recognizee}
-            </if>
-            <if test="#{vin} != null">
-                and vin = #{vin}
-            </if>
-            <if test="#{plateNumber} != null">
-                and plate_number = #{plateNumber}
-            </if>
+                <if test="policyId != null and policyId != ''">
+                    and policy_id = #{policyId}
+                </if>
+                <if test="recognizee != null and recognizee != ''">
+                    and recognizee = #{recognizee}
+                </if>
+                <if test="vin != null and vin != ''">
+                    and vin = #{vin}
+                </if>
+                <if test="plateNumber != null and plateNumber != ''">
+                    and plate_number = #{plateNumber}
+                </if>
         </where>
     </select>
 

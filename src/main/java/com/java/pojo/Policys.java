@@ -3,6 +3,7 @@ package com.java.pojo;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Pattern;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,8 +11,8 @@ import java.util.Date;
  * @author zl
  * @create 2019-08-14 16:41
  */
-//避免写set和get方法
-@Data
+//@Data避免写set和get方法
+//@Data 条件查询会报错toString();
 public class Policys {
     private String policyId;
 
@@ -50,6 +51,9 @@ public class Policys {
 
     private String drivingLicence;
 
+
+//    @Pattern(regexp="(^[\\u2E80-\\u9FFF]{2,5})",
+//            message="请输入2-5位中文")
     private String nameOfOwner;
 
     private Double carPrice;
@@ -61,7 +65,15 @@ public class Policys {
 
     private Double drivingMileage;
 
-    public Policys(String policyId, String recognizee, Date writtenDate, Date startDate, Date endingDate, Double baofeizonge, String policyType, String policyState, Double peichangxiane, String engine, String vin, String factoryPlateModel, String plateNumber, String color, String vehiclesType, Integer passengerNumber, String drivingLicence, String nameOfOwner, Double carPrice, Date dateOfRegistration, Integer usefulYear, Double drivingMileage) {
+
+//    @Pattern(regexp="^(\\d{6})(\\d{4})(\\d{2})(\\d{2})(\\d{3})([0-9]|X)$",
+//            message="身份证号格式不正确,请输入18位号码")
+    private String idcard;
+
+    public Policys() {
+    }
+
+    public Policys(String policyId, String recognizee, Date writtenDate, Date startDate, Date endingDate, Double baofeizonge, String policyType, String policyState, Double peichangxiane, String engine, String vin, String factoryPlateModel, String plateNumber, String color, String vehiclesType, Integer passengerNumber, String drivingLicence, String nameOfOwner, Double carPrice, Date dateOfRegistration, Integer usefulYear, Double drivingMileage, String idcard) {
         this.policyId = policyId;
         this.recognizee = recognizee;
         this.writtenDate = writtenDate;
@@ -84,10 +96,7 @@ public class Policys {
         this.dateOfRegistration = dateOfRegistration;
         this.usefulYear = usefulYear;
         this.drivingMileage = drivingMileage;
-    }
-
-    public Policys() {
-        super();
+        this.idcard = idcard;
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -109,4 +118,176 @@ public class Policys {
         return sdf.format(this.dateOfRegistration);
     }
 
+
+    public String getPolicyId() {
+        return policyId;
+    }
+
+    public void setPolicyId(String policyId) {
+        this.policyId = policyId;
+    }
+
+    public String getRecognizee() {
+        return recognizee;
+    }
+
+    public void setRecognizee(String recognizee) {
+        this.recognizee = recognizee;
+    }
+
+
+    public void setWrittenDate(Date writtenDate) {
+        this.writtenDate = writtenDate;
+    }
+
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+
+    public void setEndingDate(Date endingDate) {
+        this.endingDate = endingDate;
+    }
+
+    public Double getBaofeizonge() {
+        return baofeizonge;
+    }
+
+    public void setBaofeizonge(Double baofeizonge) {
+        this.baofeizonge = baofeizonge;
+    }
+
+    public String getPolicyType() {
+        return policyType;
+    }
+
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
+    }
+
+    public String getPolicyState() {
+        return policyState;
+    }
+
+    public void setPolicyState(String policyState) {
+        this.policyState = policyState;
+    }
+
+    public Double getPeichangxiane() {
+        return peichangxiane;
+    }
+
+    public void setPeichangxiane(Double peichangxiane) {
+        this.peichangxiane = peichangxiane;
+    }
+
+    public String getEngine() {
+        return engine;
+    }
+
+    public void setEngine(String engine) {
+        this.engine = engine;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    public void setVin(String vin) {
+        this.vin = vin;
+    }
+
+    public String getFactoryPlateModel() {
+        return factoryPlateModel;
+    }
+
+    public void setFactoryPlateModel(String factoryPlateModel) {
+        this.factoryPlateModel = factoryPlateModel;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public void setPlateNumber(String plateNumber) {
+        this.plateNumber = plateNumber;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getVehiclesType() {
+        return vehiclesType;
+    }
+
+    public void setVehiclesType(String vehiclesType) {
+        this.vehiclesType = vehiclesType;
+    }
+
+    public Integer getPassengerNumber() {
+        return passengerNumber;
+    }
+
+    public void setPassengerNumber(Integer passengerNumber) {
+        this.passengerNumber = passengerNumber;
+    }
+
+    public String getDrivingLicence() {
+        return drivingLicence;
+    }
+
+    public void setDrivingLicence(String drivingLicence) {
+        this.drivingLicence = drivingLicence;
+    }
+
+    public String getNameOfOwner() {
+        return nameOfOwner;
+    }
+
+    public void setNameOfOwner(String nameOfOwner) {
+        this.nameOfOwner = nameOfOwner;
+    }
+
+    public Double getCarPrice() {
+        return carPrice;
+    }
+
+    public void setCarPrice(Double carPrice) {
+        this.carPrice = carPrice;
+    }
+
+
+    public void setDateOfRegistration(Date dateOfRegistration) {
+        this.dateOfRegistration = dateOfRegistration;
+    }
+
+    public Integer getUsefulYear() {
+        return usefulYear;
+    }
+
+    public void setUsefulYear(Integer usefulYear) {
+        this.usefulYear = usefulYear;
+    }
+
+    public Double getDrivingMileage() {
+        return drivingMileage;
+    }
+
+    public void setDrivingMileage(Double drivingMileage) {
+        this.drivingMileage = drivingMileage;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
 }
