@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>保险用户查询页面</title>
@@ -9,7 +9,6 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div id="wrap" class="container">
     <div class="container" style="padding-top: 100px">
         <!--查询所有信息-->
         <button type="button" class="btn btn-danger btn-sm" id="pl">批量删除</button>
@@ -57,42 +56,32 @@
         </table>
 
         <!-- 显示分页信息 -->
-        <div class="row">
-            <div class="col-md-6" th:text="${pageInfo.pageNum}/${pageInfo.pages}" th:if="${pageInfo.total != 0}"></div>
-            <div class="col-md-6">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li><a th:href="@{iu_cx(pn=1)}">首页</a></li>
-                        <!-- 判断是否有上一页 -->
-                        <li th:if ="${pageInfo.hasPreviousPage }">
-                            <a th:href="@{iu_cx(pn=${pageInfo.pageNum-1})}"aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <!-- 获取当前需要连续显示的页码 -->
-                        <a th:each="page_num:${pageInfo.navigatepageNums }">
-                            <li class="active" th:if ="${page_num == pageInfo.pageNum}">
-                                <a th:text="${page_num}"></a>
-                            </li>
-                            <li th:if ="${page_num != pageInfo.pageNum}">
-                                <a th:href="@{iu_cx(pn=${page_num})}" th:text="${page_num}"></a>
-                            </li>
-                        </a>
-                        <!-- 判断是否有下一页 -->
-                        <li th:if ="${pageInfo.hasNextPage }">
-                            <a th:href="@{iu_cx(pn=${pageInfo.pageNum+1})}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                        <li><a th:href="@{iu_cx(pn=${pageInfo.pages})}">末页</a></li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="col-md-6" th:if="${pageInfo.total != 0}">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+        <div class="col-md-6">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <!-- 判断是否有上一页 -->
+                    <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+                    <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{iu_cx(pn=1)}">首页</a></li>
+                    <li th:if="${pageInfo.hasPreviousPage }">
+                        <a th:href="@{iu_cx(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <!-- 获取当前需要连续显示的页码 -->
+                    <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                        <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                        <a th:href="@{iu_cx(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+                    </li>
+                    <!-- 判断是否有下一页 -->
+                    <li th:if="${pageInfo.hasNextPage }">
+                        <a th:href="@{iu_cx(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                    </li>
+                    <li th:if="${pageInfo.hasNextPage }"><a th:href="@{iu_cx(pn=${pageInfo.pages} )}">末页</a></li>
+                    <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
-
-</div>
+    </div>
 <script>
     // 全选
     $("#qx").click(function(){

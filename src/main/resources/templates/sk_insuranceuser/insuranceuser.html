@@ -57,38 +57,31 @@
                       </tr>
               </table>
               <!-- 显示分页信息 -->
-              <div class="row">
-                  <div class="col-md-6" th:if="${pageInfo.total != 0}"  > [[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]  </div>
-                  <div class="col-md-6">
-                      <nav aria-label="Page navigation">
-                          <ul class="pagination">
-                              <li><a th:href="@{iu_index(pn=1)}">首页</a></li>
-                              <!-- 判断是否有上一页 -->
-                                  <li th:if ="${pageInfo.hasPreviousPage }">
-                                      <a th:href="@{iu_index(pn=${pageInfo.pageNum -1})}"aria-label="Previous">
-                                          <span aria-hidden="true">&laquo;</span>
-                                      </a>
-                                  </li>
-                              <!-- 获取当前需要连续显示的页码 -->
-                              <a th:each="page_num:${pageInfo.navigatepageNums }">
-                                      <li class="active" th:if ="${page_num == pageInfo.pageNum}">
-                                          <a th:text="${page_num}"></a>
-                                      </li>
-                                        <li th:if ="${page_num != pageInfo.pageNum}">
-                                            <a th:href="@{iu_index(pn=${page_num})}" th:text="${page_num}"></a>
-                                        </li>
-                              </a>
-                              <!-- 判断是否有下一页 -->
-                                  <li th:if ="${pageInfo.hasNextPage }">
-                                      <a th:href="@{iu_index(pn=${pageInfo.pageNum+1})}" aria-label="Next">
-                                          <span aria-hidden="true">&raquo;</span>
-                                      </a>
-                                  </li>
-                              <li><a th:href="@{iu_index(pn=${pageInfo.pages})}">末页</a></li>
-                          </ul>
-                      </nav>
-                  </div>
+              <div class="col-md-6" th:if="${pageInfo.total != 0}">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+              <div class="col-md-6">
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                          <!-- 判断是否有上一页 -->
+                          <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+                          <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{iu_index(pn=1)}">首页</a></li>
+                          <li th:if="${pageInfo.hasPreviousPage }">
+                              <a th:href="@{iu_index(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                          </li>
+                          <!-- 获取当前需要连续显示的页码 -->
+                          <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                              <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                              <a th:href="@{iu_index(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+                          </li>
+                          <!-- 判断是否有下一页 -->
+                          <li th:if="${pageInfo.hasNextPage }">
+                              <a th:href="@{iu_index(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                          </li>
+                          <li th:if="${pageInfo.hasNextPage }"><a th:href="@{iu_index(pn=${pageInfo.pages} )}">末页</a></li>
+                          <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+                      </ul>
+                  </nav>
               </div>
+          </div>
           </div>
 
           <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>

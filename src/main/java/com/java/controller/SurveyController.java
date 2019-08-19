@@ -1,8 +1,6 @@
 package com.java.controller;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.java.pojo.InsuredPerson;
 import com.java.pojo.Survey;
 import com.java.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
