@@ -98,6 +98,4 @@ public class LoginController {
         return "/backstage/emails";
     }
 
-
 }
-

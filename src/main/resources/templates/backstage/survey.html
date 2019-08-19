@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
+</head>
+<body>
+    <div class="container" style="padding-top: 150px">
+        <table class="table table-striped">
+            <tr class="info">
+                <th>查勘编号</th>
+                <th>派工工号</th>
+                <th>查勘时间</th>
+                <th>查勘地点</th>
+                <th>联系电话</th>
+                <th>查勘状态</th>
+                <th>车主姓名</th>
+                <th>定损状态</th>
+                <th>定损金额</th>
+                <th>受伤人员</th>
+                <th>现场图片</th>
+            </tr>
+            <tr th:each="var : ${pageInfo.getList()}">
+                <td th:text="${var.getId()}"></td>
+                <td th:text="${var.getNumber()}"></td>
+                <td th:text="${#dates.format(var.getTime(),'yyyy-MM-dd')}"></td>
+                <td th:text="${var.getSite() }"></td>
+                <td th:text="${var.getPhone()}"></td>
+                <td th:text="${var.getStatus()}"></td>
+                <td th:text="${var.getName()}"></td>
+                <td th:text="${var.getDsStatus()}"></td>
+                <td th:text="${var.getMoney()}"></td>
+                <td th:text="${var.getWounded()}"></td>
+                <td th:text="${var.getPhoto()}"></td>
+            </tr>
+        </table>
+        <!-- 显示分页信息 -->
+        <div class="col-md-6">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+        <div class="col-md-6">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <!-- 判断是否有上一页 -->
+                    <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+                    <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{SurveyFindAll(pn=1)}">首页</a></li>
+                    <li th:if="${pageInfo.hasPreviousPage }">
+                        <a th:href="@{SurveyFindAll(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <!-- 获取当前需要连续显示的页码 -->
+                    <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                        <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                        <a th:href="@{SurveyFindAll(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+                    </li>
+                    <!-- 判断是否有下一页 -->
+                    <li th:if="${pageInfo.hasNextPage }">
+                        <a th:href="@{SurveyFindAll(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                    </li>
+                    <li th:if="${pageInfo.hasNextPage }"><a th:href="@{SurveyFindAll(pn=${pageInfo.pages} )}">末页</a></li>
+                    <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+</html>
