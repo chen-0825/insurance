@@ -21,5 +21,5 @@ public interface QuoteService {
     List<ZiCity> findCityByPinyin(String city);
 
     //添加访问信息
-    int addAccessInfo(AccessInfo accessInfo); 
+    int addAccessInfo(AccessInfo accessInfo);
 }
