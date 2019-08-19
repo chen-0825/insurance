@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>被保人增加页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
+</head>
+<body>
+<div class="container" style="padding-top: 100px">
+    <form action="ip_zj" method="post" >
+        被保人姓名:<input type="text" name="ipName"  /></br>
+        被保人性别:<input type="text" name="ipSex" /></br>
+        被保人电话:<input type="text" name="ipTel"  /></br>
+        被保人邮箱:<input type="text" name="ipEmail" /></br>
+        被保人证件类型:<input type="text" name="ipCertificateType"   /></br>
+        被保人证件号码:<input type="text" name="ipIdentificationNumber" /></br>
+        被保人联系地址:<input type="text" name="ipAddress"  /></br>
+        被保人银行账户:<input type="text" name="ipBankAccount" /></br>
+        被保人驾驶执照:<input type="text" name="ipDirverLicense"   /></br>
+        投保人姓名:<input type="text" name="phName" /></br>
+        <input type="submit" value="添加"  class="btn btn-success" /></br>
+    </form>
+</div>
+</body>
+</html>

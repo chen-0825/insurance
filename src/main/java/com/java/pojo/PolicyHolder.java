@@ -7,20 +7,20 @@ public class PolicyHolder {
 
     private String phSex;
 
-    private String phCredType;
+    private String phCertificateType;
 
-    private String phCredNumber;
+    private String phIdentificationNumber;
 
     private String phTel;
 
     private String phAddress;
 
-    public PolicyHolder(Integer phId, String phName, String phSex, String phCredType, String phCredNumber, String phTel, String phAddress) {
+    public PolicyHolder(Integer phId, String phName, String phSex, String phCertificateType, String phIdentificationNumber, String phTel, String phAddress) {
         this.phId = phId;
         this.phName = phName;
         this.phSex = phSex;
-        this.phCredType = phCredType;
-        this.phCredNumber = phCredNumber;
+        this.phCertificateType = phCertificateType;
+        this.phIdentificationNumber = phIdentificationNumber;
         this.phTel = phTel;
         this.phAddress = phAddress;
     }
@@ -53,20 +53,20 @@ public class PolicyHolder {
         this.phSex = phSex == null ? null : phSex.trim();
     }
 
-    public String getPhCredType() {
-        return phCredType;
+    public String getPhCertificateType() {
+        return phCertificateType;
     }
 
-    public void setPhCredType(String phCredType) {
-        this.phCredType = phCredType == null ? null : phCredType.trim();
+    public void setPhCertificateType(String phCertificateType) {
+        this.phCertificateType = phCertificateType == null ? null : phCertificateType.trim();
     }
 
-    public String getPhCredNumber() {
-        return phCredNumber;
+    public String getPhIdentificationNumber() {
+        return phIdentificationNumber;
     }
 
-    public void setPhCredNumber(String phCredNumber) {
-        this.phCredNumber = phCredNumber == null ? null : phCredNumber.trim();
+    public void setPhIdentificationNumber(String phIdentificationNumber) {
+        this.phIdentificationNumber = phIdentificationNumber == null ? null : phIdentificationNumber.trim();
     }
 
     public String getPhTel() {

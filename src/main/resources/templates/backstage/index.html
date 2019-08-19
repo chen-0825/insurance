@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns:shiro="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="">
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
@@ -12,7 +12,7 @@
 <body>
 <div id="wrap">
     <div id="header">
-        <div id="header1">后台管理系统</div>
+        <div id="header1">理赔管理系统</div>
         <div id="header2">[[${session.ShiroUser.name}]],你好!</div>
     </div>
     <div id="main">
@@ -21,8 +21,8 @@
                 <shiro:hasRole name = "admin">
                     <li><a href="" target="content">客户管理</a></li>
                     <li><a href="" target="content">保单管理</a></li>
-                    <li><a href="" target="content">出险管理</a></li>
-                    <li><a href="" target="content">查勘与定损管理</a></li>
+                    <li><a href="SurveyFindAll" target="content">查勘与定损管理</a></li>
+                    <li><a href="selAllRiskMessage" target="content">出险管理</a></li>
                     <li><a href="" target="content">理赔查询</a></li>
                 </shiro:hasRole>
                 <shiro:hasRole name = "user">
