@@ -12,7 +12,7 @@ public class Riskmessage {
     private String riskPersonname;
 
     private String riskPolicysId;
-    private Integer riskBnSerial;
+    private String riskBnSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date riskBnTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -14,4 +14,9 @@ public class RiskMessageServiceImpl implements RiskMessageService {
     public List<Riskmessage> selAllRiskMessage() {
         return riskMessageMapper.selAllRiskMessage();
     }
+
+    @Override
+    public int addRiskMessage(Riskmessage riskmessage) {
+        return riskMessageMapper.addRiskMessage(riskmessage);
+    }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.DiquMapper">
+    <!--查询省-->
+    <select id="selProvince" resultType="com.java.pojo.Province">
+        select * from province
+    </select>
+    <!--查询市-->
+    <select id="selCity" resultType="com.java.pojo.City">
+        select * from city where code_p = #{codeP}
+    </select>
+
+    <!--查询地区-->
+    <select id="selArea" resultType="com.java.pojo.Area">
+           select * from area where code_c = #{codeC}
+    </select>
+
+    <select id="finProvince" resultType="String">
+        select name from province where code_p=#{codeP}
+    </select>
+    <select id="finCity" resultType="String">
+        select name from city where code_c=#{codeC}
+    </select>
+    <select id="finArea" resultType="String">
+        select name from area where code_a = #{codeA}
+    </select>
+</mapper>
