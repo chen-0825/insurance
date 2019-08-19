@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>投保人详情</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
+    <!--jquery要放在所有js最上面-->
+</head>
+<body>
+<div class="container" style="padding-top: 100px">
+    <form action="iu_index" method="post">
+        <table class="table table-bordered table-hover">
+                <tr class="info"   >
+                    <td >投保人姓名:<input type="text"th:value="${t.phName}" readonly /></td>
+                    <td >投保人性别:<input type="text"  th:value="${t.phSex}"  readonly /></td>
+                </tr>
+            <tr class="info"   >
+                    <td >投保人证件类型:<input type="text"  th:value="${t.phCertificateType}" readonly /></td>
+                 <td >投保人身份证:<input type="text" th:value="${t.phIdentificationNumber}" readonly /></td>
+               </tr>
+            <tr class="info"   >
+                    <td >投保人电话:<input type="text"  th:value="${t.phTel}" readonly   /></td>
+                   <td > 投保人地址:<input type="text" th:value="${t.phAddress}" readonly /></td>
+                </tr>
+        </table>
+        <input type="submit" value="确定"  class="btn btn-success"/></br>
+    </form>
+</div>
+
+
+</body>
+</html>
