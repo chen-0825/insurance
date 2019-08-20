@@ -3,6 +3,7 @@ package com.java.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.java.address.AddressUtils;
+import com.java.pojo.AccessInfo;
 import com.java.pojo.HotCity;
 import com.java.pojo.ZiCity;
 import com.java.service.QuoteService;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -96,5 +99,22 @@ public class QuoteController {
         }
     }
 
+    @RequestMapping("/addAccessInfo")
+    public String addAccessInfo(String city,String carnumber,String getTimeYear,String getTimeMonth,double carprice,String phonenumber,Model model){
+        AccessInfo accessInfo = new AccessInfo();
+        accessInfo.setAi_city(city);
+        accessInfo.setAi_carnumber(carnumber);
+        accessInfo.setAi_cargetTime(getTimeYear+"-"+getTimeMonth);
+        accessInfo.setAi_carprice(carprice);
+        accessInfo.setAi_phonenumber(phonenumber);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+
+        accessInfo.setAi_time(time);
+        quoteService.addAccessInfo(accessInfo);
+        model.addAttribute("carprice",carprice);
+        return "quote/policydetails";
+    }
 
 }

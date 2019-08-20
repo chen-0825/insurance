@@ -1,5 +1,6 @@
 package com.java.service;
 
+import com.java.pojo.AccessInfo;
 import com.java.pojo.HotCity;
 import com.java.pojo.ZiCity;
 
@@ -18,4 +19,7 @@ public interface QuoteService {
 
     //根据拼音模糊查询
     List<ZiCity> findCityByPinyin(String city);
+
+    //添加访问信息
+    int addAccessInfo(AccessInfo accessInfo);
 }
