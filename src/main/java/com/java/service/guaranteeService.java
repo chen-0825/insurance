@@ -18,4 +18,6 @@ public interface guaranteeService {
 
     List<Policys> tiaojianfind(Policys po);
 
+    int update(String policyId,String policyState);
+
 }

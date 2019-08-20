@@ -25,4 +25,7 @@ public interface guaranteeMapper {
 
     //条件查询
     List<Policys> tiaojianfind(Policys po);
+
+    //修改保单状态
+    int update(String policyId,String policyState);
 }
