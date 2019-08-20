@@ -515,8 +515,29 @@ $("#upd_lpTime").focus(function () {
     $("#upd_lpTime_span").text("");
 })
 
-
-
+//批量删除
+$("#dels").click(function () {
+    //首先获取用户点击的多选框的id
+    var td = $(".check:checked").parent().next();
+    var dels = '';
+    $.each(td,function () {
+        dels+="_"+$(this).text();
+    });
+    dels = dels.substring(1, dels.length);
+    $.ajax({
+        url: '/dels',
+        type: 'delete',
+        data: 'dels='+dels,
+        success:function (result) {
+            if (result.code == 100) {
+                lpgl(pageNum);
+                alert("删除成功!");
+            } else {
+                alert("出现异常,删除失败!")
+            }
+        }
+    });
+});
 
 
 
