@@ -34,12 +34,8 @@ public class LpglServiceImpl implements LpglService {
     }
 
     @Override
-    public List<Lpgl> findAll() {
-        return lpglMapper.findAll();
+    public List<Lpgl> findBy(Integer id, String ss, String desc, String ord) {
+        return lpglMapper.findBy(id, ss, desc, ord);
     }
 
-    @Override
-    public List<Lpgl> findBy(Lpgl lpgl) {
-        return lpglMapper.findBy(lpgl);
-    }
 }

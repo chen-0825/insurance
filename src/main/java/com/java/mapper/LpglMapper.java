@@ -1,6 +1,7 @@
 package com.java.mapper;
 
 import com.java.pojo.Lpgl;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,8 +16,6 @@ public interface LpglMapper {
     //修改
     int updateLpgl(Lpgl lpgl);
 
-    //查询所有
-    List<Lpgl> findAll();
     //条件查询
-    List<Lpgl> findBy(Lpgl lpgl);
+    List<Lpgl> findBy(@Param("id") Integer id, @Param("ss")String ss, @Param("desc")String desc, @Param("ord")String ord);
 }

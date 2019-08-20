@@ -15,8 +15,6 @@ public interface LpglService {
     //修改
     int updateLpgl(Lpgl lpgl);
 
-    //查询所有
-    List<Lpgl> findAll();
     //条件查询
-    List<Lpgl> findBy(Lpgl lpgl);
+    List<Lpgl> findBy(Integer id, String ss, String desc, String ord);
 }
