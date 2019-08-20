@@ -9,4 +9,5 @@ public class AccessInfo {
     private String ai_cargetTime;
     private double ai_carprice;
     private String ai_phonenumber;
+    private String ai_time;
 }

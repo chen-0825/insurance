@@ -13,6 +13,6 @@
         SELECT * FROM zi_city where pinyin like #{city} LIMIT 0,7
     </select>
     <insert id="addAccessInfo" parameterType="AccessInfo">
-        insert into access_info (ai_city,ai_carnumber,ai_cargetTime,ai_carprice,ai_phonenumber)values (#{ai_city},#{ai_carnumber},#{ai_cargetTime},#{ai_carprice},#{ai_phonenumber})
+        insert into access_info (ai_city,ai_carnumber,ai_cargetTime,ai_carprice,ai_phonenumber,ai_time)values (#{ai_city},#{ai_carnumber},#{ai_cargetTime},#{ai_carprice},#{ai_phonenumber},#{ai_time})
     </insert>
 </mapper>
