@@ -13,7 +13,7 @@
             <!--width: 120px;}-->
     <!--</script>-->
 </head>
-<body>
+<body style="padding-top: 150px;">
 
 <!-- 保单添加的模态框1 -->
 <div class="modal fade bs-example-modal-lg" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -362,10 +362,9 @@
     <!--保单信息列表-->
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered" id="emps_table">
+            <table class="table table-hover table-striped" id="emps_table">
                 <thead>
-                <tr>
-
+                <tr class="info">
                     <th>保单</th>
                     <th>被保人</th>
                     <th>车架号</th>
@@ -539,17 +538,17 @@
         $("#emps_table tbody").empty();
         var emps = result.map.pageInfo.list;
         $.each(emps,function(index,item){
-            var policyId = $("<th></th>").append(item.policyId);
-            var recognizee = $("<th></th>").append(item.recognizee);
-            var vin = $("<th></th>").append(item.vin);
-            var plateNumber = $("<th></th>").append(item.plateNumber);
-            var factoryPlateModel = $("<th></th>").append(item.factoryPlateModel);
-            var startDate = $("<th></th>").append(item.startDate);
-            var endingDate = $("<th></th>").append(item.endingDate);
-            var baofeizonge = $("<th></th>").append(item.baofeizonge);
-            var peichangxiane = $("<th></th>").append(item.peichangxiane);
-            var policyType = $("<th></th>").append(item.policyType);
-            var policyState = $("<th></th>").append(item.policyState);
+            var policyId = $("<td></td>").append(item.policyId);
+            var recognizee = $("<td></td>").append(item.recognizee);
+            var vin = $("<td></td>").append(item.vin);
+            var plateNumber = $("<td></td>").append(item.plateNumber);
+            var factoryPlateModel = $("<td></td>").append(item.factoryPlateModel);
+            var startDate = $("<td></td>").append(item.startDate);
+            var endingDate = $("<td></td>").append(item.endingDate);
+            var baofeizonge = $("<td></td>").append(item.baofeizonge);
+            var peichangxiane = $("<td></td>").append(item.peichangxiane);
+            var policyType = $("<td></td>").append(item.policyType);
+            var policyState = $("<td></td>").append(item.policyState);
 
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑保单状态");

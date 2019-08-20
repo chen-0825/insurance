@@ -25,7 +25,7 @@ public class RIskMessageController {
     private DiquService diquService;
     @RequestMapping("/selAllRiskMessage")
     public String selAllRiskMessage(Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
-        PageHelper.startPage(pn,2);
+        PageHelper.startPage(pn,5);
         List<Riskmessage> list = riskMessageService.selAllRiskMessage();
         PageInfo<Riskmessage> pageInfo = new PageInfo<Riskmessage>(list);
         model.addAttribute("pageInfo",pageInfo);
@@ -56,7 +56,7 @@ public class RIskMessageController {
         }else {
             rk.setRiskState("注销");
         }*/
-        System.out.println(rk);
+//        System.out.println(rk);
         if (rk != null){
             return rk;
         }else {

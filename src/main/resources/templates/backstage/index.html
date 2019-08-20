@@ -18,10 +18,10 @@
             <ul>
                 <shiro:hasRole name = "admin">
                     <li><a href="iu_index" target="content">客户管理</a></li>
-                    <li><a href="" target="content">保单管理</a></li>
-                    <li><a href="SurveyFindAll" target="content">查勘与定损管理</a></li>
+                    <li><a href="guarantee" target="content">保单管理</a></li>
                     <li><a href="selAllRiskMessage" target="content">出险管理</a></li>
-                    <li><a href="" target="content">理赔查询</a></li>
+                    <li><a href="SurveyFindAll" target="content">查勘与定损管理</a></li>
+                    <li><a href="lpgl" target="content">理赔查询</a></li>
                 </shiro:hasRole>
                 <shiro:hasRole name = "user">
                     <!--<li><a href="" target="content">我的订单</a></li>-->
@@ -35,7 +35,7 @@
             </ul>
         </div>
         <div id="main_right">
-            <iframe frameborder="no" width="1670px" height="889px" scrolling="no" src="" name="content" id="i"></iframe>
+            <iframe frameborder="no" width="1670px" height="889px" scrolling="no" src="iu_index" name="content" id="i"></iframe>
         </div>
     </div>
 </div>
