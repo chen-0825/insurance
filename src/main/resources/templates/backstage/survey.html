@@ -7,6 +7,9 @@
 </head>
 <body>
     <div class="container" style="padding-top: 150px">
+        <botton>全选</botton>
+        <botton>反选</botton>
+        <botton>批量删除</botton>
         <table class="table table-striped">
             <tr class="info">
                 <th>查勘编号</th>
@@ -27,7 +30,14 @@
                 <td th:text="${#dates.format(var.getTime(),'yyyy-MM-dd')}"></td>
                 <td th:text="${var.getSite() }"></td>
                 <td th:text="${var.getPhone()}"></td>
-                <td th:text="${var.getStatus()}"></td>
+                <td>
+                    <select>
+
+                        <option value="暂存">暂存</option>
+                        <option value="通过">通过</option>
+                        <option value="注销">注销</option>
+                    </select>
+                </td>
                 <td th:text="${var.getName()}"></td>
                 <td th:text="${var.getDsStatus()}"></td>
                 <td th:text="${var.getMoney()}"></td>
@@ -61,5 +71,6 @@
             </nav>
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>
 </body>
 </html>
