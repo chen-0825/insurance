@@ -6,6 +6,7 @@ import com.java.SnowFlake.Snowflake;
 import com.java.pojo.Msg;
 import com.java.pojo.Policys;
 import com.java.service.guaranteeService;
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,11 +39,11 @@ public class guarantee {
     @ResponseBody
     @RequestMapping("/guarantees")
     public Msg showGuarantee(@RequestParam(value = "pn", defaultValue = "1") Integer pn){
-        PageHelper.startPage(pn, 8);
+        //在查询之前只需要调用，传入页码，以及每页的大小
+        PageHelper.startPage(pn, 5);
         PageInfo page = null;
-        if (tiaojianfind == null){
-            //在查询之前只需要调用，传入页码，以及每页的大小
-
+        //重置因为没有条件SQL语句会查所有,加条件tiaojianfind.size() > 10
+        if (tiaojianfind == null || tiaojianfind.size() > 10){
             List<Policys> policysList = guaranteeservice.guaranteesfindAll();
             //封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数5
             page = new PageInfo(policysList,5);
@@ -52,7 +53,6 @@ public class guarantee {
             page = new PageInfo(tiaojianfind,5);
             return Msg.success().maps("pageInfo", page);
         }
-
     }
 
     //在第二个模态框点击下一步生成保单号传给第三个模态框
@@ -185,4 +185,14 @@ public class guarantee {
         guaranteeservice.tiaojianfind(po);
         return Msg.success().maps("po", po);
     }
+
+    //修改保单状态
+    @ResponseBody
+    @RequestMapping(value="/update/{id}",method=RequestMethod.PUT)
+    public Msg save(@PathVariable("id")String id,HttpServletRequest request){
+        String zhuangtai = request.getParameter("zhuangtai");
+        int update = guaranteeservice.update(id,zhuangtai);
+        return Msg.success();
+    }
+
 }
