@@ -6,8 +6,6 @@
     <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
     <link rel="bookmark" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{css/backstage_index.css}"/>
-    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
-    <link rel="bookmark" th:href="@{/favicon.ico}"/>
 </head>
 <body>
 <div id="wrap">
@@ -19,20 +17,20 @@
         <div id="main_left">
             <ul>
                 <shiro:hasRole name = "admin">
-                    <li><a href="" target="content">客户管理</a></li>
+                    <li><a href="iu_index" target="content">客户管理</a></li>
                     <li><a href="" target="content">保单管理</a></li>
+                    <li><a href="SurveyFindAll" target="content">查勘与定损管理</a></li>
                     <li><a href="selAllRiskMessage" target="content">出险管理</a></li>
-                    <li><a href="" target="content">查勘与定损管理</a></li>
                     <li><a href="" target="content">理赔查询</a></li>
                 </shiro:hasRole>
                 <shiro:hasRole name = "user">
-                    <li><a href="" target="content">我的订单</a></li>
-                    <li><a href="" target="content">我的保单</a></li>
-                    <li><a href="" target="content">理赔查询</a></li>
-                    <li><a href="" target="content">个人信息</a></li>
-                    <li><a href="" target="content">车辆信息</a></li>
-                    <li><a href="" target="content">配送地址</a></li>
-                    <li><a href="" target="content">上传投保资料</a></li>
+                    <!--<li><a href="" target="content">我的订单</a></li>-->
+                    <!--<li><a href="" target="content">我的保单</a></li>-->
+                    <!--<li><a href="" target="content">理赔查询</a></li>-->
+                    <!--<li><a href="" target="content">个人信息</a></li>-->
+                    <!--<li><a href="" target="content">车辆信息</a></li>-->
+                    <!--<li><a href="" target="content">配送地址</a></li>-->
+                    <!--<li><a href="" target="content">上传投保资料</a></li>-->
                 </shiro:hasRole>
             </ul>
         </div>

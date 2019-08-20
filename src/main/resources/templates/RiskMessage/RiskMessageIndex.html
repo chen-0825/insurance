@@ -1,56 +1,391 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+-->
+
 <head>
     <meta charset="UTF-8">
     <title>出险管理</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}">
 </head>
 <body>
-    <div class="container">
-        <table class="table table-hover table-bordered">
-            <tr>
-                <td>报案编号</td>
-                <td>保单号</td>
-                <td>被保人身份证号</td>
-                <td>被保人姓名</td>
-                <td>报案人</td>
-                <td>报案时间</td>
-                <td>报案电话</td>
-                <td>司机姓名</td>
-                <td>司机电话</td>
-                <td>出险时间</td>
-                <td>出险地点</td>
-                <td>出险原因</td>
-                <td>被保人电话</td>
-                <td>保安处理</td>
-                <td>案件状态</td>
-            </tr>
+<div class="table" style="margin-top: 100px">
+    <button id="addRiskMessage" class="btn btn-info">添加</button>
+    <div style="margin-bottom: 20px; margin-left: 30px">
+        报案编号查询<input type="text" name="riskBnSerial" id="riskBnSerial">&nbsp&nbsp&nbsp&nbsp
+        保单号查询<input type="text" name="riskPolicysId" id="riskPolicysId">&nbsp&nbsp&nbsp&nbsp
+        被保人身份证号查询<input type="text" name="riskIdcard" id="riskIdcard">&nbsp&nbsp&nbsp&nbsp
+        <button type="button"  id="selRiskMessageBy" class="btn btn-active ">
+            <span class="glyphicon glyphicon-search" aria-hidden="true">查询</span>
+        </button>
+    </div><hr>
+    <table class="table table-hover table-bordered">
+        <tr class="success">
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" id="quanXuan">全部选择</button>
+                <button type="button" class="btn btn-primary btn-sm" id="quXiao">全部取消</button>
+            </td>
+            <td>报案编号</td>
+            <td>保单号</td>
+            <td>被保人身份证号</td>
+            <td>被保人姓名</td>
+            <td>报案人</td>
+            <td>报案时间</td>
+            <td>立案时间</td>
+            <td>出险时间</td>
+            <td>司机姓名</td>
+            <td>司机电话</td>
+            <td>出险地点</td>
+            <td>出险原因</td>
+            <td>被保人电话</td>
+            <td>结案时间</td>
+            <td>报案处理</td>
+            <td>案件状态</td>
 
-            <tr th:each="li:${list}" >
-                <td th:text="${li.riskBnSerial}"></td>
-                <td th:text="${li.riskIdcard}"></td>
-                <td th:text="${li.riskPersonname}"></td>
-                <td th:text="${li.riskReporter}"></td>
-                <td th:text="${li.riskBnTime}"></td>
-                <td th:text="${li.riskDirvertel}"></td>
-                <td th:text="${li.riskDirver}"></td>
-                <td th:text="${li.riskDirvertel}"></td>
-                <td th:text="${li.riskOuttime}"></td>
-                <td th:text="${li.riskOutprovince + li.riskOutcity +li.riskOutarea +li.riskOutroad}"></td>
-                <td th:text="${li.riskReason}"></td>
-                <td th:text="${li.riskReportertel}"></td>
-                <td th:if="${li.riskHander} == 1">注销</td>
-                <td th:if="${li.riskHander} == 2">受理</td>
-                <td th:if="${li.riskHander} == 3">暂存</td>
-                <td th:if="${li.riskState} == 1">结案</td>
-                <td th:if="${li.riskState} == 2">予以立案</td>
-                <td th:if="${li.riskState} == 3">撤案</td>
-                <td th:if="${li.riskState} == 4">注销</td>
-            </tr>
-        </table>
+            <td>
+                <button type="button" class="btn btn-danger" id="delAll">
+                    批量删除</button>
+            </td>
+        </tr>
 
+        <tr th:each="li:${list}" class="active">
+            <td><input type="checkbox" th:value="${li.riskId}"></td>
+            <td th:text="${li.riskBnSerial} != null ? ${li.riskBnSerial}:'---'"></td>
+            <td th:text="${li.riskPolicysId} != null ? ${li.riskPolicysId}:'---'"></td>
+            <td th:text="${li.riskIdcard} != null ? ${li.riskIdcard}:'---'"></td>
+            <td th:text="${li.riskPersonname} != null ? ${li.riskPersonname}:'---'"></td>
+            <td th:text="${li.riskReporter} != null ? ${li.riskReporter}:'---'"></td>
+            <td th:text="${li.riskBnTime}!= null ? ${li.riskBnTime}:'---'"></td>
+            <td th:text="${li.riskLianTime} != null ? ${li.riskLianTime}:'---'"></td>
+            <td th:text="${li.riskOuttime} != null ? ${li.riskOuttime}:'---'"></td>
+            <td th:text="${li.riskDirver}!= null ? ${li.riskDirver}:'---'"></td>
+            <td th:text="${li.riskDirvertel} != null ? ${li.riskDirvertel}:'---'"></td>
+            <td th:text="${li.riskOutprovince + li.riskOutcity +li.riskOutarea +li.riskOutroad}"></td>
+            <td th:text="${li.riskReason} != null ? ${li.riskReason}:'---'"></td>
+            <td th:text="${li.riskReportertel}!= null ? ${li.riskReportertel}:'---'"></td>
+            <td th:text="${li.riskEndtime} != null ? ${li.riskEndtime}:'---'"></td>
+
+            <td th:if="${li.riskHander} == 1">注销</td>
+            <td th:if="${li.riskHander} == 2">受理</td>
+            <td th:if="${li.riskHander} == 3">暂存</td>
+
+            <td th:if="${li.riskState} == 1">结案</td>
+            <td th:if="${li.riskState} == 2">予以立案</td>
+            <td th:if="${li.riskState} == 3">撤销</td>
+            <td th:if="${li.riskState} == 4">注销</td>
+            <td><a th:href="@{/delRiskMessage(riskId=${li.riskId},pn=${pageInfo.pageNum})}" class="btn btn-danger">删除</a></td>
+        </tr>
+    </table>
+</div>
+<!--显示分页信息-->
+<!--<div class="row">
+    <div class="col-md-6"><span th:text="${pageInfo.pageNum}" id="pageIndex"></span>/<span th:text="${pageInfo.pages}"></span></div>
+    <div class="col-md-6">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li><a th:href="@{selAllRiskMessage(pn=1)}">首页</a></li>
+                &lt;!&ndash; 判断是否有上一页 &ndash;&gt;
+                <li th:if="${pageInfo.hasPreviousPage }">
+                    <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum-1})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                &lt;!&ndash; 获取当前需要连续显示的页码 &ndash;&gt;
+                <a th:each="page_num:${pageInfo.navigatepageNums }">
+                    <li class="active" th:if="${page_num == pageInfo.pageNum}">
+                        <a th:text="${page_num}"></a>
+                    </li>
+                    <li th:if="${page_num != pageInfo.pageNum}">
+                        <a th:href="@{selAllRiskMessage(pn=${page_num})}" th:text="${page_num}"></a>
+                    </li>
+                </a>
+                &lt;!&ndash; 判断是否有下一页 &ndash;&gt;
+                <li th:if="${pageInfo.hasNextPage }">
+                    <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum+1})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li><a th:href="@{selAllRiskMessage(pn=${pageInfo.pages})}">末页</a></li>
+            </ul>
+        </nav>
     </div>
+</div>-->
+
+<div class="col-md-6">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+<div class="col-md-6">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- 判断是否有上一页 -->
+            <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+            <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{selAllRiskMessage(pn=1)}">首页</a></li>
+            <li th:if="${pageInfo.hasPreviousPage }">
+                <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <!-- 获取当前需要连续显示的页码 -->
+            <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                <a th:href="@{selAllRiskMessage(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+            </li>
+            <!-- 判断是否有下一页 -->
+            <li th:if="${pageInfo.hasNextPage }">
+                <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+            <li th:if="${pageInfo.hasNextPage }"><a th:href="@{selAllRiskMessage(pn=${pageInfo.pages} )}">末页</a></li>
+            <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+        </ul>
+    </nav>
+</div>
+<!--模态框-->
+<div class="modal fade bs-example-modal-lg" id="showRisk" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="addMessage1">
+            <!--<form action="addMessageAction" method="post" id="addMessage" style="padding-top: 20px;margin-left:150px"
+                  class="form-horizontal">
+            </form>-->
+        </div>
+    </div>
+</div>
 <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>
+
+<script>
+    $("#addRiskMessage").click(function (){
+        $("#addMessage1").empty();
+        var pn = $("#pageIndex").text();
+        $("#addMessage1").append(" <form action=\"addMessageAction\" method=\"post\" id=\"addMessage\" style=\"padding-top: 20px;margin-left:150px\" class=\"form-horizontal\"></form>")
+        $("#addMessage").append("<input type='hidden' name='pn' value="+pn+" >");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">报案编号</label><input type='text' name='riskBnSerial' id=\"inputText1\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">保单号</label><input type='text' name='riskPolicysId' id=\"inputText2\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText3\" class=\"col-sm-2 control-label\">被保人身份证号</label><input type='text' name='riskIdcard' id=\"inputText3\"/></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText4\" class=\"col-sm-2 control-label\">被保人姓名</label><input type='text' name='riskPersonname' id=\"inputText4\"/></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText5\" class=\"col-sm-2 control-label\">报案人</label><input type='text' name='riskReporter' id=\"inputText5\"/></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText6\" class=\"col-sm-2 control-label\">报案时间</label><input type='datetime-local' name='riskBnTime1' id=\"inputText6\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText7\" class=\"col-sm-2 control-label\">立案时间</label><input type='datetime-local' name='riskLianTime1' id=\"inputText7\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText8\" class=\"col-sm-2 control-label\">出险时间</label><input type='datetime-local' name='riskOuttime1' id=\"inputText8\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText9\" class=\"col-sm-2 control-label\">报案电话</label><input type='text' name='riskReportertel'id=\"inputText9\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText10\" class=\"col-sm-2 control-label\">司机姓名</label><input type='text' name='riskDirver' id=\"inputText10\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText11\" class=\"col-sm-2 control-label\">司机电话</label><input type='text' name='riskDirvertel' id=\"inputText11\" /></div>");
+        $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder ; margin-bottom: 20px'>出险地点&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+        $("#addMessage").append("<select name=\"riskOutprovince\" id=\"sel_province\"><option value=\"\">----- 请选择省份 -----</option></select>");
+        $("#addMessage").append(" <select name=\"riskOutcity\" id=\"sel_city\"><option value=\"\">----- 请选择城市 -----</option></select>");
+        $("#addMessage").append("<select name=\"riskOutarea\" id=\"sel_area\"><option value=\"\">----- 请选择地区 -----</option></select>");
+        $("#addMessage").append("<div class=\"form-group\" style='margin-top: 15px' > <label for=\"inputText12\" class=\"col-sm-2 control-label\">详细路段</label><input type='text' name='riskOutroad' id=\"inputText12\"  /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText13\" class=\"col-sm-2 control-label\">出险原因</label><input type='text' name='riskReason' id=\"inputText13\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText14\" class=\"col-sm-2 control-label\">结案时间</label><input type='datetime-local' name='riskEndtime1' id=\"inputText14\" /></div>");
+        $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+        $("#addMessage").append("<select name='riskHander' ><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>");
+        $("#addMessage").append("<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+        $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+        $("#addMessage").append("<select name='riskState' ><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>撤销</option><option value='4'>注销</option></select>");
+        $("#addMessage").append("<div class=\"form-group\" style='margin-top: 15px' > <label for=\"inputSubmit\" class=\"col-sm-2 control-label\"></label><input type='submit' value='添加' id=\"inputSubmit\" class='btn btn-danger btn-group-sm'/></div>");
+        //进入页面自动加载省
+        $(function () {
+            $.ajax({
+                url:"getProvince",
+                success:function (data) {
+                    if (data!=null && data !=""){
+
+                        for (var i = 0; i <data.length ; i++) {
+                            $("#sel_province").append('<option value ='+data[i].codeP+' >'+data[i].name+'</option>');
+                        }
+                    }
+                }
+            })
+            //监听用户更改省市
+            $("#sel_province").change(function () {
+                a = 0;
+                //更改省的时候清除市的选择
+                $("#sel_city").empty();
+                $("#sel_city").append('<option value=""><-- 请选择城市 &ndash;&gt;</option>');
+                b = 0;
+                //更改省的时候清除区县的选择
+                $("#sel_area").empty();
+                $("#sel_area").append('<option value=""><-- 请选择区/县 &ndash;&gt;</option>');
+            })
+        });
+
+        var a = 0;
+        var b = 0;
+        // 加载市
+        $("#sel_province").change(function () {
+            if(a == 0){
+                var codeP = $("#sel_province").val();
+                $.ajax({
+                    url:"getCity",
+                    data:{"codeP":codeP},
+                    // dataType:"text",
+                    success:function (result) {
+                        if (result != null && result != ""){
+                            $("#sel_city").empty();
+                            $("#sel_city").append('<option value=""><-- 请选择城市 &ndash;&gt;</option>');
+                            for (var j = 0; j <result.length ; j++) {
+                                var opt = $('<option></option>').val(result[j].codeC).text(result[j].name);
+                                $("#sel_city").append(opt);
+                            }
+
+                        }
+                    }
+                })
+                a = 1;
+            }
+            //监听用户更改市
+            $("#sel_city").change(function () {
+                b = 0;
+                //更改省的时候清除区县的选择
+                $("#sel_area").empty();
+                $("#sel_area").append('<option value=""><-- 请选择区/县 &ndash;&gt;</option>');
+            })
+        })
+
+
+        //加载地区
+        $("#sel_city").change(function () {
+            var codeC = $("#sel_city").val();
+            if (b == 0){
+                $.ajax({
+                    url:"getArea",
+                    data:{"codeC":codeC},
+                    // dataType:"text",
+                    success:function (result) {
+                        if (result != null && result != ""){
+                            $("#sel_area").empty();
+                            $("#sel_area").append('<option value=""><-- 请选择区/县 --></option>');
+                            for (var k = 0; k <result.length ; k++) {
+                                var opt = $('<option></option>').val(result[k].codeA).text(result[k].name);
+                                $("#sel_area").append(opt);
+                            }
+                        }
+                    }
+                })
+                b = 1;
+            }
+        })
+        $("#showRisk").modal();
+    })
+</script>
+<script>
+    /*
+* 按条件查询
+* */
+     $("#selRiskMessageBy").click(function () {
+         var riskBnSerial = $("#riskBnSerial").val();
+         var riskPolicysId = $("#riskPolicysId").val();
+         var riskIdcard = $("#riskIdcard").val();
+         var pn = $("#pageIndex").text();
+         $.ajax({
+             url:"selRiskMessageBy",
+             data:{"riskBnSerial":riskBnSerial,"riskPolicysId":riskPolicysId,"riskIdcard":riskIdcard},
+             success:function (rk) {
+                 if (rk != null && rk != ""){
+                     $("#addMessage1").empty();
+                    /* alert(rk.riskBnTime);*/
+                     $("#addMessage1").append(" <form action=\"updateRiskMessage\" method=\"post\" id=\"updateRiskMessage\" style=\"padding-top: 20px;margin-left:150px\" class=\"form-horizontal\"></form>")
+                     $("#updateRiskMessage").append("<input type='hidden' name='pn' value="+pn+" >");
+                     $("#updateRiskMessage").append("<input type='hidden' name='riskId' id='riskId' value="+rk.riskId+" >");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">报案编号</label><input type='text'  id=\"inputText1\"  readonly value="+rk.riskBnSerial+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">保单号</label><input type='text'  id=\"inputText2\" readonly value="+rk.riskPolicysId+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText3\" class=\"col-sm-2 control-label\">被保人身份证号</label><input type='text'  id=\"inputText3\" readonly value="+rk.riskIdcard+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText4\" class=\"col-sm-2 control-label\">被保人姓名</label><input type='text' name='riskPersonname' id=\"inputText4\" readonly value="+rk.riskPersonname+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText5\" class=\"col-sm-2 control-label\">报案人</label><input type='text' name='riskReporter' id=\"inputText5\" readonly value="+rk.riskReporter+" /></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskBnTime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskOuttime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskLianTime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskEndtime+"</span></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText9\" class=\"col-sm-2 control-label\">报案电话</label><input type='text' id=\"inputText9\" readonly value="+rk.riskReportertel+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText10\" class=\"col-sm-2 control-label\">司机姓名</label><input type='text'  id=\"inputText10\" readonly value="+rk.riskDirver+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText11\" class=\"col-sm-2 control-label\">司机电话</label><input type='text'  id=\"inputText11\" readonly value="+rk.riskDirvertel+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText12\" class=\"col-sm-2 control-label\">出险地点</label><input type='text'  id=\"inputText12\" readonly value="+rk.riskOutprovince + rk.riskOutcity +rk.riskOutarea +rk.riskOutroad+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText16\" class=\"col-sm-2 control-label\">出险原因</label><input type='text'  id=\"inputText16\"  readonly value="+rk.riskReason+" /></div>");
+                     $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+                     $("#updateRiskMessage").append($("<select name='riskHander' id='riskHander'><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>").val([rk.riskHander]));
+                     $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder;margin-left: 20px '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+                     $("#updateRiskMessage").append($("<select name='riskState' id='riskState'><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>撤销</option><option value='4'>注销</option></select>").val([rk.riskState]));
+                     $("#updateRiskMessage").append("<div style='margin-left: 100px;margin-top: 20px;margin-bottom: 50px'><input type='submit' class='btn btn-danger' value='修改' /></div>");
+                     $("#showRisk").modal();
+                 }else{
+                     alert("无此险单！")
+                 }
+             },
+             error:function () {
+                 alert("无此险单！")
+             }
+         })
+     })
+</script>
+<script>
+
+   // 全选
+        $("#quanXuan").click(function () {
+            var nums = $("input[type='checkbox']");
+            for (var i = 0; i < nums.length; i++){
+                nums[i].checked = true;
+            }
+        })
+
+
+        $("#quXiao").click(function () {
+            var nums = $("input[type='checkbox']");
+            for (var i = 0; i < nums.length; i++){
+                nums[i].checked = false
+            }
+        })
+
+
+        $("#delAll").click(function () {
+
+            var nums = $("input[type='checkbox']");
+            var id = "";
+            for(var i = 0; i < nums.length; i++){
+                if(nums[i].checked == true){
+                    id+=nums[i].value+",";
+                }
+            }
+            $.ajax({
+                url:"delSomeMessage",
+                data:{"id":id},
+                type:"POST",
+                dataType:"json",
+                success:function (result) {
+                    if (result>0){
+                        location.reload();
+                    } else {
+                        alert("删除失败！！！")
+                    }
+                },
+                error:function () {
+                    alert("错误");
+                }
+            });
+        })
+</script>
+
+<!--<script>
+    $("#updateRiskMessage").click(function () {
+        var riskHander = $("#riskHander").val();
+        var riskState = $("#riskState").val();
+        var riskId = $("#riskId").val();
+        alert(riskHander);
+        alert(riskState);
+        alert(riskId);
+        $.ajax({
+            url:"updateRiskMessage",
+            data:{"riskHander":riskHander,"riskState":riskState,"riskId":riskId},
+            success:function (result) {
+                if (result >= 0){
+                    alert("修改成功！");
+                    location.reload();
+                }else {
+                    alert("修改失败！");
+                }
+            },
+            error:function () {
+                alert("错误！！！");
+            }
+        })
+    })
+</script>-->
 </body>
 </html>

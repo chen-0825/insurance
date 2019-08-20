@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Repository;
 
 @SpringBootApplication
-//不需再配置中配mybatis.mapper-locations=classpath:com/java/mapper/*.xml和在mapper层@Mapper @Repository
 @MapperScan("com.java.mapper")
 @EnableScheduling
 public class InsuranceApplication {

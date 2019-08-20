@@ -27,67 +27,60 @@
         </foreach>
     </delete>
 
-    <!--条件片段-->
-    <sql id="sel_upd">
-        <if test="xmName != null and xmName != ''">
-            xm_name = #{xmName}
-        </if>
-        <if test="ssMoney != null and ssMoney != ''">
-            ss_money = #{ssMoney}
-        </if>
-        <if test="pfMoney != null and pfMoney != ''">
-            pf_money = #{pfMoney}
-        </if>
-        <if test="lpId != null and lpId != ''">
-            lp_id = #{lpId}
-        </if>
-        <if test="lqPeople != null and lqPeople != ''">
-            lq_people = #{lqPeople}
-        </if>
-        <if test="lpFs != null and lpFs != ''">
-            lp_fs = #{lpFs}
-        </if>
-        <if test="lpSh != null and lpSh != ''">
-            lp_sh = #{lpSh}
-        </if>
-        <if test="lpTime != null">
-            lp_time = #{lpTime}
-        </if>
-    </sql>
-
     <!--修改
     int updateLpgl(Lpgl lpgl);-->
     <update id="updateLpgl">
         update lpgl
         <set>
-            <trim suffix=",">
-                <include refid="sel_upd"/>
-            </trim>
+            <if test="xmName != null and xmName != ''">
+                xm_name = #{xmName},
+            </if>
+            <if test="ssMoney != null and ssMoney != ''">
+                ss_money = #{ssMoney},
+            </if>
+            <if test="pfMoney != null and pfMoney != ''">
+                pf_money = #{pfMoney},
+            </if>
+            <if test="lpId != null and lpId != ''">
+                lp_id = #{lpId},
+            </if>
+            <if test="lqPeople != null and lqPeople != ''">
+                lq_people = #{lqPeople},
+            </if>
+            <if test="lpFs != null and lpFs != ''">
+                lp_fs = #{lpFs},
+            </if>
+            <if test="lpSh != null and lpSh != ''">
+                lp_sh = #{lpSh},
+            </if>
+            <if test="lpTime != null and lpTime != ''">
+                lp_time = #{lpTime}
+            </if>
         </set>
         where id =#{id}
     </update>
 
-    <!--查询所有
-    List<Lpgl> findAll();-->
-    <select id="findAll" resultType="lpgl">
-        select id,
-        <include refid="lp"/>
-        from lpgl
-    </select>
-
     <!--条件查询
     List<Lpgl> findBy();-->
-    <select id="findBy">
+    <select id="findBy" resultType="lpgl">
         select id,
         <include refid="lp"/>
         from lpgl
         <where>
-            <trim prefix="and">
-                <if test="id != null and id != ''">
-                    id = #{id}
-                </if>
-                <include refid="sel_upd"/>
-            </trim>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
         </where>
+        <where>
+            <if test="ss != null and ss != ''">
+                or xm_name like #{ss}
+            </if>
+            <if test="ss != null and ss != ''">
+                or lq_people like #{ss}
+            </if>
+        </where>
+        <if test="ord != null and ord != ''">
+            order by ${ord} ${desc}
+        </if>
     </select>
 </mapper>

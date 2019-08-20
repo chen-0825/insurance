@@ -1,7 +1,7 @@
 package com.java.pojo;
 
-public class InsuredPerson {
-    private Integer ipId;
+public class InsuranceUser {
+    private Integer iuId;
 
     private String ipName;
 
@@ -23,8 +23,18 @@ public class InsuredPerson {
 
     private String phName;
 
-    public InsuredPerson(Integer ipId, String ipName, String ipSex, String ipTel, String ipEmail, String ipCertificateType, String ipIdentificationNumber, String ipAddress, String ipBankAccount, String ipDirverLicense, String phName) {
-        this.ipId = ipId;
+    private String phSex;
+
+    private String phCertificateType;
+
+    private String phIdentificationNumber;
+
+    private String phTel;
+
+    private String phAddress;
+
+    public InsuranceUser(Integer iuId, String ipName, String ipSex, String ipTel, String ipEmail, String ipCertificateType, String ipIdentificationNumber, String ipAddress, String ipBankAccount, String ipDirverLicense, String phName, String phSex, String phCertificateType, String phIdentificationNumber, String phTel, String phAddress) {
+        this.iuId = iuId;
         this.ipName = ipName;
         this.ipSex = ipSex;
         this.ipTel = ipTel;
@@ -35,18 +45,23 @@ public class InsuredPerson {
         this.ipBankAccount = ipBankAccount;
         this.ipDirverLicense = ipDirverLicense;
         this.phName = phName;
+        this.phSex = phSex;
+        this.phCertificateType = phCertificateType;
+        this.phIdentificationNumber = phIdentificationNumber;
+        this.phTel = phTel;
+        this.phAddress = phAddress;
     }
 
-    public InsuredPerson() {
+    public InsuranceUser() {
         super();
     }
 
-    public Integer getIpId() {
-        return ipId;
+    public Integer getIuId() {
+        return iuId;
     }
 
-    public void setIpId(Integer ipId) {
-        this.ipId = ipId;
+    public void setIuId(Integer iuId) {
+        this.iuId = iuId;
     }
 
     public String getIpName() {
@@ -127,5 +142,45 @@ public class InsuredPerson {
 
     public void setPhName(String phName) {
         this.phName = phName == null ? null : phName.trim();
+    }
+
+    public String getPhSex() {
+        return phSex;
+    }
+
+    public void setPhSex(String phSex) {
+        this.phSex = phSex == null ? null : phSex.trim();
+    }
+
+    public String getPhCertificateType() {
+        return phCertificateType;
+    }
+
+    public void setPhCertificateType(String phCertificateType) {
+        this.phCertificateType = phCertificateType == null ? null : phCertificateType.trim();
+    }
+
+    public String getPhIdentificationNumber() {
+        return phIdentificationNumber;
+    }
+
+    public void setPhIdentificationNumber(String phIdentificationNumber) {
+        this.phIdentificationNumber = phIdentificationNumber == null ? null : phIdentificationNumber.trim();
+    }
+
+    public String getPhTel() {
+        return phTel;
+    }
+
+    public void setPhTel(String phTel) {
+        this.phTel = phTel == null ? null : phTel.trim();
+    }
+
+    public String getPhAddress() {
+        return phAddress;
+    }
+
+    public void setPhAddress(String phAddress) {
+        this.phAddress = phAddress == null ? null : phAddress.trim();
     }
 }

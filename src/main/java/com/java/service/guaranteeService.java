@@ -16,6 +16,8 @@ public interface guaranteeService {
 
     int guaranteedelete(String policyId);
 
-    int tianjianfind(Policys po);
+    List<Policys> tiaojianfind(Policys po);
+
+    int update(String policyId,String policyState);
 
 }

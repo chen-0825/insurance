@@ -13,7 +13,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h1 class="modal-title" id="myModalLabel">增加理赔记录</h1>
+                <h3 class="modal-title" id="myModalLabel">增加理赔记录</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
@@ -21,42 +21,49 @@
                         <label for="ins_xmName" class="col-sm-2 control-label">项目名</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="ins_xmName" name="xmName">
+                            <span id="ins_xmName_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ins_ssMoney" class="col-sm-2 control-label">损失金额</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="ins_ssMoney" name="ssMoney">
+                            <span id="ins_ssMoney_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ins_pfMoney" class="col-sm-2 control-label">赔付金额</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="ins_pfMoney" name="pfMoney">
+                            <span id="ins_pfMoney_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ins_lqPeople" class="col-sm-2 control-label">领取人</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="ins_lqPeople" name="lqPeople">
+                            <span id="ins_lqPeople_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        理赔方式：
-                        <select class="form-control" name="lpFs" id="ins_lpFs">
+                        <strong>&emsp;&emsp;理赔方式</strong>
+                        <span id="ins_lpFs_span"></span>
+                        <select class="form-control" style="width: 400px; margin-left: 120px" name="lpFs" id="ins_lpFs">
                             <option>转账</option>
                             <option>金钱</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        理赔审核：
-                        <select class="form-control" name="lpSh" id="ins_lpSh">
+                        <strong>&emsp;&emsp;理赔审核</strong>
+                        <span id="ins_lpSh_span"></span>
+                        <select class="form-control" style="width: 400px; margin-left: 120px" name="lpSh" id="ins_lpSh">
                             <option>已过</option>
                             <option>未过</option>
                         </select>
                     </div>
                     <div>
-                        领取时间:
+                        <strong>&emsp;领取时间</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="ins_lpTime_span"></span>
                         <input type="date" name="lpTime" id="ins_lpTime"/>
                     </div>
                     <div class="form-group">
@@ -72,6 +79,7 @@
         </div>
     </div>
 </div>
+
 <!--修改框-->
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
     <div class="modal-dialog" role="document">
@@ -79,52 +87,59 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h1 class="modal-title" id="myModalLabel1">编辑理赔记录</h1>
+                <h3 class="modal-title" id="myModalLabel1">编辑理赔记录</h3>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal">
-                    <h4>编号:<span id="upd_id" style="color: darkcyan"></span></h4>
+                    <h4>&emsp;&emsp;编号:<span id="upd_id" style="color: darkcyan"></span></h4>
                     <h4>理赔编号:<span id="upd_lpId" style="color: darkcyan"></span></h4>
                     <div class="form-group">
                         <label for="upd_xmName" class="col-sm-2 control-label">项目名</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="upd_xmName" name="xmName">
+                            <span id="upd_xmName_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="upd_ssMoney" class="col-sm-2 control-label">损失金额</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="upd_ssMoney" name="ssMoney">
+                            <span id="upd_ssMoney_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="upd_pfMoney" class="col-sm-2 control-label">赔付金额</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="upd_pfMoney" name="pfMoney">
+                            <span id="upd_pfMoney_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="upd_lqPeople" class="col-sm-2 control-label">领取人</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="upd_lqPeople" name="lqPeople">
+                            <span id="upd_lqPeople_span"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        理赔方式：
-                        <select class="form-control" name="lpFs" id="upd_lpFs">
-                            <option>转账</option>
-                            <option>金钱</option>
+                        <strong>&emsp;&emsp;理赔方式</strong>
+                        <span id="upd_lpFs_span"></span>
+                        <select class="form-control" style="width: 400px; margin-left: 120px" name="lpFs" id="upd_lpFs">
+                            <option value="转账">转账</option>
+                            <option value="金钱">金钱</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        理赔审核：
-                        <select class="form-control" name="lpSh" id="upd_lpSh">
-                            <option>已过</option>
-                            <option>未过</option>
+                        <strong>&emsp;&emsp;理赔审核</strong>
+                        <span id="upd_lpSh_span"></span>
+                        <select class="form-control" style="width: 400px; margin-left: 120px" name="lpSh" id="upd_lpSh">
+                            <option value="已过">已过</option>
+                            <option value="未过">未过</option>
                         </select>
                     </div>
                     <div>
-                        领取时间:
+                        <strong>&emsp;领取时间</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="upd_lpTime_span"></span>
                         <input type="date" name="lpTime" id="upd_lpTime"/>
                     </div>
                     <div class="form-group">
@@ -145,6 +160,10 @@
     <div class="row">
         <div class="col-md-12">
             <h1 style="text-align: center">理赔管理表</h1>
+            <div class="col-md-4">
+                <label for="ss">搜索</label>
+                <input type="text" style="text-align: center" class="form-control" id="ss" placeholder="------查询------">
+            </div>
             <div class="col-md-4 col-md-offset-10">
                 <button class="btn btn-primary" id="insert">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -157,6 +176,7 @@
             </div>
         </div>
     </div>
+    <div id="ssts"></div>
     <div class="row">
         <div class="col-md-12">
             <!--表格-->
@@ -166,13 +186,21 @@
                     <th><input type="checkbox" id="allChoice"/></th>
                     <th>主编号</th>
                     <th>项目名</th>
-                    <th>损失金额</th>
-                    <th>赔付金额</th>
+                    <th>
+                        损失金额
+                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="ordss"></span>
+                    </th>
+                    <th>
+                        赔付金额
+                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="ordpf"></span>
+                    </th>
                     <th>理赔编号</th>
                     <th>领取人名</th>
                     <th>理赔方式</th>
                     <th>理赔审核</th>
-                    <th>理赔时间</th>
+                    <th>理赔时间
+                        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="ordtime"></span>
+                    </th>
                     <th>操作</th>
                 </tr>
                 </thead>
