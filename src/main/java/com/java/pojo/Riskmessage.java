@@ -44,9 +44,9 @@ public class Riskmessage {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date riskEndtime;
 
-    private Integer riskHander;
+    private String riskHander;
 
-    private Integer riskState;
+    private String riskState;
 
     SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

@@ -19,4 +19,24 @@ public class RiskMessageServiceImpl implements RiskMessageService {
     public int addRiskMessage(Riskmessage riskmessage) {
         return riskMessageMapper.addRiskMessage(riskmessage);
     }
+
+    @Override
+    public Riskmessage selAllRiskMessageBy(Riskmessage riskmessage) {
+        return riskMessageMapper.selAllRiskMessageBy(riskmessage);
+    }
+
+    @Override
+    public int delSomeMessage(String[] ids) {
+        return riskMessageMapper.delSomeMessage(ids);
+    }
+
+    @Override
+    public int delRiskMessage(Integer riskId) {
+        return riskMessageMapper.delRiskMessage(riskId);
+    }
+
+    @Override
+    public int updateRiskMessage(Riskmessage riskmessage) {
+        return riskMessageMapper.updateRiskMessage(riskmessage);
+    }
 }

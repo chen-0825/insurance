@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.RiskMessageMapper">
-    <select id="selAllRiskMessage" resultType="com.java.pojo.Riskmessage">
+
+  <select id="selAllRiskMessage" resultType="com.java.pojo.Riskmessage">
+          select * from riskmessage
+  </select>
+    <select id="selAllRiskMessageBy" resultType="com.java.pojo.Riskmessage">
         select * from riskmessage
+        <where>
+          <if test="riskBnSerial != null and riskBnSerial != ''">
+             and risk_bn_serial = #{riskBnSerial}
+          </if>
+          <if test="riskPolicysId != null and riskPolicysId != ''">
+            and risk_policys_id = #{riskPolicysId}
+          </if>
+          <if test="riskIdcard != null and riskIdcard != ''">
+             and risk_idcard = #{riskIdcard}
+          </if>
+        </where>
     </select>
 
     <update id="addRiskMessage">
@@ -52,4 +67,20 @@ VALUES
     #{riskState}
   )
     </update>
+
+  <delete id="delSomeMessage">
+    delete from riskmessage where risk_id in
+    <foreach collection="array"  separator="," open="(" close=")" item="ids">
+      #{ids}
+    </foreach>
+
+  </delete>
+
+  <delete id="delRiskMessage">
+    delete from riskmessage where risk_id = #{riskId}
+  </delete>
+
+  <update id="updateRiskMessage">
+    update riskmessage set risk_hander = #{riskHander},risk_state = #{riskState} where risk_id = #{riskId}
+  </update>
 </mapper>

@@ -13,8 +13,20 @@
 <body>
 <div class="table" style="margin-top: 100px">
     <button id="addRiskMessage" class="btn btn-info">添加</button>
+    <div style="margin-bottom: 20px; margin-left: 30px">
+        报案编号查询<input type="text" name="riskBnSerial" id="riskBnSerial">&nbsp&nbsp&nbsp&nbsp
+        保单号查询<input type="text" name="riskPolicysId" id="riskPolicysId">&nbsp&nbsp&nbsp&nbsp
+        被保人身份证号查询<input type="text" name="riskIdcard" id="riskIdcard">&nbsp&nbsp&nbsp&nbsp
+        <button type="button"  id="selRiskMessageBy" class="btn btn-active ">
+            <span class="glyphicon glyphicon-search" aria-hidden="true">查询</span>
+        </button>
+    </div><hr>
     <table class="table table-hover table-bordered">
         <tr class="success">
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" id="quanXuan">全部选择</button>
+                <button type="button" class="btn btn-primary btn-sm" id="quXiao">全部取消</button>
+            </td>
             <td>报案编号</td>
             <td>保单号</td>
             <td>被保人身份证号</td>
@@ -31,10 +43,15 @@
             <td>结案时间</td>
             <td>报案处理</td>
             <td>案件状态</td>
+
+            <td>
+                <button type="button" class="btn btn-danger" id="delAll">
+                    批量删除</button>
+            </td>
         </tr>
 
         <tr th:each="li:${list}" class="active">
-
+            <td><input type="checkbox" th:value="${li.riskId}"></td>
             <td th:text="${li.riskBnSerial} != null ? ${li.riskBnSerial}:'---'"></td>
             <td th:text="${li.riskPolicysId} != null ? ${li.riskPolicysId}:'---'"></td>
             <td th:text="${li.riskIdcard} != null ? ${li.riskIdcard}:'---'"></td>
@@ -56,25 +73,26 @@
 
             <td th:if="${li.riskState} == 1">结案</td>
             <td th:if="${li.riskState} == 2">予以立案</td>
-            <td th:if="${li.riskState} == 3">撤案</td>
+            <td th:if="${li.riskState} == 3">撤销</td>
             <td th:if="${li.riskState} == 4">注销</td>
+            <td><a th:href="@{/delRiskMessage(riskId=${li.riskId},pn=${pageInfo.pageNum})}" class="btn btn-danger">删除</a></td>
         </tr>
     </table>
 </div>
 <!--显示分页信息-->
-<div class="row">
+<!--<div class="row">
     <div class="col-md-6"><span th:text="${pageInfo.pageNum}" id="pageIndex"></span>/<span th:text="${pageInfo.pages}"></span></div>
     <div class="col-md-6">
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li><a th:href="@{selAllRiskMessage(pn=1)}">首页</a></li>
-                <!-- 判断是否有上一页 -->
+                &lt;!&ndash; 判断是否有上一页 &ndash;&gt;
                 <li th:if="${pageInfo.hasPreviousPage }">
                     <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum-1})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <!-- 获取当前需要连续显示的页码 -->
+                &lt;!&ndash; 获取当前需要连续显示的页码 &ndash;&gt;
                 <a th:each="page_num:${pageInfo.navigatepageNums }">
                     <li class="active" th:if="${page_num == pageInfo.pageNum}">
                         <a th:text="${page_num}"></a>
@@ -83,7 +101,7 @@
                         <a th:href="@{selAllRiskMessage(pn=${page_num})}" th:text="${page_num}"></a>
                     </li>
                 </a>
-                <!-- 判断是否有下一页 -->
+                &lt;!&ndash; 判断是否有下一页 &ndash;&gt;
                 <li th:if="${pageInfo.hasNextPage }">
                     <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum+1})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
@@ -93,15 +111,40 @@
             </ul>
         </nav>
     </div>
-</div>
+</div>-->
 
+<div class="col-md-6">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+<div class="col-md-6">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <!-- 判断是否有上一页 -->
+            <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+            <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{selAllRiskMessage(pn=1)}">首页</a></li>
+            <li th:if="${pageInfo.hasPreviousPage }">
+                <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <!-- 获取当前需要连续显示的页码 -->
+            <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                <a th:href="@{selAllRiskMessage(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+            </li>
+            <!-- 判断是否有下一页 -->
+            <li th:if="${pageInfo.hasNextPage }">
+                <a th:href="@{selAllRiskMessage(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+            <li th:if="${pageInfo.hasNextPage }"><a th:href="@{selAllRiskMessage(pn=${pageInfo.pages} )}">末页</a></li>
+            <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+        </ul>
+    </nav>
+</div>
+<!--模态框-->
 <div class="modal fade bs-example-modal-lg" id="showRisk" tabindex="-1" role="dialog"
      aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <form action="addMessageAction" method="post" id="addMessage" style="padding-top: 20px;margin-left:150px"
+        <div class="modal-content" id="addMessage1">
+            <!--<form action="addMessageAction" method="post" id="addMessage" style="padding-top: 20px;margin-left:150px"
                   class="form-horizontal">
-            </form>
+            </form>-->
         </div>
     </div>
 </div>
@@ -110,9 +153,10 @@
 
 <script>
     $("#addRiskMessage").click(function (){
-        $("#addMessage").empty();
+        $("#addMessage1").empty();
         var pn = $("#pageIndex").text();
-        $("#addMessage").append("<input type='hidden' name='pn' value="+pn+" readonly/>");
+        $("#addMessage1").append(" <form action=\"addMessageAction\" method=\"post\" id=\"addMessage\" style=\"padding-top: 20px;margin-left:150px\" class=\"form-horizontal\"></form>")
+        $("#addMessage").append("<input type='hidden' name='pn' value="+pn+" >");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">报案编号</label><input type='text' name='riskBnSerial' id=\"inputText1\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">保单号</label><input type='text' name='riskPolicysId' id=\"inputText2\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText3\" class=\"col-sm-2 control-label\">被保人身份证号</label><input type='text' name='riskIdcard' id=\"inputText3\"/></div>");
@@ -222,5 +266,126 @@
         $("#showRisk").modal();
     })
 </script>
+<script>
+    /*
+* 按条件查询
+* */
+     $("#selRiskMessageBy").click(function () {
+         var riskBnSerial = $("#riskBnSerial").val();
+         var riskPolicysId = $("#riskPolicysId").val();
+         var riskIdcard = $("#riskIdcard").val();
+         var pn = $("#pageIndex").text();
+         $.ajax({
+             url:"selRiskMessageBy",
+             data:{"riskBnSerial":riskBnSerial,"riskPolicysId":riskPolicysId,"riskIdcard":riskIdcard},
+             success:function (rk) {
+                 if (rk != null && rk != ""){
+                     $("#addMessage1").empty();
+                    /* alert(rk.riskBnTime);*/
+                     $("#addMessage1").append(" <form action=\"updateRiskMessage\" method=\"post\" id=\"updateRiskMessage\" style=\"padding-top: 20px;margin-left:150px\" class=\"form-horizontal\"></form>")
+                     $("#updateRiskMessage").append("<input type='hidden' name='pn' value="+pn+" >");
+                     $("#updateRiskMessage").append("<input type='hidden' name='riskId' id='riskId' value="+rk.riskId+" >");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">报案编号</label><input type='text'  id=\"inputText1\"  readonly value="+rk.riskBnSerial+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText2\" class=\"col-sm-2 control-label\">保单号</label><input type='text'  id=\"inputText2\" readonly value="+rk.riskPolicysId+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText3\" class=\"col-sm-2 control-label\">被保人身份证号</label><input type='text'  id=\"inputText3\" readonly value="+rk.riskIdcard+"  /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText4\" class=\"col-sm-2 control-label\">被保人姓名</label><input type='text' name='riskPersonname' id=\"inputText4\" readonly value="+rk.riskPersonname+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText5\" class=\"col-sm-2 control-label\">报案人</label><input type='text' name='riskReporter' id=\"inputText5\" readonly value="+rk.riskReporter+" /></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskBnTime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskOuttime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskLianTime+"</span></div>");
+                     $("#updateRiskMessage").append("<div style='font-weight: bolder;font-size: 15px;margin-bottom: 10px;margin-left: 40px'>出险时间<span style='margin-left: 10px'>"+rk.riskEndtime+"</span></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText9\" class=\"col-sm-2 control-label\">报案电话</label><input type='text' id=\"inputText9\" readonly value="+rk.riskReportertel+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText10\" class=\"col-sm-2 control-label\">司机姓名</label><input type='text'  id=\"inputText10\" readonly value="+rk.riskDirver+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText11\" class=\"col-sm-2 control-label\">司机电话</label><input type='text'  id=\"inputText11\" readonly value="+rk.riskDirvertel+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText12\" class=\"col-sm-2 control-label\">出险地点</label><input type='text'  id=\"inputText12\" readonly value="+rk.riskOutprovince + rk.riskOutcity +rk.riskOutarea +rk.riskOutroad+" /></div>");
+                     $("#updateRiskMessage").append("<div class=\"form-group\" > <label for=\"inputText16\" class=\"col-sm-2 control-label\">出险原因</label><input type='text'  id=\"inputText16\"  readonly value="+rk.riskReason+" /></div>");
+                     $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+                     $("#updateRiskMessage").append($("<select name='riskHander' id='riskHander'><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>").val([rk.riskHander]));
+                     $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder;margin-left: 20px '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
+                     $("#updateRiskMessage").append($("<select name='riskState' id='riskState'><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>撤销</option><option value='4'>注销</option></select>").val([rk.riskState]));
+                     $("#updateRiskMessage").append("<div style='margin-left: 100px;margin-top: 20px;margin-bottom: 50px'><input type='submit' class='btn btn-danger' value='修改' /></div>");
+                     $("#showRisk").modal();
+                 }else{
+                     alert("无此险单！")
+                 }
+             },
+             error:function () {
+                 alert("无此险单！")
+             }
+         })
+     })
+</script>
+<script>
+
+   // 全选
+        $("#quanXuan").click(function () {
+            var nums = $("input[type='checkbox']");
+            for (var i = 0; i < nums.length; i++){
+                nums[i].checked = true;
+            }
+        })
+
+
+        $("#quXiao").click(function () {
+            var nums = $("input[type='checkbox']");
+            for (var i = 0; i < nums.length; i++){
+                nums[i].checked = false
+            }
+        })
+
+
+        $("#delAll").click(function () {
+
+            var nums = $("input[type='checkbox']");
+            var id = "";
+            for(var i = 0; i < nums.length; i++){
+                if(nums[i].checked == true){
+                    id+=nums[i].value+",";
+                }
+            }
+            $.ajax({
+                url:"delSomeMessage",
+                data:{"id":id},
+                type:"POST",
+                dataType:"json",
+                success:function (result) {
+                    if (result>0){
+                        location.reload();
+                    } else {
+                        alert("删除失败！！！")
+                    }
+                },
+                error:function () {
+                    alert("错误");
+                }
+            });
+        })
+</script>
+
+<!--<script>
+    $("#updateRiskMessage").click(function () {
+        var riskHander = $("#riskHander").val();
+        var riskState = $("#riskState").val();
+        var riskId = $("#riskId").val();
+        alert(riskHander);
+        alert(riskState);
+        alert(riskId);
+        $.ajax({
+            url:"updateRiskMessage",
+            data:{"riskHander":riskHander,"riskState":riskState,"riskId":riskId},
+            success:function (result) {
+                if (result >= 0){
+                    alert("修改成功！");
+                    location.reload();
+                }else {
+                    alert("修改失败！");
+                }
+            },
+            error:function () {
+                alert("错误！！！");
+            }
+        })
+    })
+</script>-->
 </body>
 </html>
