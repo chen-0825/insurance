@@ -7,8 +7,13 @@
 </head>
 <body>
     <div class="container" style="padding-top: 150px">
-        <table class="table table-striped">
+        <botton class="btn btn-success" id="add">添加</botton>
+        <botton class="btn btn-primary" id="all">全选</botton>
+        <botton class="btn btn-info" id="re">反选</botton>
+        <botton class="btn btn-danger" id="del">删除</botton>
+        <table class="table table-hover">
             <tr class="info">
+                <th></th>
                 <th>查勘编号</th>
                 <th>派工工号</th>
                 <th>查勘时间</th>
@@ -21,18 +26,35 @@
                 <th>受伤人员</th>
                 <th>现场图片</th>
             </tr>
-            <tr th:each="var : ${pageInfo.getList()}">
-                <td th:text="${var.getId()}"></td>
+            <tr th:each="var : ${pageInfo.getList()}" class="active">
+                <td><input type="checkbox" th:name="${var.getId()}"/></td>
+                <td class="td" th:text="${var.getId()}"></td>
                 <td th:text="${var.getNumber()}"></td>
                 <td th:text="${#dates.format(var.getTime(),'yyyy-MM-dd')}"></td>
                 <td th:text="${var.getSite() }"></td>
                 <td th:text="${var.getPhone()}"></td>
-                <td th:text="${var.getStatus()}"></td>
+                <td>
+                    <select class="select1">
+                        <option th:text="${var.getStatus()}" disabled selected></option>
+                        <option value="暂存">暂存</option>
+                        <option value="通过">通过</option>
+                        <option value="撤销">撤销</option>
+                    </select>
+                </td>
                 <td th:text="${var.getName()}"></td>
-                <td th:text="${var.getDsStatus()}"></td>
+                <td>
+                    <select class="select2">
+                        <option th:text="${var.getDsStatus()}" disabled selected></option>
+                        <option value="暂存">暂存</option>
+                        <option value="通过">通过</option>
+                        <option value="撤销">撤销</option>
+                    </select>
+                </td>
                 <td th:text="${var.getMoney()}"></td>
                 <td th:text="${var.getWounded()}"></td>
-                <td th:text="${var.getPhoto()}"></td>
+                <td >
+                    <img th:src="@{'/img/'+${var.getPhoto()}}" width="40px" height="30px"/>
+                </td>
             </tr>
         </table>
         <!-- 显示分页信息 -->
@@ -61,5 +83,102 @@
             </nav>
         </div>
     </div>
+    <!--模态框-->
+    <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form action="Survey_add" method="post" enctype="multipart/form-data" style="margin: 50px">
+                    派工工号:<input type="number" name="number"/><br/><br/>
+                    查勘时间:<input type="date" name="time"/><br/><br/>
+                    查勘地点:<input type="text" name="site"/><br/><br/>
+                    联系电话:<input type="tel" name="phone"/><br/><br/>
+                    查勘状态:<select id="select1" name="status">
+                        <option value="暂存">--请选择--</option>
+                        <option value="暂存">暂存</option>
+                        <option value="通过">通过</option>
+                        <option value="撤销">撤销</option>
+                    </select><br/><br/>
+                    车主姓名:<input type="text" name="name"/><br/><br/>
+                    定损状态:<select id="select2" name="dsStatus">
+                        <option value="暂存">--请选择--</option>
+                        <option value="暂存">暂存</option>
+                        <option value="通过">通过</option>
+                        <option value="撤销">撤销</option>
+                    </select><br/><br/>
+                    定损金额:<input type="number" name="money"/><br/><br/>
+                    受伤人员:<input type="text" name="wounded"/><br/><br/>
+                    现场图片:<input type="file" name="file"/><br/><br/>
+                    <input type="submit" value="确认" class="btn btn-primary"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"></script>
+    <script>
+        $(function(){
+            var index1 = 0;
+            var index2 = 0;
+            var td = $(".td");
+            var select1 = $(".select1");
+            var select2 = $(".select2");
+            // 修改状态
+            select1.change(function(){
+                index1 = select1.index(this);
+                var id = td.eq(index1).text();
+                var status = select1.eq(index1).val();
+                $.post("Survey_status",{"status":status,"id":id},function(){
+                    location.reload();
+                });
+            });
+            select2.change(function(){
+                index2 = select2.index(this);
+                var id = td.eq(index2).text();
+                var dsStatus = select2.eq(index2).val();
+                $.post("Survey_status",{"dsStatus":dsStatus,"id":id},function(){
+                    location.reload();
+                });
+            });
+            // 全选
+            $("#all").click(function(){
+               var nums = $("input[type='checkbox']")
+                for(var i = 0;i<nums.length;i++){
+                    nums[i].checked = true;
+                }
+            });
+            // 反选
+            $("#re").click(function(){
+                var nums = $("input[type='checkbox']")
+                for(var i = 0;i<nums.length;i++){
+                    if(nums[i].checked == true){
+                        nums[i].checked = false;
+                    }else{
+                        nums[i].checked = true;
+                    }
+                }
+            });
+            // 删除
+            $("#del").click(function(){
+                var nums = $("input[type='checkbox']")
+                var arr = "";
+                for(var i = 0;i<nums.length;i++){
+                    if(nums[i].checked == true){
+                        arr += nums[i].name+","
+                    }
+                }
+                $.post("Survey_delete",{"arr":arr},function(){
+                    location.reload();
+                });
+            });
+
+            // 添加
+            $("#add").click(function(){
+                $("#modal").modal();
+            });
+
+
+        })
+
+    </script>
 </body>
 </html>

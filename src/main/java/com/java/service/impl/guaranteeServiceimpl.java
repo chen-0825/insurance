@@ -31,8 +31,12 @@ public class guaranteeServiceimpl implements guaranteeService {
     }
 
     public List<Policys> tiaojianfind(Policys po){
-        System.out.println(po);
+//        System.out.println(po);
         return gm.tiaojianfind(po);
+    }
+
+    public int update(String policyId,String policyState){
+        return gm.update(policyId,policyState);
     }
 
 }

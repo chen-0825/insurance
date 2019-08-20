@@ -81,7 +81,7 @@ public class LoginController {
         message.setSubject("验证码");
         i = (int) ((Math.random() * 9 + 1) * 100000);
         message.setText("验证码:"+i);
-        message.setFrom("1499192230@qq.com");
+        message.setFrom("15272452553@163.com");
         ShiroUser shiroUser = (ShiroUser)request.getSession().getAttribute("ShiroUser");
         System.out.println(shiroUser);
         message.setTo(shiroUser.getEmail());

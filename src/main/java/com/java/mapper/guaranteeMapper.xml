@@ -90,4 +90,15 @@ values
         </where>
     </select>
 
+
+    <update id="update">
+        update policys
+        <set>
+          <if test="policyState != null">
+              policy_state = #{policyState},
+          </if>
+        </set>
+        where policy_id = #{policyId}
+    </update>
+
 </mapper>

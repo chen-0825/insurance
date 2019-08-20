@@ -1,7 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.java.mapper.RiskMessageMapper">
-    <select id="selAllRiskMessage" resultType="com.java.pojo.Riskmessage">
+
+  <select id="selAllRiskMessage" resultType="com.java.pojo.Riskmessage">
+          select * from riskmessage
+  </select>
+    <select id="selAllRiskMessageBy" resultType="com.java.pojo.Riskmessage">
         select * from riskmessage
+        <where>
+          <if test="riskBnSerial != null and riskBnSerial != ''">
+             and risk_bn_serial = #{riskBnSerial}
+          </if>
+          <if test="riskPolicysId != null and riskPolicysId != ''">
+            and risk_policys_id = #{riskPolicysId}
+          </if>
+          <if test="riskIdcard != null and riskIdcard != ''">
+             and risk_idcard = #{riskIdcard}
+          </if>
+        </where>
     </select>
+
+    <update id="addRiskMessage">
+        INSERT INTO `insurance`.`riskmessage` (
+  `risk_idcard`,
+  `risk_personname`,
+  `risk_policys_id`,
+  `risk_bn_serial`,
+  `risk_bn_time`,
+  `risk_lian_time`,
+  `risk_outtime`,
+  `risk_outprovince`,
+  `risk_outcity`,
+  `risk_outarea`,
+  `risk_outroad`,
+  `risk_outtype`,
+  `risk_reason`,
+  `risk_reporter`,
+  `risk_reportertel`,
+  `risk_dirver`,
+  `risk_dirvertel`,
+  `risk_endtime`,
+  `risk_hander`,
+  `risk_state`
+)
+VALUES
+  (
+    #{riskIdcard},
+    #{riskPersonname},
+    #{riskPolicysId},
+    #{riskBnSerial},
+    #{riskBnTime},
+    #{riskLianTime},
+    #{riskOuttime},
+    #{riskOutprovince},
+    #{riskOutcity},
+    #{riskOutarea},
+    #{riskOutroad},
+    #{riskOuttype},
+    #{riskReason},
+    #{riskReporter},
+    #{riskReportertel},
+    #{riskDirver},
+    #{riskDirvertel},
+    #{riskEndtime},
+    #{riskHander},
+    #{riskState}
+  )
+    </update>
+
+  <delete id="delSomeMessage">
+    delete from riskmessage where risk_id in
+    <foreach collection="array"  separator="," open="(" close=")" item="ids">
+      #{ids}
+    </foreach>
+
+  </delete>
+
+  <delete id="delRiskMessage">
+    delete from riskmessage where risk_id = #{riskId}
+  </delete>
+
+  <update id="updateRiskMessage">
+    update riskmessage set risk_hander = #{riskHander},risk_state = #{riskState} where risk_id = #{riskId}
+  </update>
 </mapper>

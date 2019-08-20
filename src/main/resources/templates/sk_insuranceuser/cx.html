@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>被保人查询页面</title>
+    <title>保险用户查询页面</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"/>
     <!--jquery要放在所有js最上面-->
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div id="wrap" class="container">
     <div class="container" style="padding-top: 100px">
         <!--查询所有信息-->
         <button type="button" class="btn btn-danger btn-sm" id="pl">批量删除</button>
-        <a href="ip_index"><button type="button" class="btn btn-danger btn-sm" >返回首页</button></a>
+        <a href="iu_index"><button type="button" class="btn btn-danger btn-sm" >返回首页</button></a>
         <table class="table table-bordered table-hover">
             <tr class="info">
                 <td> <button type="button" class="btn btn-primary btn-sm" id="qx">全选</button></td>
-                <button type="button" class="btn btn-primary btn-sm" id="fx">反选</button>
+                <button type="button" class="btn btn-primary btn-sm" id="fx">全部取消</button>
                 <td >被保人姓名</td>
                 <td >被保人性别</td>
                 <td >被保人电话</td>
@@ -28,10 +27,15 @@
                 <td >被保人银行账户</td>
                 <td >被保人驾驶执照</td>
                 <td >投保人姓名</td>
+                <td >投保人性别</td>
+                <td >投保人证件类型</td>
+                <td >投保人身份证</td>
+                <td >投保人电话</td>
+                <td >投保人地址</td>
                 <td >操作</td>
             </tr>
             <tr th:each="i:${pageInfo.getList()}" th:if="${pageInfo.total != 0}" class="info">
-                <td> <input type="checkbox" th:value="${i.ipId}" /></td>
+                <td> <input type="checkbox" th:value="${i.iuId}" /></td>
                 <td  th:text="${i.ipName}"></td>
                 <td  th:text="${i.ipSex}"></td>
                 <td  th:text="${i.ipTel}"></td>
@@ -42,48 +46,42 @@
                 <td  th:text="${i.ipBankAccount}"></td>
                 <td  th:text="${i.ipDirverLicense}"></td>
                 <td  th:text="${i.phName}"></td>
-                <td ><a th:href="@{ip_delete(ipId=${i.ipId})}" type="button" class="btn btn-danger">删除</a> <a th:href="@{ip_findOne(ipId=${i.ipId})}" type="button" class="btn btn-warning" >修改</a></td>
+                <td  th:text="${i.phSex}"></td>
+                <td  th:text="${i.phCertificateType}"></td>
+                <td  th:text="${i.phIdentificationNumber}"></td>
+                <td  th:text="${i.phTel}"></td>
+                <td  th:text="${i.phAddress}"></td>
+                <td ><a th:href="@{iu_delete(iuId=${i.iuId})}" type="button" class="btn btn-danger">删除</a> <a th:href="@{iu_findOne(iuId=${i.iuId})}" type="button" class="btn btn-warning" >修改</a></td>
             </tr>
-            </c:forEach>
         </table>
 
         <!-- 显示分页信息 -->
-        <div class="row">
-            <div class="col-md-6" th:text="${pageInfo.pageNum}/${pageInfo.pages}" th:if="${pageInfo.total != 0}"></div>
-            <div class="col-md-6">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li><a th:href="@{ip_cx(pn=1)}">首页</a></li>
-                        <!-- 判断是否有上一页 -->
-                        <li th:if ="${pageInfo.hasPreviousPage }">
-                            <a th:href="@{ip_cx(pn=${pageInfo.pageNum-1})}"aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <!-- 获取当前需要连续显示的页码 -->
-                        <a th:each="page_num:${pageInfo.navigatepageNums }">
-                            <li class="active" th:if ="${page_num == pageInfo.pageNum}">
-                                <a th:text="${page_num}"></a>
-                            </li>
-                            <li th:if ="${page_num != pageInfo.pageNum}">
-                                <a th:href="@{ip_cx(pn=${page_num})}" th:text="${page_num}"></a>
-                            </li>
-                        </a>
-                        <!-- 判断是否有下一页 -->
-                        <li th:if ="${pageInfo.hasNextPage }">
-                            <a th:href="@{ip_cx(pn=${pageInfo.pageNum+1})}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                        <li><a th:href="@{ip_cx(pn=${pageInfo.pages})}">末页</a></li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="col-md-6" th:if="${pageInfo.total != 0}">[[${pageInfo.pageNum}]] / [[${pageInfo.pages}]]</div>
+        <div class="col-md-6">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <!-- 判断是否有上一页 -->
+                    <li th:if="${!pageInfo.hasPreviousPage }" class="disabled"><span>首页</span></li>
+                    <li th:if="${pageInfo.hasPreviousPage }"><a th:href="@{iu_cx(pn=1)}">首页</a></li>
+                    <li th:if="${pageInfo.hasPreviousPage }">
+                        <a th:href="@{iu_cx(pn=${pageInfo.pageNum -1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <!-- 获取当前需要连续显示的页码 -->
+                    <li th:each="page_num : ${pageInfo.navigatepageNums }" >
+                        <span th:if="${page_num == pageInfo.pageNum}" class="list-group-item active" th:text="${page_num}"></span>
+                        <a th:href="@{iu_cx(pn=${page_num} )}" th:if="${page_num != pageInfo.pageNum}" th:text="${page_num}"></a>
+                    </li>
+                    <!-- 判断是否有下一页 -->
+                    <li th:if="${pageInfo.hasNextPage }">
+                        <a th:href="@{iu_cx(pn=${pageInfo.pageNum +1} )}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                    </li>
+                    <li th:if="${pageInfo.hasNextPage }"><a th:href="@{iu_cx(pn=${pageInfo.pages} )}">末页</a></li>
+                    <li th:if="${!pageInfo.hasNextPage }" class="disabled"><span>末页</span></li>
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
-
-</div>
+    </div>
 <script>
     // 全选
     $("#qx").click(function(){
@@ -99,8 +97,6 @@
         for(var i = 0;i < nums.length; i++){
             if(nums[i].checked==true){
                 nums[i].checked=false;
-            }else{
-                nums[i].checked=true;
             }
         }
     })
@@ -116,7 +112,7 @@
             }
         }
         $.ajax({
-            url:"ip_batchDelete",
+            url:"iu_batchDelete",
             data:{"id":id},
             type:"POST",
             dataType:"json",

@@ -10,9 +10,9 @@ public class EmailsConfig {
     @Bean
     public JavaMailSenderImpl javaMailSender(){
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setUsername("1499192230@qq.com");
-        javaMailSender.setPassword("xgxijmlyakklgcdb");
-        javaMailSender.setHost("smtp.qq.com");
+        javaMailSender.setUsername("15272452553@163.com");
+        javaMailSender.setPassword("chy0825");
+        javaMailSender.setHost("smtp.163.com");
         return javaMailSender;
     }
 }

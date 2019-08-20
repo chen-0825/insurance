@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>保险用户修改页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
+</head>
+<body>
+<div class="container" style="padding-top: 100px">
+    <form action="iu_xg" method="post">
+        <table class="table table-bordered table-hover">
+
+            <h1>被保人</h1>
+            <tr class="info" >
+                <input type="text" name="iuId" th:value="${i.iuId}" style="display: none" /></br>
+                <td >被保人姓名:<input type="text" name="ipName" th:value="${i.ipName}"  /></td>
+                <td >被保人性别:<input type="text" name="ipSex" th:value="${i.ipSex}" /></td>
+            </tr>
+            <tr class="info" >
+                <td >被保人电话:<input type="text" name="ipTel" th:value="${i.ipTel}"  /></td>
+                <td >被保人邮箱:<input type="text" name="ipEmail" th:value="${i.ipEmail}" /></td>
+            </tr>
+            <tr class="info" >
+                <td >被保人证件类型:<input type="text" name="ipCertificateType" th:value="${i.ipCertificateType}"   /></td>
+                <td >被保人证件号码:<input type="text" name="ipIdentificationNumber" th:value="${i.ipIdentificationNumber}" /></td>
+            </tr>
+            <tr class="info" >
+                <td >被保人联系地址:<input type="text" name="ipAddress" th:value="${i.ipAddress}"  /></td>
+                <td >被保人银行账户:<input type="text" name="ipBankAccount" th:value="${i.ipBankAccount}" /></td>
+            </tr>
+            <tr class="info" >
+                <td >被保人驾驶执照:<input type="text" name="ipDirverLicense" th:value="${i.ipDirverLicense}" /></td>
+            </tr>
+            </hr>
+            <tr><td><h1>投保人</h1></td></tr>
+            <tr class="info"   >
+                <td >投保人姓名:<input type="text" name="phName" th:value="${i.phName}" /></td>
+                <td >投保人性别:<input type="text" name="phSex"  th:value="${i.phSex}"  /></td>
+            </tr>
+            <tr class="info"   >
+                <td >投保人证件类型:<input type="text" name="phCertificateType" th:value="${i.phCertificateType}" /></td>
+                <td >投保人身份证:<input type="text" name="phIdentificationNumber" th:value="${i.phIdentificationNumber}" /></td>
+            </tr>
+            <tr class="info"   >
+                <td >投保人电话:<input type="text" name="phTel"  th:value="${i.phTel}"  /></td>
+                <td >投保人地址:<input type="text" name="phAddress" th:value="${i.phAddress}" /></td>
+            </tr>
+        </table>
+        <input type="submit" value="修改"  class="btn btn-success" />
+    </form>
+</div>
+</body>
+</html>

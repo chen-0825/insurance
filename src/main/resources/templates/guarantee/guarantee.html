@@ -46,7 +46,7 @@
                     <input type="text" style="width: 130px" id="passenger_number">
                     <label>车主:</label>
                     <input type="text" style="width: 130px" id="name_of_owner">
-                    <span class="help-block"></span>
+                    <!--<span class="help-block"></span>-->
                 </div>
                 <br/>
                 <div>
@@ -61,12 +61,12 @@
                 </div>
                 <br/>
                 <div>
-                    <label>车价:</label>
+                    <label>车价(元):</label>
                     <input type="text" style="width: 130px" id="car_price">
                     <label>签单日期:</label>
                     <input type="date" style="width: 130px" id="written_date">
                     <label>身份证:</label>
-                    <input type="text" style="width: 130px" id="idcard">
+                    <input type="text" style="width: 150px" id="idcard">
                     <span class="help-block"></span>
                 </div>
                 <hr/>
@@ -292,6 +292,31 @@
 </div>
 
 
+<!--编写保单状态-->
+<div class="modal fade" tabindex="-1" role="dialog" id="bianxie">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">保单状态更新</h4>
+            </div>
+            <div class="modal-body">
+                <label>保单状态:</label>
+                <select id="zhuangtai">
+                    <option>请选择</option>
+                    <option value="保期内">保期内</option>
+                    <option value="退保">退保</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="emp_update_btn">更新</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <!--整体结构-->
 <div class="container">
     <!--查询条件-->
@@ -299,13 +324,13 @@
 
         <div class="col-xs-2">
             <label>保单号</label>
-            <input type="text" class="form-control" placeholder="PDAA201033011114006532" id="num1">
+            <input type="text" class="form-control" placeholder="201033011114006532" id="num1">
         </div>
 
         <div class="col-xs-2">
             <label>被保人</label>
             <input type="text" class="form-control" placeholder="张三丰" id="num2">
-            <span ></span>
+            <span></span>
         </div>
 
         <div class="col-xs-2">
@@ -315,7 +340,7 @@
 
         <div class="col-xs-2">
             <label>车牌号</label>
-            <input type="text" class="form-control" placeholder="鄂A.88888" id="num4">
+            <input type="text" class="form-control" placeholder="鄂A-666666" id="num4">
         </div>
     </div>
     <hr/>
@@ -329,7 +354,7 @@
     <div class="row">
         <div class="col-md-4">
             <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-            <!--<button class="btn btn-primary">保单审核</button>-->
+            <!--<button class="btn btn-primary" id="back">返回</button>-->
         </div>
     </div>
 
@@ -376,7 +401,7 @@
     //总记录数,当前页,模态框2各项保费
     var totalRecord,currentPage,jidong2,san2,shiji2,passenger2,boli2,hua2,tiao2;
     //赔偿限额
-    var jidong,san,shiji,passenger,boli;
+    var jidong,san,shiji,passenger,boli,hua,all;
     //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
     $(function(){
         //去首页
@@ -458,7 +483,6 @@
 
         //车身划痕损失险
         var mySelect4 = document.getElementById('hua');
-        var hua = null;
         mySelect4.onchange = function () {
             hua = mySelect4.options[mySelect4.selectedIndex].value;
         }
@@ -483,6 +507,7 @@
                         check_val.push(obj[k].value);
                 }
                 tiao2 = check_val.length * 100;
+                all = check_val.length * 10000;
                 $("#tiao2").text(tiao2);
             }else {
                 $("#tiao2").text("");
@@ -493,7 +518,6 @@
     });
 
     function to_page(pn){
-        // alert(1);
         //进页面就发ajax请求,查分页
         $.ajax({
             url:"/guarantees",
@@ -528,7 +552,7 @@
             var policyState = $("<th></th>").append(item.policyState);
 
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
-                .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
+                .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑保单状态");
             //为编辑按钮添加一个自定义的属性，来表示当前员工id
             editBtn.attr("edit-id",item.policyId);
             var delBtn =  $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
@@ -652,9 +676,7 @@
         }
     });
 
-
-    //条件查询
-    $("#find").click(function(){
+    function update_check(){
         var num1 = $("#num1").val();
         var num2 = $("#num2").val();
         var num3 = $("#num3").val();
@@ -670,10 +692,13 @@
                     }
                 }
             });
-        }else{
-            alert("查询条件不能为空,请输入查询条件");
         }
+    }
 
+
+    //条件查询
+    $("#find").click(function(){
+        update_check();
     })
 
 
@@ -683,6 +708,13 @@
         $("#num2").val('');
         $("#num3").val('');
         $("#num4").val('');
+        $.ajax({
+            url:"find",
+            type:"POST",
+            success:function(result){
+                to_page(1);
+            }
+        });
     })
 
 
@@ -706,6 +738,7 @@
         $(ele)[0].reset();
         //清空表单样式
         $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
     }
 
 
@@ -713,6 +746,15 @@
     $("#emp_add_modal_btn").click(function(){
         //清空模态框1
         reset_form("#empAddModal form");
+        //清空模态框2,保费没清掉
+        reset_form("#empAddModal2 form");
+        $("#tiao2").text("");
+        $("#hua2").text("");
+        $("#boli2").text("");
+        $("#passenger2").text("");
+        $("#shiji2").text("");
+        $("#san2").text("");
+        $("#jidong2").text("");
         //弹出1模态框
         $("#empAddModal").modal({
             backdrop:"static"
@@ -720,11 +762,15 @@
     });
 
 
-    var idcard = $("#idcard").val();
+
     //JSR303校验,提示出现的位置不好调,屏蔽
     $("#emp_next_btn").click(function(){
         //清空模态框2
-        // reset_form("#empAddModa2 form");
+        // reset_form("#empAddModal2 form");
+        //前端校验
+        if(!validate_add_form()){
+            return false;
+        };
         //关闭1模态框
         $('#empAddModal').modal('hide');
         //弹出2模态框
@@ -819,7 +865,7 @@
 
         var car_price = $("#car_price").val();
         var written_date = $("#written_date").val();
-
+        var idcard = $("#idcard").val();
 
         //保单生效日期
         var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
@@ -831,9 +877,10 @@
 
         //保单类型
         var policy_type = $("input[name='policy_type']:checked").val();
-
         var baofeizonge = $("#zonge").text();
-        var peichangxiane = ;
+        xiane = parseInt(jidong)+parseInt(san)+parseInt(shiji)+parseInt(passenger)+
+            parseInt(boli)+parseInt(hua)+parseInt(all);
+        var peichangxiane =xiane;
         var policy_id = $("#baodan").text();
 
         //通过ajax把数据传向后台
@@ -865,33 +912,79 @@
         //alert($(this).attr("edit-id"));
         //2、查出员工信息，显示员工信息
         getEmp($(this).attr("edit-id"));
-
+        $("#bianxie").modal('show');
         // //3、把员工的id传递给模态框的更新按钮
-        // $("#emp_update_btn").attr("edit-id",$(this).attr("edit-id"));
+        $("#emp_update_btn").attr("edit-id",$(this).attr("edit-id"));
         // $("#empUpdateModal").modal({
         //     backdrop:"static"
         // });
     });
 
+    //点击编写查单条
+    function getEmp(id){
+        $.ajax({
+            url:"bianxie/"+id,
+            type:"GET",
+            success:function(result){
+                //console.log(result);编写框数据填入
+                var empData = result.map.pageInfo.list;
+                // $("#empName_update_static").text(empData.empName);
+                // $("#email_update_input").val(empData.email);
+                // $("#empUpdateModal input[name=gender]").val([empData.gender]);
+                // $("#empUpdateModal select").val([empData.dId]);
+            }
+        });
+    }
 
-    //点击编写把数据显示模态框
-    // function getEmp(id){
-    //     $.ajax({
-    //         url:"bianxie/"+id,
-    //         type:"GET",
-    //         success:function(result){
-    //             //console.log(result);编写框数据填入
-    //             var empData = result.map.pageInfo.list;
-    //             $("#empName_update_static").text(empData.empName);
-    //             $("#email_update_input").val(empData.email);
-    //             $("#empUpdateModal input[name=gender]").val([empData.gender]);
-    //             $("#empUpdateModal select").val([empData.dId]);
-    //         }
-    //     });
-    // }
+    //保单状态更改
+    var zhuangtai;
+    var select = document.getElementById('zhuangtai');
+    select.onchange = function () {
+        zhuangtai = select.options[select.selectedIndex].value;
+    }
+
+    $("#emp_update_btn").click(function(){
+        var num1 = $("#num1").val();
+        var num2 = $("#num2").val();
+        var num3 = $("#num3").val();
+        var num4 = $("#num4").val();
+
+        //发送ajax请求保存更新数据
+        $.ajax({
+            url:"/update/"+$(this).attr("edit-id"),
+            type:"PUT",
+            data:{"zhuangtai":zhuangtai},
+            success:function(result){
+                //1、关闭对话框
+                $("#bianxie").modal("hide");
+                if(num1 != "" || num2 != "" || num3 != "" || num4 != "") {
+                    // alert("查询后修改");
+                    update_check();
+                }else {
+                    // alert("列表修改");
+                    //2、修改完成回到当前页面
+                    to_page(currentPage);
+                }
+            }
+        });
+    });
 
 
-
+    //前端校验数据
+    function validate_add_form(){
+        //1、拿到要校验的数据，使用正则表达式
+        var card = $("#idcard").val();
+        var regName = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/;
+        //regName.test(empName)为true,取反为false
+        if(!regName.test(card)){
+            //alert("请输入正确18位身份证号");
+            show_validate_msg("#idcard", "error", "请输入正确18位身份证号");
+            return false;
+        }else{
+            show_validate_msg("#idcard", "success", "");
+        };
+        return true;
+    }
 
 
 

@@ -12,7 +12,7 @@ public class Riskmessage {
     private String riskPersonname;
 
     private String riskPolicysId;
-    private Integer riskBnSerial;
+    private String riskBnSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date riskBnTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -44,9 +44,9 @@ public class Riskmessage {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date riskEndtime;
 
-    private Integer riskHander;
+    private String riskHander;
 
-    private Integer riskState;
+    private String riskState;
 
     SimpleDateFormat stf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
