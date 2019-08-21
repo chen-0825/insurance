@@ -11,8 +11,8 @@ import java.util.List;
 public class RiskMessageServiceImpl implements RiskMessageService {
     @Autowired
     private RiskMessageMapper riskMessageMapper;
-    public List<Riskmessage> selAllRiskMessage() {
-        return riskMessageMapper.selAllRiskMessage();
+    public List<Riskmessage> selAllRiskMessage(String riskHander) {
+        return riskMessageMapper.selAllRiskMessage(riskHander);
     }
 
     @Override
