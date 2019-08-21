@@ -9,14 +9,19 @@
 	<body>
 	<div id="main">
 		<div id="back">
+			<input id="carprice" type="hidden" th:value="${carprice}"/>
+			<div id="total1">
+				<b>￥</b>
+				<b th:text="${totalprice}"></b>
+				<b style="font-size: 20px">.00起</b>
+			</div>
 			<div id="choose-type">
 				<input type="text" id="select-type" readonly="readonly" value="基本方案"><img src="img/xiala10.jpg" id="xiala10">
-				<div id="total1" style="">
-
-				</div>
 			</div>
 			<div id="threeclass">
-
+				<li id="class1" class="threeclass-li">基本方案</li>
+				<li id="class2" class="threeclass-li">性价比高方案</li>
+				<li id="class3" class="threeclass-li">周全保障方案</li>
 			</div>
 			<div id="type-details">
 				<img src="img/all1.jpg" id="all1">
@@ -28,7 +33,64 @@
 
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 		<script type="text/javascript">
-			$("#xiala10").
+			$(function () {
+				var li = $(".threeclass-li");
+				console.log(li);
+				var count = 0;
+				li.click(function () {
+					count = li.index(this);
+					var city = li.eq(count).text();
+					$("#select-type").val(city);
+					$("#threeclass").css('display','none');
+
+					var select1 = $("#select-type").val();
+					if(select1=="基本方案"){
+						$("#all1").css('display','inline-block');
+						$("#all2").css('display','none');
+						$("#all3").css('display','none');
+						var price = $("#carprice").val();
+						var total = price*40 + 3073 + 950;
+
+						$("#total1").empty();
+						$("#total1").append("<b>￥</b>");
+						$("#total1").append("<b>"+total+"</b>");
+						$("#total1").append("<b style=\"font-size: 20px\">.00起</b>");
+
+					}else if(select1=="性价比高方案"){
+						$("#all1").css('display','none');
+						$("#all2").css('display','inline-block');
+						$("#all3").css('display','none');
+
+						var price = parseInt($("#carprice").val());
+						var total = price*60 + 3559 + 950;
+						$("#total1").empty();
+						$("#total1").append("<b>￥</b>");
+						$("#total1").append("<b>"+total+"</b>");
+						$("#total1").append("<b style=\"font-size: 20px\">.00起</b>");
+					}else if(select1=="周全保障方案"){
+						$("#all1").css('display','none');
+						$("#all2").css('display','none');
+						$("#all3").css('display','inline-block');
+
+						var price = parseInt($("#carprice").val());
+						var total = price*80 + 4528 + 950;
+						$("#total1").empty();
+						$("#total1").append("<b>￥</b>");
+						$("#total1").append("<b>"+total+"</b>");
+						$("#total1").append("<b style=\"font-size: 20px\">.00起</b>");
+					}
+				})
+
+				$("#xiala10").click(function () {
+					if ($("#threeclass").css('display')=='none'){
+						$("#threeclass").css('display','inline-block');
+					}else {
+						$("#threeclass").css('display','none');
+					}
+				})
+
+
+			})
 		</script>
 	</body>
 </html>

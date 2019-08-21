@@ -113,7 +113,10 @@ public class QuoteController {
 
         accessInfo.setAi_time(time);
         quoteService.addAccessInfo(accessInfo);
-        model.addAttribute("carprice",carprice);
+        int price = (int) carprice;
+        model.addAttribute("carprice",price);
+        int total = (int) (carprice*40 + 3073 +960);
+        model.addAttribute("totalprice",total);
         return "quote/policydetails";
     }
 
