@@ -9,11 +9,11 @@
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
     <!--<script type="text/css">-->
-        <!--.modal-content>.modal-body>.kuang{-->
-            <!--width: 120px;}-->
+    <!--.modal-content>.modal-body>.kuang{-->
+    <!--width: 120px;}-->
     <!--</script>-->
 </head>
-<body>
+<body style="padding-top: 150px">
 
 <!-- 保单添加的模态框1 -->
 <div class="modal fade bs-example-modal-lg" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -24,78 +24,78 @@
                 <h4 class="modal-title" id="myModalLabel">保单添加</h4>
             </div>
             <form class="form-horizontal">
-            <div class="modal-body">
-                <label>车辆信息</label>
-                <div>
-                    <label>号牌号码:</label>
-                    <input type="text" style="width: 130px" id="plate_number">
-                    <label>车架号:</label>
-                    <input type="text" style="width: 130px" id="vin">
-                    <label>行驶证号:</label>
-                    <input type="text" style="width: 130px" id="driving_Licence">
-                    <label>厂牌车型:</label>
-                    <input type="text" style="width: 130px" id="factory_plate_model">
-                </div>
-                <br/>
-                <div>
-                    <label>登录日期:</label>
-                    <input type="date" style="width: 130px" id="date_of_registration">
-                    <label>发动机号:</label>
-                    <input type="text" style="width: 130px" id="engine">
-                    <label>载客数:</label>
-                    <input type="text" style="width: 130px" id="passenger_number">
-                    <label>车主:</label>
-                    <input type="text" style="width: 130px" id="name_of_owner">
-                    <!--<span class="help-block"></span>-->
-                </div>
-                <br/>
-                <div>
-                    <label>使用年限:</label>
-                    <input type="text" style="width: 130px" id="useful_year">
-                    <label>已行驶公里:</label>
-                    <input type="text" style="width: 130px" id="driving_mileage">
-                    <label>机动车类型:</label>
-                    <input type="text" style="width: 130px" id="vehicles_type">
-                    <label>颜色:</label>
-                    <input type="text" style="width: 130px" id="color">
-                </div>
-                <br/>
-                <div>
-                    <label>车价(元):</label>
-                    <input type="text" style="width: 130px" id="car_price">
-                    <label>签单日期:</label>
-                    <input type="date" style="width: 130px" id="written_date">
-                    <label>身份证:</label>
-                    <input type="text" style="width: 150px" id="idcard">
-                    <span class="help-block"></span>
-                </div>
-                <hr/>
-                <br/>
-
-                <label>保单生效信息</label>
-                <div>
+                <div class="modal-body">
+                    <label>车辆信息</label>
                     <div>
-                        客户期望交强险保单生效日期:<input type="date" id="start_date">0时至<input type="date" id="ending_date">24时止&nbsp&nbsp<input type="checkbox" name="jiaoqiang" id="jiaoqiang" value="1">投保
+                        <label>号牌号码:</label>
+                        <input type="text" style="width: 130px" id="plate_number">
+                        <label>车架号:</label>
+                        <input type="text" style="width: 130px" id="vin">
+                        <label>行驶证号:</label>
+                        <input type="text" style="width: 130px" id="driving_Licence">
+                        <label>厂牌车型:</label>
+                        <input type="text" style="width: 130px" id="factory_plate_model">
                     </div>
                     <br/>
                     <div>
-                        客户期望商业险保单生效日期:<input type="date">0时至<input type="date">24时止&nbsp&nbsp<input type="checkbox" name="shangye" id="shangye" value="1">投保
+                        <label>登录日期:</label>
+                        <input type="date" style="width: 130px" id="date_of_registration">
+                        <label>发动机号:</label>
+                        <input type="text" style="width: 130px" id="engine">
+                        <label>载客数:</label>
+                        <input type="text" style="width: 130px" id="passenger_number">
+                        <label>车主:</label>
+                        <input type="text" style="width: 130px" id="name_of_owner">
+                        <!--<span class="help-block"></span>-->
+                    </div>
+                    <br/>
+                    <div>
+                        <label>使用年限:</label>
+                        <input type="text" style="width: 130px" id="useful_year">
+                        <label>已行驶公里:</label>
+                        <input type="text" style="width: 130px" id="driving_mileage">
+                        <label>机动车类型:</label>
+                        <input type="text" style="width: 130px" id="vehicles_type">
+                        <label>颜色:</label>
+                        <input type="text" style="width: 130px" id="color">
+                    </div>
+                    <br/>
+                    <div>
+                        <label>车价(元):</label>
+                        <input type="text" style="width: 130px" id="car_price">
+                        <label>签单日期:</label>
+                        <input type="date" style="width: 130px" id="written_date">
+                        <label>身份证:</label>
+                        <input type="text" style="width: 150px" id="idcard">
+                        <span class="help-block"></span>
+                    </div>
+                    <hr/>
+                    <br/>
+
+                    <label>保单生效信息</label>
+                    <div>
+                        <div>
+                            客户期望交强险保单生效日期:<input type="date" id="start_date">0时至<input type="date" id="ending_date">24时止&nbsp&nbsp<input type="checkbox" name="jiaoqiang" id="jiaoqiang" value="1">投保
+                        </div>
+                        <br/>
+                        <div>
+                            客户期望商业险保单生效日期:<input type="date">0时至<input type="date">24时止&nbsp&nbsp<input type="checkbox" name="shangye" id="shangye" value="1">投保
+                        </div>
+                    </div>
+                    <hr/>
+                    <br/>
+
+                    <label>保单类型</label>
+                    <div>
+                        <input type="radio" name="policy_type" value="新保"/>新保
+                        <input type="radio" name="policy_type" value="续保"/>续保
                     </div>
                 </div>
-                <hr/>
-                <br/>
 
-                <label>保单类型</label>
-                <div>
-                    <input type="radio" name="policy_type" value="新保"/>新保
-                    <input type="radio" name="policy_type" value="续保"/>续保
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="emp_next_btn">下一步</button>
                 </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="emp_next_btn">下一步</button>
-            </div>
             </form>
         </div>
     </div>
@@ -110,8 +110,8 @@
                 <h4 class="modal-title" id="myModalL">保单添加</h4>
             </div>
             <form>
-            <div class="modal-body">
-                <label>交强险信息</label>
+                <div class="modal-body">
+                    <label>交强险信息</label>
 
                     <table style="width: 880px" border="1px,solider,black">
                         <tr>
@@ -128,122 +128,122 @@
                     </table>
 
 
-                <br/>
-                <label>商业险信息</label>
-                <table style="width: 880px" border="1px,solider,black">
-                    <tr>
-                        <td>基本险</td>
-                        <td>投保金额/责任限额</td>
-                        <td>是否投保</td>
-                        <td>保险费(元)</td>
-                    </tr>
-                    <tr>
-                        <td>机动车损失险</td>
-                        <td><input type="text" id="jidong"/></td>
-                        <td><input type="checkbox" name="jidong1" id="jidong1" value="1"></td>
-                        <td><span id="jidong2"></span></td>
-                    </tr>
-                    <tr>
-                        <td>第三者责任保险</td>
-                        <td>
-                            <select id="san">
-                                <option>请选择....</option>
-                                <option value="200000">20万</option>
-                                <option value="300000">30万</option>
-                                <option value="1000000">100万</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" name="san1" id="san1" value="1"></td>
-                        <td><span id="san2"></span></td>
-                    </tr>
-                    <tr>
-                        <td>车上人员责任险(司机)</td>
-                        <td>
-                            <select id="shiji">
-                                <option>请选择....</option>
-                                <option value="10000">1万</option>
-                                <option value="10000">1万</option>
-                                <option value="20000">2万</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" name="shiji1" id="shiji1" value="1"></td>
-                        <td><span id="shiji2"></span></td>
-                    </tr>
-                    <tr>
-                        <td>车上人员责任险(乘客)</td>
-                        <td>
-                            <select id="passenger">
-                                <option>请选择....</option>
-                                <option value="10000">1万</option>
-                                <option value="10000">1万</option>
-                                <option value="20000">2万</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" name="passenger1" id="passenger1" value="1"></td>
-                        <td><span id="passenger2"></span></td>
-                    </tr>
-                    <!--<tr>-->
+                    <br/>
+                    <label>商业险信息</label>
+                    <table style="width: 880px" border="1px,solider,black">
+                        <tr>
+                            <td>基本险</td>
+                            <td>投保金额/责任限额</td>
+                            <td>是否投保</td>
+                            <td>保险费(元)</td>
+                        </tr>
+                        <tr>
+                            <td>机动车损失险</td>
+                            <td><input type="text" id="jidong"/></td>
+                            <td><input type="checkbox" name="jidong1" id="jidong1" value="1"></td>
+                            <td><span id="jidong2"></span></td>
+                        </tr>
+                        <tr>
+                            <td>第三者责任保险</td>
+                            <td>
+                                <select id="san">
+                                    <option>请选择....</option>
+                                    <option value="200000">20万</option>
+                                    <option value="300000">30万</option>
+                                    <option value="1000000">100万</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" name="san1" id="san1" value="1"></td>
+                            <td><span id="san2"></span></td>
+                        </tr>
+                        <tr>
+                            <td>车上人员责任险(司机)</td>
+                            <td>
+                                <select id="shiji">
+                                    <option>请选择....</option>
+                                    <option value="10000">1万</option>
+                                    <option value="10000">1万</option>
+                                    <option value="20000">2万</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" name="shiji1" id="shiji1" value="1"></td>
+                            <td><span id="shiji2"></span></td>
+                        </tr>
+                        <tr>
+                            <td>车上人员责任险(乘客)</td>
+                            <td>
+                                <select id="passenger">
+                                    <option>请选择....</option>
+                                    <option value="10000">1万</option>
+                                    <option value="10000">1万</option>
+                                    <option value="20000">2万</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" name="passenger1" id="passenger1" value="1"></td>
+                            <td><span id="passenger2"></span></td>
+                        </tr>
+                        <!--<tr>-->
                         <!--<td>机动车盗抢险</td>-->
                         <!--<td>50000</td>-->
                         <!--<td><input type="checkbox"></td>-->
                         <!--<td><span>500</span></td>-->
-                    <!--</tr>-->
+                        <!--</tr>-->
 
 
-                    <tr>
-                        <td>附加险</td>
-                        <td>投保金额/责任限额</td>
-                        <td>是否投保</td>
-                        <td>保险费(元)</td>
-                    </tr>
-                    <tr>
-                        <td>玻璃单独破碎险</td>
-                        <td>
-                            <select id="boli">
-                                <option>请选择....</option>
-                                <option value="20000">国产玻璃</option>
-                                <option value="50000">外国玻璃</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" name="boli1" id="boli1" value="1"></td>
-                        <td><span id="boli2"></span></td>
-                    </tr>
-                    <tr>
-                        <td>车身划痕损失险</td>
-                        <td>
-                            <select id="hua">
-                                <option>请选择....</option>
-                                <option value="10000">1万</option>
-                                <option value="20000">2万</option>
-                            </select>
-                        </td>
-                        <td><input type="checkbox" name="hua1" id="hua1" value="1"></td>
-                        <td><span id="hua2"></span></td>
-                    </tr>
-                    <!--<tr>-->
+                        <tr>
+                            <td>附加险</td>
+                            <td>投保金额/责任限额</td>
+                            <td>是否投保</td>
+                            <td>保险费(元)</td>
+                        </tr>
+                        <tr>
+                            <td>玻璃单独破碎险</td>
+                            <td>
+                                <select id="boli">
+                                    <option>请选择....</option>
+                                    <option value="20000">国产玻璃</option>
+                                    <option value="50000">外国玻璃</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" name="boli1" id="boli1" value="1"></td>
+                            <td><span id="boli2"></span></td>
+                        </tr>
+                        <tr>
+                            <td>车身划痕损失险</td>
+                            <td>
+                                <select id="hua">
+                                    <option>请选择....</option>
+                                    <option value="10000">1万</option>
+                                    <option value="20000">2万</option>
+                                </select>
+                            </td>
+                            <td><input type="checkbox" name="hua1" id="hua1" value="1"></td>
+                            <td><span id="hua2"></span></td>
+                        </tr>
+                        <!--<tr>-->
                         <!--<td>自然损失险</td>-->
                         <!--<td>16666</td>-->
                         <!--<td><input type="checkbox"></td>-->
                         <!--<td><span>7890</span></td>-->
-                    <!--</tr>-->
-                    <tr>
-                        <td>不计免赔案特约条款</td>
-                        <td>
-                            <input type="checkbox" name="aa" class="cc" value="1"/>车损
-                            <input type="checkbox" name="aa" class="cc" value="1"/>三者
-                            <input type="checkbox" name="aa" class="cc" value="1"/>司机
-                            <input type="checkbox" name="aa" class="cc" value="1"/>乘客
-                            <input type="checkbox" name="aa" class="cc" value="1"/>盗抢
-                            <input type="checkbox" name="aa" class="cc" value="1"/>自燃
-                            <input type="checkbox" name="aa" class="cc" value="1"/>涉水
-                        </td>
-                        <td><input type="checkbox" name="tiao1" id="tiao1" value="1"></td>
-                        <td><span id="tiao2"></span></td>
-                    </tr>
-                </table>
+                        <!--</tr>-->
+                        <tr>
+                            <td>不计免赔案特约条款</td>
+                            <td>
+                                <input type="checkbox" name="aa" class="cc" value="1"/>车损
+                                <input type="checkbox" name="aa" class="cc" value="1"/>三者
+                                <input type="checkbox" name="aa" class="cc" value="1"/>司机
+                                <input type="checkbox" name="aa" class="cc" value="1"/>乘客
+                                <input type="checkbox" name="aa" class="cc" value="1"/>盗抢
+                                <input type="checkbox" name="aa" class="cc" value="1"/>自燃
+                                <input type="checkbox" name="aa" class="cc" value="1"/>涉水
+                            </td>
+                            <td><input type="checkbox" name="tiao1" id="tiao1" value="1"></td>
+                            <td><span id="tiao2"></span></td>
+                        </tr>
+                    </table>
 
 
-            </div>
+                </div>
             </form>
 
             <div class="modal-footer">
@@ -383,7 +383,7 @@
         <div class="col-md-12">
             <table class="table table-bordered" id="emps_table">
                 <thead>
-                <tr>
+                <tr class="info">
 
                     <th>保单</th>
                     <th>被保人</th>
@@ -425,10 +425,8 @@
     $(function(){
         //去首页
         to_page(1);
-
         //计算模态框1
         //机动车损失险
-
         $(document).on("click","#jidong1",function(){
             var jidong1 = $("input[name='jidong1']:checked").val();
             if (jidong1 == 1){
@@ -439,7 +437,6 @@
                 $("#jidong2").text("");
             }
         });
-
         //第三者责任保险
         var mySelect = document.getElementById('san');
         mySelect.onchange = function () {
@@ -454,7 +451,6 @@
                 $("#san2").text("");
             }
         });
-
         //车上人员责任险(司机)
         var mySelect1 = document.getElementById('shiji');
         mySelect1.onchange = function () {
@@ -469,7 +465,6 @@
                 $("#shiji2").text("");
             }
         });
-
         //车上人员责任险(乘客)
         var mySelect2 = document.getElementById('passenger');
         mySelect2.onchange = function () {
@@ -484,7 +479,6 @@
                 $("#passenger2").text("");
             }
         });
-
         //玻璃单独破碎险
         var mySelect3 = document.getElementById('boli');
         mySelect3.onchange = function () {
@@ -499,7 +493,6 @@
                 $("#boli2").text("");
             }
         });
-
         //车身划痕损失险
         var mySelect4 = document.getElementById('hua');
         mySelect4.onchange = function () {
@@ -514,7 +507,6 @@
                 $("#hua2").text("");
             }
         });
-
         //不计免赔案特约条款
         var obj = document.getElementsByName("aa");;
         $(document).on("click","#tiao1",function(){
@@ -533,9 +525,7 @@
                 $(".cc").prop('checked',false);
             }
         });
-
     });
-
     function to_page(pn){
         //进页面就发ajax请求,查分页
         $.ajax({
@@ -552,24 +542,22 @@
             }
         });
     }
-
     function build_emps_table(result){
         //清空table表格
         $("#emps_table tbody").empty();
         var emps = result.map.pageInfo.list;
         $.each(emps,function(index,item){
-            var policyId = $("<th></th>").append(item.policyId);
-            var recognizee = $("<th></th>").append(item.recognizee);
-            var vin = $("<th></th>").append(item.vin);
-            var plateNumber = $("<th></th>").append(item.plateNumber);
-            var factoryPlateModel = $("<th></th>").append(item.factoryPlateModel);
-            var startDate = $("<th></th>").append(item.startDate);
-            var endingDate = $("<th></th>").append(item.endingDate);
-            var baofeizonge = $("<th></th>").append(item.baofeizonge);
-            var peichangxiane = $("<th></th>").append(item.peichangxiane);
-            var policyType = $("<th></th>").append(item.policyType);
-            var policyState = $("<th></th>").append(item.policyState);
-
+            var policyId = $("<td></td>").append(item.policyId);
+            var recognizee = $("<td></td>").append(item.recognizee);
+            var vin = $("<td></td>").append(item.vin);
+            var plateNumber = $("<td></td>").append(item.plateNumber);
+            var factoryPlateModel = $("<td></td>").append(item.factoryPlateModel);
+            var startDate = $("<td></td>").append(item.startDate);
+            var endingDate = $("<td></td>").append(item.endingDate);
+            var baofeizonge = $("<td></td>").append(item.baofeizonge);
+            var peichangxiane = $("<td></td>").append(item.peichangxiane);
+            var policyType = $("<td></td>").append(item.policyType);
+            var policyState = $("<td></td>").append(item.policyState);
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑保单状态");
             //为编辑按钮添加一个自定义的属性，来表示当前员工id
@@ -581,7 +569,6 @@
             var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
             //var delBtn =
             //append方法执行完成以后还是返回原来的元素
-
             $("<tr></tr>").append(policyId)
                 .append(recognizee)
                 .append(vin)
@@ -597,10 +584,6 @@
                 .appendTo("#emps_table tbody");
         });
     }
-
-
-
-
     //解析显示分页信息
     function build_page_info(result){
         // alert(result.map.pageInfo.pages);
@@ -611,13 +594,11 @@
         totalRecord = result.map.pageInfo.total;
         currentPage = result.map.pageInfo.pageNum;
     }
-
     //解析显示分页条，点击分页要能去下一页....
     function build_page_nav(result){
         //page_nav_area
         $("#page_nav_area").empty();
         var ul = $("<ul></ul>").addClass("pagination");
-
         //构建元素
         var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
         var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
@@ -633,7 +614,6 @@
                 to_page(result.map.pageInfo.pageNum -1);
             });
         }
-
         var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
         var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
         if(result.map.pageInfo.hasNextPage == false){
@@ -648,14 +628,10 @@
                 to_page(result.map.pageInfo.pages);
             });
         }
-
-
-
         //添加首页和前一页 的提示
         ul.append(firstPageLi).append(prePageLi);
         //1,2，3遍历给ul中添加页码提示
         $.each(result.map.pageInfo.navigatepageNums,function(index,item){
-
             var numLi = $("<li></li>").append($("<a></a>").append(item));
             if(result.map.pageInfo.pageNum == item){
                 numLi.addClass("active");
@@ -668,38 +644,34 @@
         });
         //添加下一页和末页 的提示
         ul.append(nextPageLi).append(lastPageLi);
-
         //把ul加入到nav
         var navEle = $("<nav></nav>").append(ul);
         navEle.appendTo("#page_nav_area");
     }
-
     var policyId;
     //单个删除
     $(document).on("click",".delete_btn",function(){
         //1、弹出是否确认删除对话框
-        policyId = $(this).parents("tr").find("th:eq(0)").text();
+        policyId = $(this).parents("tr").find("td:eq(0)").text();
         $("#delId").text("确认删除单号:"+policyId+"的信息吗?");
         $("#del").modal('show');
         // var empId = $(this).attr("del-id");
         // alert($(this).attr("del-id"));
         // if(confirm("确认删除【"+policyId+"】吗？")){
-            //确认，发送ajax请求删除即可
-            // $.ajax({
-            //     url:"delete/"+policyId,
-            //     type:"DELETE",
-            //     success:function(result){
-            //         // alert(result.msg);
-            //         //回到本页
-            //         to_page(currentPage);
-            //     }
-            // });
+        //确认，发送ajax请求删除即可
+        // $.ajax({
+        //     url:"delete/"+policyId,
+        //     type:"DELETE",
+        //     success:function(result){
+        //         // alert(result.msg);
+        //         //回到本页
+        //         to_page(currentPage);
+        //     }
+        // });
         // }
     });
-
     //点击确认删除
     $("#emp_del_btn").click(function(){
-
         $.ajax({
             url:"/delete/"+policyId,
             type:"DELETE",
@@ -710,9 +682,6 @@
             }
         });
     })
-
-
-
     function update_check(){
         var num1 = $("#num1").val();
         var num2 = $("#num2").val();
@@ -731,14 +700,10 @@
             });
         }
     }
-
-
     //条件查询
     $("#find").click(function(){
         update_check();
     })
-
-
     //重置条件并查询所有
     $("#cz").click(function(){
         $("#num1").val('');
@@ -753,8 +718,6 @@
             }
         });
     })
-
-
     //显示校验结果的提示信息   ele就是元素(id)
     function show_validate_msg(ele,status,msg){
         //清除当前元素的校验状态
@@ -768,8 +731,6 @@
             $(ele).next("span").text(msg);
         }
     }
-
-
     //清空表单样式及内容
     function reset_form(ele){
         $(ele)[0].reset();
@@ -777,8 +738,6 @@
         $(ele).find("*").removeClass("has-error has-success");
         $(ele).find(".help-block").text("");
     }
-
-
     //添加保单
     $("#emp_add_modal_btn").click(function(){
         //清空模态框1
@@ -797,9 +756,6 @@
             backdrop:"static"
         });
     });
-
-
-
     //JSR303校验,提示出现的位置不好调,屏蔽
     $("#emp_next_btn").click(function(){
         //清空模态框2
@@ -819,68 +775,61 @@
         if(jiaoqiang==1){
             $("#jiao").prop('checked',true);
         }
-
         //
-    //     $.ajax({
-    //         url:"check",
-    //         type:"POST",
-    //         data:{"idcard":idcard},
-    //         success:function(result){
-    //             // alert(result.code);
-    //             if(100 == 100){
-    //                 //关闭1模态框
-    //                 $('#empAddModal').modal('hide');
-    //                 //弹出2模态框
-    //                 $("#empAddModal2").modal({
-    //                     backdrop:"static"
-    //                 });
-    //                 //1模态框中交强选中后2模态框交强自动给选中
-    //                 var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
-    //                 if(jiaoqiang==1){
-    //                     $("#jiao").prop('checked',true);
-    //                 }
-    //             }else{
-    //                 //显示失败信息   后台JSR303校验
-    //                 //console.log(result);
-    //                 //有哪个字段的错误信息就显示哪个字段的；
-    //                 if(undefined != result.map.errorFields.idcard){
-    //                     //显示身份证错误信息
-    //                     show_validate_msg("#idcard", "error", result.map.errorFields.idcard);
-    //                 }
-    //                 if(undefined != result.map.errorFields.nameOfOwner){
-    //                     //显示名字的错误信息
-    //                     show_validate_msg("#name_of_owner", "error", result.map.errorFields.nameOfOwner);
-    //                 }
-    //             }
-    //         }
-    //     });
+        //     $.ajax({
+        //         url:"check",
+        //         type:"POST",
+        //         data:{"idcard":idcard},
+        //         success:function(result){
+        //             // alert(result.code);
+        //             if(100 == 100){
+        //                 //关闭1模态框
+        //                 $('#empAddModal').modal('hide');
+        //                 //弹出2模态框
+        //                 $("#empAddModal2").modal({
+        //                     backdrop:"static"
+        //                 });
+        //                 //1模态框中交强选中后2模态框交强自动给选中
+        //                 var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
+        //                 if(jiaoqiang==1){
+        //                     $("#jiao").prop('checked',true);
+        //                 }
+        //             }else{
+        //                 //显示失败信息   后台JSR303校验
+        //                 //console.log(result);
+        //                 //有哪个字段的错误信息就显示哪个字段的；
+        //                 if(undefined != result.map.errorFields.idcard){
+        //                     //显示身份证错误信息
+        //                     show_validate_msg("#idcard", "error", result.map.errorFields.idcard);
+        //                 }
+        //                 if(undefined != result.map.errorFields.nameOfOwner){
+        //                     //显示名字的错误信息
+        //                     show_validate_msg("#name_of_owner", "error", result.map.errorFields.nameOfOwner);
+        //                 }
+        //             }
+        //         }
+        //     });
     });
-
-
     $("#emp_last_btn").click(function(){
         $.ajax({
             url: "policyId",
             type: "POST",
             success: function (result) {
-                    //关闭2模态框
-                    $('#empAddModal2').modal('hide');
-                    //弹出3模态框
-                    $("#empAddModal3").modal('show');
-                    //显示保费及保费总额
-                    baofei = parseInt(jidong2)+parseInt(san2)+parseInt(shiji2)+parseInt(passenger2)+
-                        parseInt(boli2)+parseInt(hua2)+parseInt(tiao2);
-                    $("#baofei").text(baofei);
-                    zonge = baofei + 950;
-                    $("#zonge").text(zonge)
-                    //接收保单号
-                    $("#baodan").text(result);
+                //关闭2模态框
+                $('#empAddModal2').modal('hide');
+                //弹出3模态框
+                $("#empAddModal3").modal('show');
+                //显示保费及保费总额
+                baofei = parseInt(jidong2)+parseInt(san2)+parseInt(shiji2)+parseInt(passenger2)+
+                    parseInt(boli2)+parseInt(hua2)+parseInt(tiao2);
+                $("#baofei").text(baofei);
+                zonge = baofei + 950;
+                $("#zonge").text(zonge)
+                //接收保单号
+                $("#baodan").text(result);
             }
         });
-
-
     });
-
-
     $("#emp_finally_btn").click(function(){
         //关闭3模态框
         $('#empAddModal3').modal('hide');
@@ -889,21 +838,17 @@
         var vin = $("#vin").val();
         var driving_Licence = $("#driving_Licence").val();
         var factory_plate_model = $("#factory_plate_model").val();
-
         var date_of_registration = $("#date_of_registration").val();
         var engine = $("#engine").val();
         var passenger_number = $("#passenger_number").val();
         var name_of_owner = $("#name_of_owner").val();
-
         var useful_year = $("#useful_year").val();
         var driving_mileage = $("#driving_mileage").val();
         var vehicles_type = $("#vehicles_type").val();
         var color = $("#color").val();
-
         var car_price = $("#car_price").val();
         var written_date = $("#written_date").val();
         var idcard = $("#idcard").val();
-
         //保单生效日期
         var jiaoqiang = $("input[name='jiaoqiang']:checked").val();
         var shangye = $("input[name='shangye']:checked").val();
@@ -911,7 +856,6 @@
             var start_date = $("#start_date").val();
             var ending_date = $("#ending_date").val();
         }
-
         //保单类型
         var policy_type = $("input[name='policy_type']:checked").val();
         var baofeizonge = $("#zonge").text();
@@ -919,7 +863,6 @@
             parseInt(boli)+parseInt(hua)+parseInt(all);
         var peichangxiane =xiane;
         var policy_id = $("#baodan").text();
-
         //通过ajax把数据传向后台
         $.ajax({
             url: "guarantee/insert",
@@ -942,10 +885,8 @@
             }
         });
     });
-
     //编写
     $(document).on("click",".edit_btn",function(){
-
         //alert($(this).attr("edit-id"));
         //2、查出员工信息，显示员工信息
         getEmp($(this).attr("edit-id"));
@@ -956,7 +897,6 @@
         //     backdrop:"static"
         // });
     });
-
     //点击编写查单条
     function getEmp(id){
         $.ajax({
@@ -972,20 +912,17 @@
             }
         });
     }
-
     //保单状态更改
     var zhuangtai;
     var select = document.getElementById('zhuangtai');
     select.onchange = function () {
         zhuangtai = select.options[select.selectedIndex].value;
     }
-
     $("#emp_update_btn").click(function(){
         var num1 = $("#num1").val();
         var num2 = $("#num2").val();
         var num3 = $("#num3").val();
         var num4 = $("#num4").val();
-
         //发送ajax请求保存更新数据
         $.ajax({
             url:"/update/"+$(this).attr("edit-id"),
@@ -1005,8 +942,6 @@
             }
         });
     });
-
-
     //前端校验数据
     function validate_add_form(){
         //1、拿到要校验的数据，使用正则表达式
@@ -1022,9 +957,6 @@
         };
         return true;
     }
-
-
-
 </script>
 </body>
 </html>
