@@ -2,11 +2,13 @@ package com.java.quartz;
 
 import com.java.pojo.ExpirationInfo;
 import com.java.service.QuartMissionService;
+import com.java.service.guaranteeService;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +19,9 @@ import java.util.List;
 public class Quartz {
     @Autowired
     private QuartMissionService quartMissionService;
+
+    @Autowired
+    private guaranteeService guaranteeservice;
 
     //任务调度每天早上9点执行
 //    @Scheduled(cron = "0 0 12 * * ?")
@@ -63,5 +68,14 @@ public class Quartz {
         }
     }
 
+    //对比日期修改保单状态
+    @Scheduled(cron = "0 20 19 * * ?")
+    public void outPolicy(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String end = sdf.format(new Date());
+        System.out.println(end);
+        int i = guaranteeservice.updatepolicyState(end);
+        System.out.println(i);
+    }
 
 }

@@ -6,6 +6,7 @@ import com.java.service.guaranteeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,10 @@ public class guaranteeServiceimpl implements guaranteeService {
 
     public int update(String policyId,String policyState){
         return gm.update(policyId,policyState);
+    }
+
+    public int updatepolicyState(String end){
+        return gm.updatepolicyState(end);
     }
 
 }

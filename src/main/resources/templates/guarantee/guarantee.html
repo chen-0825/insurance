@@ -13,7 +13,7 @@
     <!--width: 120px;}-->
     <!--</script>-->
 </head>
-<body style="padding-top: 150px">
+<body style="padding-top: 150px ">
 
 <!-- 保单添加的模态框1 -->
 <div class="modal fade bs-example-modal-lg" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -90,6 +90,18 @@
                         <input type="radio" name="policy_type" value="新保"/>新保
                         <input type="radio" name="policy_type" value="续保"/>续保
                     </div>
+
+
+                    <label>套餐选择</label>
+                    <div>
+                        <select id="tao">
+                            <option>请选择....</option>
+                            <option value="基本">基本</option>
+                            <option value="性价比">性价比</option>
+                            <option value="周全">周全</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">
@@ -337,7 +349,7 @@
 
 
 <!--整体结构-->
-<div class="container">
+<div class="container" style="width: 1300px">
     <!--查询条件-->
     <div>
 
@@ -361,21 +373,26 @@
             <label>车牌号</label>
             <input type="text" class="form-control" placeholder="鄂A-666666" id="num4">
         </div>
+
+        <div class="col-xs-2">
+            <label>保单状态:</label>
+            <br>
+            <select id="zhuang">
+                <option>请选择</option>
+                <option value="保期内">保期内</option>
+                <option value="退保">退保</option>
+            </select>
+        </div>
     </div>
-    <hr/>
     <!--按钮-->
     <div>
         <button type="button" class="btn btn-success" id="find">查询</button>
         <button type="button" class="btn btn-info" id="cz">重置</button>
+        <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
     </div>
 
 
-    <div class="row">
-        <div class="col-md-4">
-            <button class="btn btn-primary" id="emp_add_modal_btn">新增</button>
-            <!--<button class="btn btn-primary" id="back">返回</button>-->
-        </div>
-    </div>
+
 
 
     <!--保单信息列表-->
@@ -394,6 +411,7 @@
                     <th>终保时间</th>
                     <th>保险总额</th>
                     <th>赔偿限额</th>
+                    <th>套餐</th>
                     <th>保单类型</th>
                     <th>保单状态</th>
                     <th>操作</th>
@@ -556,6 +574,7 @@
             var endingDate = $("<td></td>").append(item.endingDate);
             var baofeizonge = $("<td></td>").append(item.baofeizonge);
             var peichangxiane = $("<td></td>").append(item.peichangxiane);
+            var taocan = $("<td></td>").append(item.taocan);
             var policyType = $("<td></td>").append(item.policyType);
             var policyState = $("<td></td>").append(item.policyState);
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
@@ -578,6 +597,7 @@
                 .append(endingDate)
                 .append(baofeizonge)
                 .append(peichangxiane)
+                .append(taocan)
                 .append(policyType)
                 .append(policyState)
                 .append(btnTd)
@@ -682,16 +702,23 @@
             }
         });
     })
+
+    var zhuang;
+    var select01 = document.getElementById('zhuang');
+    select01.onchange = function () {
+        zhuang = select01.options[select01.selectedIndex].value;
+    }
     function update_check(){
         var num1 = $("#num1").val();
         var num2 = $("#num2").val();
         var num3 = $("#num3").val();
         var num4 = $("#num4").val();
-        if(num1 != "" || num2 != "" || num3 != "" || num4 != "") {
+        if(num1 != "" || num2 != "" || num3 != "" || num4 != "" || zhuang != "") {
+            // alert(zhuang);
             $.ajax({
                 url: "find",
                 type: "POST",
-                data: {"policyId": num1, "recognizee": num2, "vin": num3, "plateNumber": num4},
+                data: {"policyId": num1, "recognizee": num2, "vin": num3, "plateNumber": num4, "policyState": zhuang},
                 success: function (result) {
                     if (result.code == 100) {
                         to_page(1);
@@ -710,6 +737,8 @@
         $("#num2").val('');
         $("#num3").val('');
         $("#num4").val('');
+        // select01.innerHTML = "请选择";重置回请选择
+
         $.ajax({
             url:"find",
             type:"POST",
@@ -830,6 +859,12 @@
             }
         });
     });
+
+    var tao;
+    var selectt = document.getElementById('tao');
+    selectt.onchange = function () {
+        tao = selectt.options[selectt.selectedIndex].value;
+    }
     $("#emp_finally_btn").click(function(){
         //关闭3模态框
         $('#empAddModal3').modal('hide');
@@ -863,6 +898,9 @@
             parseInt(boli)+parseInt(hua)+parseInt(all);
         var peichangxiane =xiane;
         var policy_id = $("#baodan").text();
+
+        // alert(tao);
+
         //通过ajax把数据传向后台
         $.ajax({
             url: "guarantee/insert",
@@ -873,7 +911,8 @@
                 "useful_year":useful_year,"driving_mileage":driving_mileage,"vehicles_type":vehicles_type,
                 "color":color,"car_price":car_price,"written_date":written_date,"start_date":start_date,
                 "ending_date":ending_date,"policy_type":policy_type,"recognizee":name_of_owner,
-                "baofeizonge":baofeizonge,"peichangxiane":peichangxiane,"policy_id":policy_id,"idcard":idcard},
+                "baofeizonge":baofeizonge,"peichangxiane":peichangxiane,"policy_id":policy_id,"idcard":idcard,
+                "tao":tao},
             success: function (result) {
                 if (result.code == 100) {
                     //保单保存成功；

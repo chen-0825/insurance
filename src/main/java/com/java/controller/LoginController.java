@@ -84,6 +84,7 @@ public class LoginController {
         message.setFrom("15272452553@163.com");
         ShiroUser shiroUser = (ShiroUser)request.getSession().getAttribute("ShiroUser");
         System.out.println(shiroUser);
+        System.out.println(i);
         message.setTo(shiroUser.getEmail());
         sendMail.send(message);
         return "/backstage/emails";

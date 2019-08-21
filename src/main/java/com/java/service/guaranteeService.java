@@ -2,6 +2,7 @@ package com.java.service;
 
 import com.java.pojo.Policys;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,5 +20,7 @@ public interface guaranteeService {
     List<Policys> tiaojianfind(Policys po);
 
     int update(String policyId,String policyState);
+
+    int updatepolicyState(String end);
 
 }
