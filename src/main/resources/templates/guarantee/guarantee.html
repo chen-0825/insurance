@@ -316,6 +316,25 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<!--删除模态框-->
+<div class="modal fade bs-example-modal-sm" id="del" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">保单信息删除</h4>
+            </div>
+            <div>
+                <h5 id="delId"></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="emp_del_btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--整体结构-->
 <div class="container">
@@ -655,26 +674,44 @@
         navEle.appendTo("#page_nav_area");
     }
 
-
+    var policyId;
     //单个删除
     $(document).on("click",".delete_btn",function(){
         //1、弹出是否确认删除对话框
-        var policyId = $(this).parents("tr").find("th:eq(0)").text();
+        policyId = $(this).parents("tr").find("th:eq(0)").text();
+        $("#delId").text("确认删除单号:"+policyId+"的信息吗?");
+        $("#del").modal('show');
         // var empId = $(this).attr("del-id");
         // alert($(this).attr("del-id"));
-        if(confirm("确认删除【"+policyId+"】吗？")){
+        // if(confirm("确认删除【"+policyId+"】吗？")){
             //确认，发送ajax请求删除即可
-            $.ajax({
-                url:"delete/"+policyId,
-                type:"DELETE",
-                success:function(result){
-                    // alert(result.msg);
-                    //回到本页
-                    to_page(currentPage);
-                }
-            });
-        }
+            // $.ajax({
+            //     url:"delete/"+policyId,
+            //     type:"DELETE",
+            //     success:function(result){
+            //         // alert(result.msg);
+            //         //回到本页
+            //         to_page(currentPage);
+            //     }
+            // });
+        // }
     });
+
+    //点击确认删除
+    $("#emp_del_btn").click(function(){
+
+        $.ajax({
+            url:"/delete/"+policyId,
+            type:"DELETE",
+            success:function(result){
+                $("#del").modal('hide');
+                //回到本页
+                to_page(currentPage);
+            }
+        });
+    })
+
+
 
     function update_check(){
         var num1 = $("#num1").val();
@@ -913,7 +950,7 @@
         //2、查出员工信息，显示员工信息
         getEmp($(this).attr("edit-id"));
         $("#bianxie").modal('show');
-        // //3、把员工的id传递给模态框的更新按钮
+        //3、把员工的id传递给模态框的更新按钮
         $("#emp_update_btn").attr("edit-id",$(this).attr("edit-id"));
         // $("#empUpdateModal").modal({
         //     backdrop:"static"
