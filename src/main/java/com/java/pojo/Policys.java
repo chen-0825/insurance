@@ -70,10 +70,22 @@ public class Policys {
 //            message="身份证号格式不正确,请输入18位号码")
     private String idcard;
 
+    private String taocan;
+
+    public String getTaocan() {
+        return taocan;
+    }
+
+    public void setTaocan(String taocan) {
+        this.taocan = taocan;
+    }
+
+
+
     public Policys() {
     }
 
-    public Policys(String policyId, String recognizee, Date writtenDate, Date startDate, Date endingDate, Double baofeizonge, String policyType, String policyState, Double peichangxiane, String engine, String vin, String factoryPlateModel, String plateNumber, String color, String vehiclesType, Integer passengerNumber, String drivingLicence, String nameOfOwner, Double carPrice, Date dateOfRegistration, Integer usefulYear, Double drivingMileage, String idcard) {
+    public Policys(String policyId, String recognizee, Date writtenDate, Date startDate, Date endingDate, Double baofeizonge, String policyType, String policyState, Double peichangxiane, String engine, String vin, String factoryPlateModel, String plateNumber, String color, String vehiclesType, Integer passengerNumber, String drivingLicence, String nameOfOwner, Double carPrice, Date dateOfRegistration, Integer usefulYear, Double drivingMileage, String idcard, String taocan) {
         this.policyId = policyId;
         this.recognizee = recognizee;
         this.writtenDate = writtenDate;
@@ -97,6 +109,7 @@ public class Policys {
         this.usefulYear = usefulYear;
         this.drivingMileage = drivingMileage;
         this.idcard = idcard;
+        this.taocan = taocan;
     }
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

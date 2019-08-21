@@ -26,7 +26,8 @@
         `date_of_registration`,
         `useful_year`,
         `driving_mileage`,
-        `idcard`
+        `idcard`,
+        `taocan`
    </sql>
 
   <!--#{}是实体类属性-->
@@ -57,7 +58,8 @@ values
     #{dateOfRegistration},
     #{usefulYear},
     #{drivingMileage},
-    #{idcard}
+    #{idcard},
+    #{taocan}
   ) ;
     </insert>
 
@@ -87,6 +89,9 @@ values
                 <if test="plateNumber != null and plateNumber != ''">
                     and plate_number = #{plateNumber}
                 </if>
+                <if test="policyState != null and policyState != ''">
+                    and policy_state = #{policyState}
+                </if>
         </where>
     </select>
 
@@ -99,6 +104,16 @@ values
           </if>
         </set>
         where policy_id = #{policyId}
+    </update>
+
+
+    <!--end作为参数,没用policys类中endingDate作为参数,String可以与Date类对比-->
+    <update id="updatepolicyState" parameterType="String">
+        update
+        `insurance`.`policys`
+        set
+        `policy_state` = '退保'
+        where `ending_date` = #{end}
     </update>
 
 </mapper>
