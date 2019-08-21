@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -70,7 +69,7 @@ public class Quartz {
     }
 
     //对比日期修改保单状态
-    @Scheduled(cron = "0 20 19 * * ?")
+    @Scheduled(cron = "0 17 20 * * ?")
     public void outPolicy(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String end = sdf.format(new Date());
