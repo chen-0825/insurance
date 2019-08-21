@@ -109,6 +109,9 @@ function lpgl(pn) {
 //选择每页条数
 $("#xzts").change(function () {
     sel = $("#xzts select").val();
+    if(sel == 'all'){
+        sel = total;
+    }
     lpgl(pageNum);
 });
 
