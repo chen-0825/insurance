@@ -28,4 +28,9 @@ public class SurveyServiceImpl implements SurveyService {
     public List<Survey> findAll() {
         return surveyMapper.findAll();
     }
+
+    @Override
+    public Survey findOne(Survey survey) {
+        return surveyMapper.findOne(survey);
+    }
 }

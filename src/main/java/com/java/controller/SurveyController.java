@@ -1,7 +1,9 @@
 package com.java.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.java.pojo.Lp;
 import com.java.pojo.Survey;
+import com.java.service.LpService;
 import com.java.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,6 +23,8 @@ public class SurveyController {
 
     @Autowired
     private SurveyService surveyService;
+    @Autowired
+    private LpService lpService;
 
 //    查所有分页
     @RequestMapping("/SurveyFindAll")
@@ -41,6 +46,16 @@ public class SurveyController {
     @RequestMapping("/Survey_status")
     public String Survey_status(Survey survey){
         int count = surveyService.update(survey);
+        if("通过".equals(survey.getDsStatus())){
+            Survey one = surveyService.findOne(survey);
+            Lp lp = new Lp();
+            lp.setLpPeople(one.getName());
+            lp.setLpMoney(one.getMoney());
+            lp.setStatus("0");
+            lp.setLpStatus("0");
+            lp.setLpTime(new Date());
+            lpService.insertLp(lp)
+        }
         if(count>0){
             return "修改成功";
         }else{

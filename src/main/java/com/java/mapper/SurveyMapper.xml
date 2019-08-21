@@ -32,4 +32,7 @@
         select * from survey
     </select>
 
+    <select id="findOne" resultType="Survey">
+        select * from survey where id = #{id}
+    </select>
 </mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.LpMapper">
+    <!--增加-->
+    <insert id="insertLp">
+        insert into lp (
+        <include refid="ins_lp"/>)
+        value(#{lpPeople},#{lpMoney},#{lpTime},#{lpStatus},#{status})
+    </insert>
+
+    <sql id="ins_lp">
+        lp_people,lp_money,lp_time,lp_status,status
+    </sql>
+
+    <!--修改-->
+    <update id="updateLp">
+        update lp
+        <set>
+            <if test="lpPeople != null and lpPeople != ''">
+                lp_people = #{lpPeople},
+            </if>
+            <if test="lpTime != null">
+                lp_time = #{lpTime},
+            </if>
+            <if test="lpStatus != null and lpStatus != ''">
+                lp_status = #{lpStatus},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status}
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <!--条件查询-->
+<select id="findLp" resultType="lp">
+    select id,
+    <include refid="ins_lp"/>
+    from lp
+    <where>
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        <if test="lpStatus != null and lpStatus != ''">
+            and lp_status = #{lpStatus}
+        </if>
+        <if test="lpPeople != null and lpPeople != ''">
+            and lp_people like #{lpPeople}
+        </if>
+    </where>
+    order by status asc
+</select>
+
+</mapper>

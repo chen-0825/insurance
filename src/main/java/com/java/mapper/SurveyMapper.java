@@ -16,4 +16,7 @@ public interface SurveyMapper {
 
     //查所有
     List<Survey> findAll();
+
+    //查单条
+    Survey findOne(Survey survey);
 }
