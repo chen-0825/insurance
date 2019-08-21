@@ -32,7 +32,7 @@ public class LpglController {
     //分页查所有,模糊排序查询
     @GetMapping("/lpgls")
     @ResponseBody
-    public Msg lpgl(Integer id, @RequestParam(value = "pn", defaultValue = "1")Integer pn, String ss, String desc, String ord){
+    public Msg lpgl(Integer id, @RequestParam(value = "pn", defaultValue = "1")Integer pn, String ss, String desc, String ord, String sel){
         if(ss != null && ss != ""){
             ss = "%"+ss+"%";
         }
@@ -40,8 +40,13 @@ public class LpglController {
         System.out.println(desc);
         System.out.println(ss);
         System.out.println(ord);
+        System.out.println(sel);
+        Integer x = 3;
+        if(sel != null && sel != ""){
+            x = Integer.parseInt(sel);
+        }
 
-        PageHelper.startPage(pn, 5);
+        PageHelper.startPage(pn, x);
         List<Lpgl> all = lpglService.findBy(id, ss, desc, ord);
         if (all.size() == 0) {//如果查询结果没有,直接返回错误提示
             return Msg.fail();
