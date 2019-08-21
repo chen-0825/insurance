@@ -204,6 +204,7 @@ $(document).on("click", ".del", function () {
     });
 });
 
+
 //全选按钮
 $("#allChoice").click(function () {
     var status = ($(this).prop("checked"));

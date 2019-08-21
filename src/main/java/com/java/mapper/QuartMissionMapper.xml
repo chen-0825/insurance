@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.QuartMissionMapper">
+    <select id="findSevenDaysToEnding" resultType="ExpirationInfo" parameterType="String">
+        SELECT ip_name AS ipname,ip_tel AS iptel,plate_number AS platenumber,ending_date AS endingdate FROM policys p INNER JOIN insurance_user i ON p.`idcard`=i.`ip_identification_number` AND p.`policy_state`='保期内' AND p.`ending_date`=#{endingdate}
+    </select>
+
+    <select id="sendToNextMonth" resultType="ExpirationInfo" parameterType="String">
+        SELECT ip_name AS ipname,ip_tel AS iptel,plate_number AS platenumber,ending_date AS endingdate FROM policys p INNER JOIN insurance_user i ON p.`idcard`=i.`ip_identification_number` AND p.`policy_state`='保期内' AND p.`ending_date` LIKE #{endingdate}
+    </select>
+</mapper>

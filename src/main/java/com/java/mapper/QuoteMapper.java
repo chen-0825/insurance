@@ -1,5 +1,6 @@
 package com.java.mapper;
 
+import com.java.pojo.AccessInfo;
 import com.java.pojo.HotCity;
 import com.java.pojo.ZiCity;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,7 @@ public interface QuoteMapper {
 
     //根据拼音模糊查询
     List<ZiCity> findCityByPinyin(String city);
+
+    //添加访问信息
+    int addAccessInfo(AccessInfo accessInfo);
 }

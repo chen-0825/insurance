@@ -11,45 +11,40 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}">
 </head>
 <body>
-<div class="table" style="margin-top: 100px">
-    <button id="addRiskMessage" class="btn btn-info">添加</button>
+<div style="margin-top: 100px">
     <div style="margin-bottom: 20px; margin-left: 30px">
         报案编号查询<input type="text" name="riskBnSerial" id="riskBnSerial">&nbsp&nbsp&nbsp&nbsp
         保单号查询<input type="text" name="riskPolicysId" id="riskPolicysId">&nbsp&nbsp&nbsp&nbsp
         被保人身份证号查询<input type="text" name="riskIdcard" id="riskIdcard">&nbsp&nbsp&nbsp&nbsp
         <button type="button"  id="selRiskMessageBy" class="btn btn-active ">
-            <span class="glyphicon glyphicon-search" aria-hidden="true">查询</span>
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </div><hr>
+    <button id="addRiskMessage" class="btn btn-success btn-sm">添加</button>
+    <button type="button" class="btn btn-primary btn-sm" id="quanXuan">全选</button>
+    <button type="button" class="btn btn-primary btn-sm" id="quXiao">取消</button>
+    <button type="button" class="btn btn-danger btn-sm" id="delAll">批量删除</button>
     <table class="table table-hover table-bordered">
-        <tr class="success">
-            <td>
-                <button type="button" class="btn btn-primary btn-sm" id="quanXuan">全部选择</button>
-                <button type="button" class="btn btn-primary btn-sm" id="quXiao">全部取消</button>
-            </td>
-            <td>报案编号</td>
-            <td>保单号</td>
-            <td>被保人身份证号</td>
-            <td>被保人姓名</td>
-            <td>报案人</td>
-            <td>报案时间</td>
-            <td>立案时间</td>
-            <td>出险时间</td>
-            <td>司机姓名</td>
-            <td>司机电话</td>
-            <td>出险地点</td>
-            <td>出险原因</td>
-            <td>被保人电话</td>
-            <td>结案时间</td>
-            <td>报案处理</td>
-            <td>案件状态</td>
-
-            <td>
-                <button type="button" class="btn btn-danger" id="delAll">
-                    批量删除</button>
-            </td>
+        <tr class="info">
+            <th></th>
+            <th>报案编号</th>
+            <th>保单号</th>
+            <th>被保人身份证号</th>
+            <th>被保人姓名</th>
+            <th>报案人</th>
+            <th>报案时间</th>
+            <th>立案时间</th>
+            <th>出险时间</th>
+            <th>司机姓名</th>
+            <th>司机电话</th>
+            <th>出险地点</th>
+            <th>出险原因</th>
+            <th>被保人电话</th>
+            <th>结案时间</th>
+            <th>报案处理</th>
+            <th>案件状态</th>
+            <th>操作</th>
         </tr>
-
         <tr th:each="li:${list}" class="active">
             <td><input type="checkbox" th:value="${li.riskId}"></td>
             <td th:text="${li.riskBnSerial} != null ? ${li.riskBnSerial}:'---'"></td>
@@ -75,7 +70,7 @@
             <td th:if="${li.riskState} == 2">予以立案</td>
             <td th:if="${li.riskState} == 3">撤销</td>
             <td th:if="${li.riskState} == 4">注销</td>
-            <td><a th:href="@{/delRiskMessage(riskId=${li.riskId},pn=${pageInfo.pageNum})}" class="btn btn-danger">删除</a></td>
+            <td><a th:href="@{/delRiskMessage(riskId=${li.riskId},pn=${pageInfo.pageNum})}" class="btn btn-danger btn-sm">删除</a></td>
         </tr>
     </table>
 </div>
@@ -165,6 +160,7 @@
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText6\" class=\"col-sm-2 control-label\">报案时间</label><input type='datetime-local' name='riskBnTime1' id=\"inputText6\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText7\" class=\"col-sm-2 control-label\">立案时间</label><input type='datetime-local' name='riskLianTime1' id=\"inputText7\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText8\" class=\"col-sm-2 control-label\">出险时间</label><input type='datetime-local' name='riskOuttime1' id=\"inputText8\" /></div>");
+        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText14\" class=\"col-sm-2 control-label\">结案时间</label><input type='datetime-local' name='riskEndtime1' id=\"inputText14\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText9\" class=\"col-sm-2 control-label\">报案电话</label><input type='text' name='riskReportertel'id=\"inputText9\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText10\" class=\"col-sm-2 control-label\">司机姓名</label><input type='text' name='riskDirver' id=\"inputText10\" /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText11\" class=\"col-sm-2 control-label\">司机电话</label><input type='text' name='riskDirvertel' id=\"inputText11\" /></div>");
@@ -174,7 +170,6 @@
         $("#addMessage").append("<select name=\"riskOutarea\" id=\"sel_area\"><option value=\"\">----- 请选择地区 -----</option></select>");
         $("#addMessage").append("<div class=\"form-group\" style='margin-top: 15px' > <label for=\"inputText12\" class=\"col-sm-2 control-label\">详细路段</label><input type='text' name='riskOutroad' id=\"inputText12\"  /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText13\" class=\"col-sm-2 control-label\">出险原因</label><input type='text' name='riskReason' id=\"inputText13\" /></div>");
-        $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText14\" class=\"col-sm-2 control-label\">结案时间</label><input type='datetime-local' name='riskEndtime1' id=\"inputText14\" /></div>");
         $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
         $("#addMessage").append("<select name='riskHander' ><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>");
         $("#addMessage").append("<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")

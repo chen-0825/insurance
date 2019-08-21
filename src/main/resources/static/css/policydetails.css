@@ -1,0 +1,86 @@
+*{
+	margin: 0;
+}
+
+#main{
+	width: 100%;
+	height: 100%;
+}
+
+#back{
+	width: 1918px;
+	height: 967px;
+	border: solid 1px #FFFFFF;
+	background-image: url(../img/back1.jpg);
+}
+
+#choose-type{
+	width: 500px;
+	height: 40px;
+	border: solid 1px black;
+	position: absolute;
+	left: 660px;
+	top: 268px;
+}
+
+#select-type{
+	width: 154px;
+	height: 38px;
+	font-size: 18px;
+	line-height: 38px;
+	border: none;
+}
+
+#all1{
+	width: 539px;
+	height: 111px;
+	position: absolute;
+	left: 544px;
+	top: 316px;
+	display: inline-block;
+}
+
+#all2{
+	width: 591px;
+	height: 174px;
+	position: absolute;
+	left: 544px;
+	top: 316px;
+	display: none;
+}
+
+#all3{
+	width: 602px;
+	height: 179px;
+	position: absolute;
+	left: 544px;
+	top: 316px;
+	display: none;
+}
+
+#xiala10{
+	width: 38px;
+	height: 38px;
+	position: absolute;
+}
+
+#total1{
+	color: #FF6633;
+	font-size: 23px;
+	width: 250px;
+	height: 36px;
+	border: 1px solid black;
+	position: absolute;
+	left: 235px;
+	top: 1px;
+}
+
+#threeclass{
+	width: 192px;
+	height: 110px;
+	border: 1px solid black;
+	position: absolute;
+	left: 660px;
+	top: 309px;
+	z-index: 99;
+}
