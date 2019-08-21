@@ -24,6 +24,14 @@
         <button type="button"  id="selRiskMessageBy" class="btn btn-active ">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
+        <form action="/selAllRiskMessage" method="post" style="margin-left: 1600px">
+            <select name="riskHander">
+                <option value="3">暂存</option>
+                <option value="2">受理</option>
+                <option value="1">注销</option>
+            </select>
+            <input type="submit" value="按报案状态查看" class="btn btn-info btn-sm">
+        </form>
     </div><hr>
     <button id="addRiskMessage" class="btn btn-success btn-sm">添加</button>
     <button type="button" class="btn btn-primary btn-sm" id="quanXuan">全选</button>
@@ -73,8 +81,7 @@
 
             <td th:if="${li.riskState} == 1">结案</td>
             <td th:if="${li.riskState} == 2">予以立案</td>
-            <td th:if="${li.riskState} == 3">撤销</td>
-            <td th:if="${li.riskState} == 4">注销</td>
+            <td th:if="${li.riskState} == 3">暂存</td>
             <td><a th:href="@{/delRiskMessage(riskId=${li.riskId},pn=${pageInfo.pageNum})}" class="btn btn-danger btn-sm">删除</a></td>
         </tr>
     </table>
@@ -176,10 +183,10 @@
         $("#addMessage").append("<div class=\"form-group\" style='margin-top: 15px' > <label for=\"inputText12\" class=\"col-sm-2 control-label\">详细路段</label><input type='text' name='riskOutroad' id=\"inputText12\"  /></div>");
         $("#addMessage").append("<div class=\"form-group\" > <label for=\"inputText13\" class=\"col-sm-2 control-label\">出险原因</label><input type='text' name='riskReason' id=\"inputText13\" /></div>");
         $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
-        $("#addMessage").append("<select name='riskHander' ><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>");
+        $("#addMessage").append("<select name='riskHander' ><option value='3'>暂存</option></select>");
         $("#addMessage").append("<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
         $("#addMessage").append("<span style='font-size: 15px; font-weight: bolder '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
-        $("#addMessage").append("<select name='riskState' ><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>撤销</option><option value='4'>注销</option></select>");
+        $("#addMessage").append("<select name='riskState' ><option value='3'>暂存</option></select>");
         $("#addMessage").append("<div class=\"form-group\" style='margin-top: 15px' > <label for=\"inputSubmit\" class=\"col-sm-2 control-label\"></label><input type='submit' value='添加' id=\"inputSubmit\" class='btn btn-danger btn-group-sm'/></div>");
         //进入页面自动加载省
         $(function () {
@@ -302,7 +309,7 @@
                      $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder '>报案处理&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
                      $("#updateRiskMessage").append($("<select name='riskHander' id='riskHander'><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>").val([rk.riskHander]));
                      $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder;margin-left: 20px '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
-                     $("#updateRiskMessage").append($("<select name='riskState' id='riskState'><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>撤销</option><option value='4'>注销</option></select>").val([rk.riskState]));
+                     $("#updateRiskMessage").append($("<select name='riskState' id='riskState'><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>暂存</option></select>").val([rk.riskState]));
                      $("#updateRiskMessage").append("<div style='margin-left: 100px;margin-top: 20px;margin-bottom: 50px'><input type='submit' class='btn btn-danger' value='修改' /></div>");
                      $("#showRisk").modal();
                  }else{

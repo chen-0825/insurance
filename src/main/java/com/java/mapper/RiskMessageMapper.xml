@@ -4,6 +4,11 @@
 
   <select id="selAllRiskMessage" resultType="com.java.pojo.Riskmessage">
           select * from riskmessage
+          <where>
+            <if test="riskHander != null and riskHander != '' " >
+              risk_hander = #{riskHander}
+            </if>
+          </where>
   </select>
     <select id="selAllRiskMessageBy" resultType="com.java.pojo.Riskmessage">
         select * from riskmessage
