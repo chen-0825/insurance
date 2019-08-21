@@ -24,7 +24,7 @@
         <button type="button"  id="selRiskMessageBy" class="btn btn-active ">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
-        <form action="/selAllRiskMessage" method="post" style="margin-left: 1600px">
+        <form action="/selAllRiskMessage" method="post" style="margin-left: 1200px">
             <select name="riskHander">
                 <option value="3">暂存</option>
                 <option value="2">受理</option>
@@ -274,6 +274,9 @@
     })
 </script>
 <script>
+
+
+
     /*
 * 按条件查询
 * */
@@ -310,7 +313,7 @@
                      $("#updateRiskMessage").append($("<select name='riskHander' id='riskHander'><option value='1'>注销</option><option value='2'>受理</option><option value='3'>暂存</option></select>").val([rk.riskHander]));
                      $("#updateRiskMessage").append("<span style='font-size: 15px; font-weight: bolder;margin-left: 20px '>案件状态&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>")
                      $("#updateRiskMessage").append($("<select name='riskState' id='riskState'><option value='1'>结案</option><option value='2'>予以立案</option><option value='3'>暂存</option></select>").val([rk.riskState]));
-                     $("#updateRiskMessage").append("<div style='margin-left: 100px;margin-top: 20px;margin-bottom: 50px'><input type='submit' class='btn btn-danger' value='修改' /></div>");
+                     $("#updateRiskMessage").append("<div style='margin-left: 100px;margin-top: 20px;margin-bottom: 50px'><input type='submit' id='shixiao' class='btn btn-danger' value='修改'  /></div>");
                      $("#showRisk").modal();
                  }else{
                      alert("无此险单！")
@@ -394,5 +397,6 @@
         })
     })
 </script>-->
+
 </body>
 </html>

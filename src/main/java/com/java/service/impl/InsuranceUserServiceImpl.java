@@ -52,4 +52,9 @@ public class InsuranceUserServiceImpl implements InsuranceUserService {
     public List<InsuranceUser> findOneSelf(InsuranceUser insuranceuser) {
         return InsuranceuserMapper.findOneSelf(insuranceuser);
     }
+
+    @Override
+    public InsuranceUser findOnesfz(InsuranceUser insuranceuser) {
+        return InsuranceuserMapper.findOnesfz(insuranceuser);
+    }
 }

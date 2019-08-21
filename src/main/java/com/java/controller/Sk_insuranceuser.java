@@ -110,4 +110,18 @@ public class Sk_insuranceuser {
         }
         return "sk_insuranceuser/cx";
     }
+
+
+    // 身份证被保人查单条
+    @ResponseBody
+    @RequestMapping("/iu_bsfz")
+    public String iubsfz(InsuranceUser insuranceuser) {
+        InsuranceUser t = insuranceuserService.findOnesfz(insuranceuser);
+        System.out.println(insuranceuser);
+        if(t != null){
+           return "1";
+        }else {
+            return "0" ;
+        }
+    }
 }

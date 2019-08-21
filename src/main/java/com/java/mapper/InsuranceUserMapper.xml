@@ -113,4 +113,10 @@ WHERE `iu_id` = #{iuId} ;
     <select id="findOneSelf" resultType="com.java.pojo.InsuranceUser">
         select * from insurance_user where iu_id = #{iuId}
     </select>
+
+
+    <!--被保人查单条-->
+    <select id="findOnesfz" resultType="com.java.pojo.InsuranceUser">
+        select * from insurance_user where ip_identification_number = #{ipIdentificationNumber}
+    </select>
 </mapper>
