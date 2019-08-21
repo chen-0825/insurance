@@ -17,8 +17,8 @@ public class SurveyServiceImpl implements SurveyService {
         return surveyMapper.add(survey);
     }
 
-    public int delete(Survey survey) {
-        return surveyMapper.delete(survey);
+    public int delete(String[] id) {
+        return surveyMapper.delete(id);
     }
 
     public int update(Survey survey) {

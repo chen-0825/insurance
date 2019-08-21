@@ -9,7 +9,7 @@ public interface SurveyMapper {
     int add(Survey survey);
 
     //删
-    int delete(Survey survey);
+    int delete(String[] id);
 
     //改
     int update(Survey survey);

@@ -8,7 +8,7 @@
 
 </head>
 <body>
-          <div class="container" style="padding-top: 100px">
+          <div class="container" style="padding-top: 100px;width: 1500px">
               <form action="iu_cx" method="post">
                   投保人姓名: <input type="text" name="phName">
                   投保人身份证号:<input type="text" name="phIdentificationNumber"></br></br>
@@ -20,7 +20,7 @@
 
               <!--查询所有信息-->
               <button type="button" class="btn btn-danger btn-sm" id="pl">批量删除</button>
-              <table  class="table table-bordered table-hover">
+              <table  class="table table-hover ">
                   <tr class="info" >
                       <td> <button type="button" class="btn btn-primary btn-sm" id="qx">全选</button></td>
                       <button type="button" class="btn btn-primary btn-sm" id="fx">全部取消</button>
@@ -38,7 +38,7 @@
                       <td >投保人信息</td>
                       <td >操作</td>
                   </tr>
-                      <tr th:each="i:${pageInfo.getList()}" th:if="${pageInfo.total != 0}" class="info">
+                      <tr th:each="i:${pageInfo.getList()}" th:if="${pageInfo.total != 0}" class="active">
                           <td> <input type="checkbox" th:value="${i.iuId}" /></td>
                           <td  th:text="${i.ipName}"></td>
                           <td  th:text="${i.ipSex}"></td>

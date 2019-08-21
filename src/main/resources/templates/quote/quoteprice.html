@@ -13,14 +13,14 @@
 			</div>
 			
 			<div id="container">
-				<form>
+				<form action="/addAccessInfo" method="post">
 					<div id="container-left">
 							<div style="border: none;">
 								驾驶城市<input type="text" id="city" name="city" th:value="${firstcity}" onkeyup="searchCity(value)" style="height: 25px; width: 200px; font-size: 22px;" required="required"/>
 								<p id="hotcity-button"></p>
 							</div>
 							<div style="border: none;">
-								车牌号码<input type="text" id="car-number" name="car-number" placeholder="选填" style="height: 25px; width: 200px; font-size: 22px;"/>
+								车牌号码<input type="text" id="car-number" name="carnumber" placeholder="选填" style="height: 25px; width: 200px; font-size: 22px;"/>
 							</div>
 							<div style="border:none;">
 								提车时间<select name="getTimeYear">
@@ -62,18 +62,18 @@
 							<div style="border: none;">
 								手机号<input type="text" name="phonenumber" style="height: 25px; width: 200px; font-size: 22px;" required="required" />
 							</div>
-							<div>
-								<input type="submit" id="submit1"/>
+							<div style="border: none;">
+								<input type="submit" id="submit1" value=""/>
 							</div>
 
 					</div>
 				</form>
-				<div id="hot-city" style="display: none; width: 298px; height: 144px; border:1px solid black; position: absolute; left: 646px; top: 50px; background-color: white;">
+				<div id="hot-city" style="display: none; width: 298px; height: 144px; border:1px solid black; position: absolute; left: 654px; top: 58px; background-color: white;">
 					<ul th:each="city:${hotCity}">
 						<li th:text="${city.CityName}" class="class1"></li>
 					</ul>
 				</div>
-				<div id="prompt-city" style="width: 298px;border: 1px solid white; position:absolute; left: 646px;top: 50px; background-color: #FFFFFF; display: inline-block;">
+				<div id="prompt-city" style="width: 298px;border: 1px solid white; position:absolute; left: 654px;top: 58px; background-color: #FFFFFF; display: inline-block;">
 
 				</div>
 				<div id="container-right">

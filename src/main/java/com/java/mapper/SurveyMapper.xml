@@ -4,12 +4,15 @@
 <mapper namespace="com.java.mapper.SurveyMapper">
 
     <insert id="add">
-        insert into survey(number,time,site,phone,status,name,dsStatus,money,wounded)
-        values(#{number},#{time},#{site},#{phone},#{status},#{name},#{dsStatus},#{money},#{wounded})
+        insert into survey(number,time,site,phone,status,name,ds_status,money,wounded,photo)
+        values(#{number},#{time},#{site},#{phone},#{status},#{name},#{dsStatus},#{money},#{wounded},#{photo})
     </insert>
 
-   <delete id="delete">
-       delete from survey where id = #{id}
+   <delete id="delete" >
+       delete from survey where id in
+       <foreach collection="array" open="(" close=")" item="id" separator=",">
+           #{id}
+       </foreach>
    </delete>
 
     <update id="update">
@@ -19,7 +22,7 @@
                 status = #{status},
             </if>
             <if test="dsStatus != null and dsStatus != ''">
-                dsStatus = #{dsStatus}
+                ds_status = #{dsStatus}
             </if>
         </set>
         where id = #{id}
