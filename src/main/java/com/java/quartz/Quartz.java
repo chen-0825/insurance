@@ -19,13 +19,14 @@ public class Quartz {
     private QuartMissionService quartMissionService;
 
     //任务调度每天早上9点执行
-    @Scheduled(cron = "0 0 12 * * ?")
+//    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 38 8 * * ?")
     public void snedToSevenDays(){
         //获取7天后的日期
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = simpleDateFormat.format(new Date());
         LocalDate sourceDate = LocalDate.parse(format, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String nextDay = String.valueOf(sourceDate.plusDays(7));
+        String nextDay = String.valueOf(sourceDate.plusDays(10));
         System.out.println(nextDay);
         List<ExpirationInfo> endingList = quartMissionService.findSevenDaysToEnding(nextDay);
         System.out.println(endingList.toString());
