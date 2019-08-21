@@ -73,6 +73,7 @@ var pages;
 var total;
 var size;
 var navigatepageNums;
+var sel;
 
 function lpgl(pn) {
     $("tbody").empty();
@@ -80,7 +81,7 @@ function lpgl(pn) {
     $("#allChoice").prop("checked", false);
     $.ajax({
         url: '/lpgls',
-        data: {'pn': pn, 'ss': ss, 'desc': desc, 'ord': ord},
+        data: {'pn': pn, 'ss': ss, 'desc': desc, 'ord': ord, 'sel': sel},
         type: 'get',
         success: function (result) {
             console.log(result);
@@ -103,6 +104,13 @@ function lpgl(pn) {
         }
     });
 }
+
+
+//选择每页条数
+$("#xzts").change(function () {
+    sel = $("#xzts select").val();
+    lpgl(pageNum);
+});
 
 //表格信息
 function tabody(list) {
@@ -133,8 +141,9 @@ function tabody(list) {
 //分页信息
 function infoPage() {
     $("#infoPage").empty();//清空之前信息
-    $("#infoPage").append("当前页:").append(pageNum).append("总页数")
-        .append(pages).append("总记录:").append(total).append("条");
+    $("#infoPage").append("当前页:").append($("<span style='color: red;'></span>").text(pageNum)).append("页<br>")
+                    .append("总页数").append($("<span style='color: red;'></span>").text(pages)).append("页<br>")
+                    .append("总记录:").append($("<span style='color: red;'></span>").text(total)).append("条")
 }
 
 //分页条信息
