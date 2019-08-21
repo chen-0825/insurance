@@ -24,9 +24,9 @@ public class RIskMessageController {
     @Autowired
     private DiquService diquService;
     @RequestMapping("/selAllRiskMessage")
-    public String selAllRiskMessage(Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
+    public String selAllRiskMessage(String riskHander,Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
         PageHelper.startPage(pn,5);
-        List<Riskmessage> list = riskMessageService.selAllRiskMessage();
+        List<Riskmessage> list = riskMessageService.selAllRiskMessage(riskHander);
         PageInfo<Riskmessage> pageInfo = new PageInfo<Riskmessage>(list);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("list",pageInfo.getList());
@@ -81,14 +81,14 @@ public class RIskMessageController {
 
     //删除单条
     @RequestMapping("/delRiskMessage")
-    public String delRiskMessage(Integer riskId,Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
+    public String delRiskMessage(String riskHander,Integer riskId,Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
         riskMessageService.delRiskMessage(riskId);
-        return this.selAllRiskMessage(model,pn);
+        return this.selAllRiskMessage(riskHander,model,pn);
     }
 
     //添加出险信息
     @RequestMapping("/addMessageAction")
-    public String addRiskMessage(Riskmessage riskmessage,String riskBnTime1,String riskLianTime1,String riskOuttime1,String riskEndtime1, Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
+    public String addRiskMessage(String riskHander,Riskmessage riskmessage,String riskBnTime1,String riskLianTime1,String riskOuttime1,String riskEndtime1, Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
         String riskBnTime2 = riskBnTime1.replace("T", " ");
         String riskOuttime2 = riskOuttime1.replace("T", " ");
         String riskEndtime2 = riskEndtime1.replace("T", " ");
@@ -113,13 +113,13 @@ public class RIskMessageController {
             e.printStackTrace();
         }
         riskMessageService.addRiskMessage(riskmessage);
-            return this.selAllRiskMessage(model,pn);
+            return this.selAllRiskMessage(riskHander,model,pn);
     }
 
     //修改状态信息
     @RequestMapping("/updateRiskMessage")
-    public String updateRiskMessage(Riskmessage riskmessage,Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
+    public String updateRiskMessage(String riskHander,Riskmessage riskmessage,Model model,@RequestParam(value="pn",defaultValue = "1") Integer pn){
         riskMessageService.updateRiskMessage(riskmessage);
-       return this.selAllRiskMessage(model,pn);
+       return this.selAllRiskMessage(riskHander,model,pn);
     }
 }

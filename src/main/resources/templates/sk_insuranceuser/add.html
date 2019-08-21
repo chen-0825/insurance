@@ -22,7 +22,8 @@
             </tr>
             <tr class="info" >
                 <td >被保人证件类型:<input type="text" name="ipCertificateType"   /></td>
-                <td >被保人证件号码:<input type="text" name="ipIdentificationNumber" /></td>
+                <td >被保人证件号码:<input type="text" name="ipIdentificationNumber" id="bsfz" /><span id="span1" style="color: red"></span>
+                </td>
             </tr>
             <tr class="info" >
                 <td >被保人联系地址:<input type="text" name="ipAddress"  /></td>
@@ -49,7 +50,24 @@
            <input type="submit" value="添加"  class="btn btn-success" id="tjxx" />
     </form>
 </div>
-<!--<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>-->
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script>
+
+     $("#bsfz").keyup(function(){
+        var bsfz =  $("#bsfz").val();
+        console.log(bsfz);
+         $.post("iu_bsfz",{"ipIdentificationNumber":bsfz},function (data) {
+             if(data == "1"){
+                 $("#span1").text("已存在该身份证");
+                 $("#tjxx").attr("disabled",true)
+             }else{
+                 $("#span1").text("");
+                 $("#tjxx").attr("disabled",false)
+             }
+         });
+
+     });
+</script>
 <!--<script>-->
     <!--//校验表单数据-->
     <!--function validate_add_form(){-->

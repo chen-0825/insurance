@@ -26,4 +26,7 @@ public interface InsuranceUserService {
 
     //分页
     List<InsuranceUser> findOneSelf(InsuranceUser insuranceuser);
+
+    //被身份证查单条
+    InsuranceUser findOnesfz(InsuranceUser insuranceuser);
 }

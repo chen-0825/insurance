@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RiskMessageService {
     //查询所有出险信息
-    public List<Riskmessage> selAllRiskMessage();
+    public List<Riskmessage> selAllRiskMessage(String riskHander);
     //添加出险信息
     public int addRiskMessage(Riskmessage riskmessage);
     //按条件查询

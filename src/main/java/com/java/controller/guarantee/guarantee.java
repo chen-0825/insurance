@@ -40,11 +40,14 @@ public class guarantee {
     @RequestMapping("/guarantees")
     public Msg showGuarantee(@RequestParam(value = "pn", defaultValue = "1") Integer pn){
         //在查询之前只需要调用，传入页码，以及每页的大小
-        PageHelper.startPage(pn, 5);
+        PageHelper.startPage(pn, 8);
         PageInfo page = null;
         //重置因为没有条件SQL语句会查所有,加条件tiaojianfind.size() > 10
-        if (tiaojianfind == null || tiaojianfind.size() > 10){
+        if (tiaojianfind == null || tiaojianfind.size() > 8){
             List<Policys> policysList = guaranteeservice.guaranteesfindAll();
+
+
+
             //封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数5
             page = new PageInfo(policysList,5);
             return Msg.success().maps("pageInfo", page);
@@ -93,6 +96,7 @@ public class guarantee {
         String idcard = request.getParameter("idcard");
         String color = request.getParameter("color");
         String policyState = "保期内";
+        String taocan = request.getParameter("tao");
 
         Double baofei = Double.parseDouble(baofeizonge);
         Double xiane = Double.parseDouble(peichangxiane);
@@ -120,7 +124,7 @@ public class guarantee {
                 policy_type, policyState,xiane,engine,
                 vin,factory_plate_model,plate_number,color,vehicles_type,
                 number,driving_Licence,name_of_owner,price,
-                dateofregistration,year,mileage,idcard);
+                dateofregistration,year,mileage,idcard,taocan);
         int i = guaranteeservice.guaranteeinsert(po);
         return Msg.success();
     }
@@ -143,12 +147,13 @@ public class guarantee {
         String recognizee = request.getParameter("recognizee");
         String vin = request.getParameter("vin");
         String plateNumber = request.getParameter("plateNumber");
-
+        String policyState = request.getParameter("policyState");
 
         po.setPolicyId(policyId);
         po.setRecognizee(recognizee);
         po.setVin(vin);
         po.setPlateNumber(plateNumber);
+        po.setPolicyState(policyState);
         tiaojianfind = guaranteeservice.tiaojianfind(po);
         mv.setViewName("redirect:/guarantees");
         return mv;

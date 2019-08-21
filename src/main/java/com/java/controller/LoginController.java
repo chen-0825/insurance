@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     private int i;
+    private String email;
 
     @Autowired
     private UserService userService;
@@ -58,43 +60,47 @@ public class LoginController {
             System.out.println("认证成功");
             token.clear();
             request.getSession().setAttribute("ShiroUser",userService.find(name));
-            return "redirect:/sendEmails";
+            return "redirect:/backstageIndex";
         }else{
             token.clear();
-            return "/backstage/login";
+            return "redirect:/tologin";
         }
     }
 
 //    注册
     @RequestMapping("/register")
-    public String register(ShiroUser shiroUser){
+    public String register(Model model,ShiroUser shiroUser){
+        email = shiroUser.getEmail();
         Md5Hash admin = new Md5Hash(shiroUser.getPassword(), shiroUser.getName(), 3);
         shiroUser.setPassword(admin.toHex());
-        userService.insert(shiroUser);
-        return "/backstage/login";
+        int count = userService.insert(shiroUser);
+        if(count>0){
+            this.sendEmails(shiroUser.getEmail());
+            model.addAttribute("email",email);
+            return "backstage/emails";
+        }
+        return "redirect:/tologin";
     }
 
 //    发送邮箱
     @RequestMapping("/sendEmails")
-    public String sendEmails(HttpServletRequest request){
+    public void sendEmails(String email){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("验证码");
         i = (int) ((Math.random() * 9 + 1) * 100000);
         message.setText("验证码:"+i);
         message.setFrom("15272452553@163.com");
-        ShiroUser shiroUser = (ShiroUser)request.getSession().getAttribute("ShiroUser");
-        System.out.println(shiroUser);
-        message.setTo(shiroUser.getEmail());
+        message.setTo(email);
         sendMail.send(message);
-        return "/backstage/emails";
     }
 
 //    邮箱正确进入首页
     @RequestMapping("/verification")
-    public String verification(String pwd){
+    public String verification(String pwd,Model model){
         if (i == Integer.parseInt(pwd)){
-            return "redirect:/backstageIndex";
+            return "redirect:/tologin";
         }
+        model.addAttribute("email",email);
         return "/backstage/emails";
     }
 

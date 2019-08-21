@@ -31,7 +31,7 @@ public class SurveyController {
     public String SurveyFindAll(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
         // 引入pagehelper插件
         // 传入页码,及每页条数
-        PageHelper.startPage(pn, 5);
+        PageHelper.startPage(pn, 8);
         // startPage后紧跟的查询就是分页查询
         List<Survey> list = surveyService.findAll();
         // 使用pageInfo包装查询后的结果

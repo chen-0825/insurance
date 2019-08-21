@@ -2,8 +2,11 @@ package com.java.quartz;
 
 import com.java.pojo.ExpirationInfo;
 import com.java.service.QuartMissionService;
+import com.java.service.guaranteeService;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +21,12 @@ public class Quartz {
     @Autowired
     private QuartMissionService quartMissionService;
 
+    @Autowired
+    private guaranteeService guaranteeservice;
+
     //任务调度每天早上9点执行
 //    @Scheduled(cron = "0 0 12 * * ?")
-    @Scheduled(cron = "0 38 8 * * ?")
+    @Scheduled(cron = "0 28 15 * * ?")
     public void snedToSevenDays(){
         //获取7天后的日期
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,7 +50,6 @@ public class Quartz {
     //任务调度每月最后一天
     @Scheduled(cron = "0 0 12 1 * ?")
     public void sendToNextMonth(){
-        //获取7天后的日期
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = simpleDateFormat.format(new Date());
         LocalDate sourceDate = LocalDate.parse(format, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -63,5 +68,14 @@ public class Quartz {
         }
     }
 
+    //对比日期修改保单状态
+    @Scheduled(cron = "0 17 20 * * ?")
+    public void outPolicy(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String end = sdf.format(new Date());
+        System.out.println(end);
+        int i = guaranteeservice.updatepolicyState(end);
+        System.out.println(i);
+    }
 
 }

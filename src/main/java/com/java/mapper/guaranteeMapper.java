@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,4 +29,7 @@ public interface guaranteeMapper {
 
     //修改保单状态
     int update(String policyId,String policyState);
+
+    //根据日期修改保单为退保
+    int updatepolicyState(String end);
 }
