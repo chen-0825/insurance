@@ -4,8 +4,8 @@
 <mapper namespace="com.java.mapper.SurveyMapper">
 
     <insert id="add">
-        insert into survey(number,time,site,phone,name,money,wounded,photo)
-        values(#{number},#{time},#{site},#{phone},#{name},#{money},#{wounded},#{photo})
+        insert into survey(number,time,site,phone,name,money,wounded,photo,details)
+        values(#{number},#{time},#{site},#{phone},#{name},#{money},#{wounded},#{photo},#{details})
     </insert>
 
    <delete id="delete" >

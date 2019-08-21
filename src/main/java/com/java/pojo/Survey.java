@@ -29,4 +29,6 @@ public class Survey {
 
     private String photo;
 
+    private String details;
+
 }

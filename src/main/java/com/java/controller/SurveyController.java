@@ -54,7 +54,7 @@ public class SurveyController {
             lp.setStatus("0");
             lp.setLpStatus("0");
             lp.setLpTime(new Date());
-            lpService.insertLp(lp)
+            lpService.insertLp(lp);
         }
         if(count>0){
             return "修改成功";

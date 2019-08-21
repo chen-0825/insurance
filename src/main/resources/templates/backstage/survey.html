@@ -31,6 +31,7 @@
                 <th>定损金额</th>
                 <th>受伤人员</th>
                 <th>现场图片</th>
+                <th></th>
             </tr>
             <tr th:each="var : ${pageInfo.getList()}" class="active">
                 <td><input type="checkbox" th:name="${var.getId()}"/></td>
@@ -59,8 +60,9 @@
                 <td th:text="${var.getMoney()}"></td>
                 <td th:text="${var.getWounded()}"></td>
                 <td >
-                    <img th:src="@{'/img/'+${var.getPhoto()}}" width="40px" height="30px"/>
+                    <img th:src="@{'/img/'+${var.getPhoto()}}" width="40px" height="30px" class="img"/>
                 </td>
+                <td><botton class="details btn btn-info btn-sm" th:name="${var.getDetails()}">理赔详情</botton></td>
             </tr>
         </table>
         <!-- 显示分页信息 -->
@@ -89,21 +91,39 @@
             </nav>
         </div>
     </div>
-    <!--模态框-->
+    <!--模态框1-->
     <div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <form action="Survey_add" method="post" enctype="multipart/form-data" style="margin: 50px">
-                    派工工号:<input type="number" name="number"/><br/><br/>
+                    派工工号:<select name="number">
+                                    <option value="10000">--请选择--</option>
+                                    <option value="10001">10001</option>
+                                    <option value="10002">10002</option>
+                                    <option value="10003">10003</option>
+                                    <option value="10004">10004</option>
+                                    <option value="10005">10005</option>
+                                    <option value="10006">10006</option>
+                             </select><br/><br/>
                     查勘时间:<input type="date" name="time"/><br/><br/>
                     查勘地点:<input type="text" name="site"/><br/><br/>
                     联系电话:<input type="tel" name="phone"/><br/><br/>
                     车主姓名:<input type="text" name="name"/><br/><br/>
                     定损金额:<input type="number" name="money"/><br/><br/>
+                    定损详情:<textarea class="form-control" rows="3" name="details">
+                             </textarea><br/><br/>
                     受伤人员:<input type="text" name="wounded"/><br/><br/>
                     现场图片:<input type="file" name="file"/><br/><br/>
                     <input type="submit" value="确认" class="btn btn-primary"/>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!--模态框2-->
+    <div id="modal2" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" id="modal2_1" style="padding: 50px;font-size: 18px;">
+
             </div>
         </div>
     </div>
@@ -113,9 +133,29 @@
         $(function(){
             var index1 = 0;
             var index2 = 0;
+            var index3 = 0;
+            var index4 = 0;
             var td = $(".td");
+            var details = $(".details");
             var select1 = $(".select1");
             var select2 = $(".select2");
+            var img = $(".img");
+            // 图片放大
+            img.click(function(){
+                index4 = img.index(this);
+                if(img.eq(index4).css("position")=="absolute"){
+                    img.eq(index4).css({"position":"","top":"","left":"","width":"40px","height":"30px"})
+                }else{
+                    img.eq(index4).css({"position":"absolute","top":"100px","left":"300px","z-index":"999","width":"1000px","height":"600px"})
+                }
+            });
+
+            // 详情
+            details.click(function(){
+                index3 = details.index(this);
+                $("#modal2_1").text(details.eq(index3).attr("name"));
+                $("#modal2").modal();
+            })
             // 修改状态
             select1.change(function(){
                 index1 = select1.index(this);
