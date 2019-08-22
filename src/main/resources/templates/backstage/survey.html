@@ -6,9 +6,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.css}"/>
 </head>
 <style>
-    body{
-        padding-top: 150px;
+    body {
+        padding-top: 100px;
         background-image: url(img/photo01.jpg);
+        font-size: 18px;
     }
 </style>
 <body>
@@ -59,8 +60,8 @@
                 </td>
                 <td th:text="${var.getMoney()}"></td>
                 <td th:text="${var.getWounded()}"></td>
-                <td >
-                    <img th:src="@{'/img/'+${var.getPhoto()}}" width="40px" height="30px" class="img"/>
+                <td>
+                    <img th:src="@{'/img/'+${var.getPhoto()}}" width="50px" height="40px" class="img"/>
                 </td>
                 <td><botton class="details btn btn-info btn-sm" th:name="${var.getDetails()}">理赔详情</botton></td>
             </tr>
@@ -114,7 +115,7 @@
                              </textarea><br/><br/>
                     受伤人员:<input type="text" name="wounded"/><br/><br/>
                     现场图片:<input type="file" name="file"/><br/><br/>
-                    <input type="submit" value="确认" class="btn btn-primary"/>
+                    <input type="submit" value="确认"  class="btn btn-primary"/>
                 </form>
             </div>
         </div>
@@ -122,7 +123,7 @@
     <!--模态框2-->
     <div id="modal2" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content" id="modal2_1" style="padding: 50px;font-size: 18px;">
+            <div class="modal-content" id="modal2_1" style="padding: 50px;">
 
             </div>
         </div>
@@ -144,7 +145,7 @@
             img.click(function(){
                 index4 = img.index(this);
                 if(img.eq(index4).css("position")=="absolute"){
-                    img.eq(index4).css({"position":"","top":"","left":"","width":"40px","height":"30px"})
+                    img.eq(index4).css({"position":"","top":"","left":"","width":"50px","height":"40px"})
                 }else{
                     img.eq(index4).css({"position":"absolute","top":"100px","left":"300px","z-index":"999","width":"1000px","height":"600px"})
                 }
@@ -169,6 +170,9 @@
                 index2 = select2.index(this);
                 var id = td.eq(index2).text();
                 var dsStatus = select2.eq(index2).val();
+                if(dsStatus=="通过"){
+                    select2.eq(index2).attr("disabled",true);
+                }
                 $.post("Survey_status",{"dsStatus":dsStatus,"id":id},function(){
                     location.reload();
                 });
@@ -209,7 +213,6 @@
             $("#add").click(function(){
                 $("#modal").modal();
             });
-
 
         })
 

@@ -69,7 +69,7 @@ public class Quartz {
     }
 
     //对比日期修改保单状态
-    @Scheduled(cron = "0 17 20 * * ?")
+    @Scheduled(cron = "0 15 14 * * ?")
     public void outPolicy(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String end = sdf.format(new Date());

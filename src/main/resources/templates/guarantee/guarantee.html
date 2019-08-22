@@ -15,11 +15,13 @@
     <!--</script>-->
 </head>
 <style>
-    body{
+    body {
+        padding-top: 150px;
         background-image: url(img/photo01.jpg);
+        font-size: 18px;
     }
 </style>
-<body style="padding-top: 150px ">
+<body>
 
 <!-- 保单添加的模态框1 -->
 <div class="modal fade bs-example-modal-lg" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -355,7 +357,7 @@
 
 
 <!--整体结构-->
-<div class="container" style="width: 1300px">
+<div class="container" style="width: 1500px">
     <!--查询条件-->
     <div>
 
@@ -384,7 +386,7 @@
             <label>保单状态:</label>
             <br>
             <select id="zhuang">
-                <option>请选择</option>
+                <option value="请选择">请选择</option>
                 <option value="保期内">保期内</option>
                 <option value="退保">退保</option>
             </select>
@@ -719,7 +721,7 @@
         var num3 = $("#num3").val();
         var num4 = $("#num4").val();
         if(num1 != "" || num2 != "" || num3 != "" || num4 != "" || zhuang != "") {
-            // alert(zhuang);
+            //alert(zhuang);
             $.ajax({
                 url: "find",
                 type: "POST",
@@ -742,7 +744,8 @@
         $("#num2").val('');
         $("#num3").val('');
         $("#num4").val('');
-        // select01.innerHTML = "请选择";重置回请选择
+        $("#zhuang").val("请选择");
+        zhuang= "";
         $.ajax({
             url:"find",
             type:"POST",
