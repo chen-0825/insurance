@@ -3,22 +3,19 @@ package com.java.pojo;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Past;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
 public class Lp {
     private Integer id;
-
     private String lpPeople;
-
     private Integer lpMoney;
-
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date lpTime;
-
     private String lpStatus;
-
     private String status;
 
     public String getLpTime() {

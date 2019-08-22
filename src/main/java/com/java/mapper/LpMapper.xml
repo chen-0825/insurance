@@ -51,7 +51,7 @@
             and lp_people like #{lpPeople}
         </if>
     </where>
-    order by status asc
+    order by lp_status asc
 </select>
 
 </mapper>

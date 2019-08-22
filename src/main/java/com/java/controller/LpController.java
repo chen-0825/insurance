@@ -7,10 +7,14 @@ import com.java.pojo.Msg;
 import com.java.service.LpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LpController {
@@ -55,12 +59,21 @@ public class LpController {
     //修改理赔记录
     @ResponseBody
     @PutMapping("/updLpgl")
-    public Object updLpgl(@Valid Lp lp) {
-        int i = lpService.updateLp(lp);
-        if (i > 0) {
-            return Msg.success();
+    public Object updLpgl(@Valid Lp lp, BindingResult result) {
+        Map<String, Object> map = new HashMap<>();
+        if(result.hasErrors()){
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError file:errors){
+                map.put(file.getField(), file.getDefaultMessage());
+            }
+            return map;
+        }else{
+            int i = lpService.updateLp(lp);
+            if (i > 0) {
+                return Msg.success();
+            }
+            return Msg.fail();
         }
-        return Msg.fail();
     }
 
     //查询指定记录

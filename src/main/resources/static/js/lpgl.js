@@ -40,6 +40,11 @@ function lpgl(pn) {
             if (result.code == 200) {
                 //提示没有搜索到
                 $("#ssts").append($("<h1>哦...没有记录!</h1>"))
+                setTimeout(function () {
+                    if ($("#ssts").text() != '') {
+                        $("#ssts").text("");
+                    }
+                }, 2000)
             } else {
                 pageNum = result.map.page.pageNum;
                 pages = result.map.page.pages;
@@ -76,8 +81,8 @@ function tabody(list) {
         var lpPeople = $("<td></td>").append(ints.lpPeople);
         var lpMoney = $("<td></td>").append(ints.lpMoney);
         var lpTime = $("<td></td>").append(ints.lpTime);
-        var lpStatus = $("<td></td>").append(ints.lpStatus==0?'未赔':'已赔');
-        var status = $("<td></td>").append(ints.status==0?'有效':'失效');
+        var lpStatus = $("<td></td>").append(ints.lpStatus == 0 ? '未赔' : '已赔');
+        var status = $("<td></td>").append(ints.status == 0 ? '有效' : '失效');
         //编辑,删除按钮
         var upd = $("<button class='btn-info upd'><span class='glyphicon glyphicon-pencil'></span>编辑</button>").attr("updIds", ints.id);
         var cz = $("<td></td>").append(upd).append(" ");
@@ -85,11 +90,11 @@ function tabody(list) {
         var tr = $("<tr></tr>").append(id)
             .append(lpPeople).append(lpMoney).append(lpTime).append(lpStatus).append(status)
             .append(cz)
-         if(ints.lpStatus == '0'){
-             tr.css("background-color","white");
-         }else{
-             tr.css({"background-color":"lightgrey","opacity":"0.7"});
-         }
+        if (ints.lpStatus == '0') {
+            tr.css("background-color", "white");
+        } else {
+            tr.css({"background-color": "lightgrey", "opacity": "0.7"});
+        }
         tr.appendTo($("#showAll tbody"));
     })
 }
@@ -106,16 +111,16 @@ function infoPage() {
 function pagePilot(page) {
     $("#pagePilot ul").empty();//清空之前信息
     var first = $("<li></li>").append($("<a></a>").append("首页"));
-    first.click(function () {//跳首页 及时绑定方法,不用on
-        lpgl(1);
-    });
+
     var before = $("<li></li>").append($("<a></a>").append("&laquo;"));
-    before.click(function () {//跳上一页
-        lpgl(pageNum - 1);
-    });
-    if (!page.hasPreviousPage) {//如果没有上一页了,就失效
-        first.addClass("disabled");
-        before.addClass("disabled");
+
+    if (page.hasPreviousPage) {//如果没有上一页了,就失效
+        first.click(function () {//跳首页 及时绑定方法,不用on
+            lpgl(1);
+        });
+        before.click(function () {//跳上一页
+            lpgl(pageNum - 1);
+        });
     }
     $("#pagePilot ul").append(first).append(before);
 
@@ -132,16 +137,14 @@ function pagePilot(page) {
 
     var next = $("<li></li>").append($("<a></a>").append("&raquo;"));
     var last = $("<li></li>").append($("<a></a>").append("尾页"));
-    if (!page.hasNextPage) {//如果没有下一页了,就失效
-        next.addClass("disabled");
-        last.addClass("disabled");
+    if (page.hasNextPage) {//如果没有下一页了,就失效
+        next.click(function () {//跳下一页
+            lpgl(pageNum + 1);
+        });
+        last.click(function () {//跳尾页
+            lpgl(pages);
+        });
     }
-    next.click(function () {//跳下一页
-        lpgl(pageNum + 1);
-    });
-    last.click(function () {//跳尾页
-        lpgl(pages);
-    });
     $("#pagePilot ul").append(next).append(last);
 }
 
@@ -169,7 +172,8 @@ $(document).on("click", ".upd", function () {
     $("#upd_lpTime").val("");
     $("#upd_status").val("");
 
-    $("#upd_lpTime_span").text("");
+    $("#upd_lpPeople_span").text("");
+
     //表单信息回显
     var updIds = $(this).attr("updIds");
     upd_msg(updIds);
@@ -186,7 +190,6 @@ function upd_msg(upd_id) {
         type: 'get',
         success: function (result) {
             var lpgl = result.map.lpgl;
-            console.log(lpgl);
             $("#upd_id").text(lpgl.id);
             $("#upd_lpMoney").text(lpgl.lpMoney);
             $("#upd_lpPeople").val(lpgl.lpPeople);
@@ -199,48 +202,44 @@ function upd_msg(upd_id) {
 
 //点击确认编辑
 $("#updateForm").click(function () {
-    var udp = $("#updateModal form").serialize();
-    udp = decodeURIComponent(udp);
-    udp += '&id=' + $("#upd_id").text() + '&lpMoney=' + $("#upd_lpMoney").text();
-    $.ajax({
-        url: '/updLpgl',
-        type: 'put',
-        data: udp,
-        success: function (result) {
-            if (result.code == 100) {
-                lpgl(pageNum);
-                alert("修改成功!");
-                $("#updateModal").modal("hide");
-            } else {
-                alert("出现异常,修改失败!");
+    if ($("#upd_lpPeople_span").text() == '用户名必须为英文或中文组成!且长度不大于6位') {
+        alert("请正确填写表单!");
+    } else {
+        var udp = $("#updateModal form").serialize();
+        udp = decodeURIComponent(udp);
+        udp += '&id=' + $("#upd_id").text() + '&lpMoney=' + $("#upd_lpMoney").text();
+        $.ajax({
+            url: '/updLpgl',
+            type: 'put',
+            data: udp,
+            success: function (result) {
+                if (result.lpTime != null) {
+                    alert(result.lpTime)
+                } else {
+                    if (result.code == 100) {
+                        lpgl(pageNum);
+                        alert("修改成功!");
+                        $("#updateModal").modal("hide");
+                    } else {
+                        alert("出现异常,修改失败!");
+                    }
+                }
             }
-        }
-    });
+        });
+    }
 });
 
-//批量删除
-// $("#dels").click(function () {
-//     //首先获取用户点击的多选框的id
-//     var td = $(".check:checked").parent().next();
-//     var dels = '';
-//     $.each(td,function () {
-//         dels+="_"+$(this).text();
-//     });
-//     dels = dels.substring(1, dels.length);
-//     $.ajax({
-//         url: '/dels',
-//         type: 'delete',
-//         data: 'dels='+dels,
-//         success:function (result) {
-//             if (result.code == 100) {
-//                 lpgl(pageNum);
-//                 alert("删除成功!");
-//             } else {
-//                 alert("出现异常,删除失败!")
-//             }
-//         }
-//     });
-// });
+//正则验证用户
+$("#upd_lpPeople").blur(function () {
+    var va = $(this).val();
+    var yz = /^[a-zA-Z\u4e00-\u9fa5]+$/;
+    if (!(va.match(yz) && va.length <= 6)) {
+        $("#upd_lpPeople_span").text("用户名必须为英文或中文组成!且长度不大于6位").css("color", "red");
+    } else {
+        $("#upd_lpPeople_span").text("ok!").css("color", "green");
+    }
+})
+
 
 
 
