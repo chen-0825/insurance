@@ -46,7 +46,9 @@ public class SurveyController {
     @RequestMapping("/Survey_status")
     public String Survey_status(Survey survey){
         int count = surveyService.update(survey);
-        if("通过".equals(survey.getDsStatus())){
+        //根据状态在理赔信息中添加一条
+        String dsStatus = survey.getDsStatus();
+        if("通过".equals(dsStatus)){
             Survey one = surveyService.findOne(survey);
             Lp lp = new Lp();
             lp.setLpPeople(one.getName());
